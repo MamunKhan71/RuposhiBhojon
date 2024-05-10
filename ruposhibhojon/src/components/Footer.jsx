@@ -37,7 +37,7 @@ const Footer = () => {
             </footer>
             <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300  container mx-auto">
                 <aside className="items-center grid-flow-col">
-                    <img className="w-16" src="/src/assets/footerlogo.png" alt="" />
+                    <img className="w-16" src="./src/assets/footerlogo.png" alt="" />
                     <div className="flex flex-col">
                         <span className="font-bold text-lg">RuposhiBangla </span>
                         <span className="font-medium">Reliable Food Delivery Service</span>

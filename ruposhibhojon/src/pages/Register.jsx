@@ -1,13 +1,13 @@
+import Lottie from "lottie-react";
 import { FaGithub } from "react-icons/fa";
 import { FaArrowRightToBracket } from "react-icons/fa6"
 import { NavLink } from "react-router-dom";
-import Lottie from "lottie-react";
-import loginAnimation from '../assets/lottie/loginLottie.json'
-const Login = () => {
+import SignUpLottie from '../assets/lottie/signUpLottie.json'
+const Register = () => {
     return (
         <div className="flex justify-between items-center gap-10 my-12 w-full">
             <div className="flex-1 flex items-center justify-center rounded-xl">
-            <Lottie animationData={loginAnimation} loop={true} />
+                <Lottie animationData={SignUpLottie} loop={true} />
                 {/* <img className="h-[700px] rounded-xl w-full object-cover" src="./src/assets/login.jpg" alt="" /> */}
             </div>
             <div className="flex-1 w-1/2">
@@ -17,10 +17,18 @@ const Login = () => {
                 >
                     <div className="w-full h-100 space-y-4">
                         <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">
-                            <span className="text-primary font-bold">Log in</span> to your account
+                            <span className="text-primary font-bold">Register </span> your account
                         </h1>
                         <hr />
-                        <form className="mt-6" action="#" method="POST">
+                        <form className="space-y-4" action="#" method="POST">
+                            <div>
+                                <label className="font-medium">Your Name</label>
+                                <input
+                                    type="email"
+                                    placeholder="Enter Email Name"
+                                    className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
+                                />
+                            </div>
                             <div>
                                 <label className="font-medium">Email Address</label>
                                 <input
@@ -29,7 +37,15 @@ const Login = () => {
                                     className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
                                 />
                             </div>
-                            <div className="mt-4">
+                            <div>
+                                <label className="font-medium">Photo Url</label>
+                                <input
+                                    type="email"
+                                    placeholder="Enter Photo Url"
+                                    className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
+                                />
+                            </div>
+                            <div>
                                 <label className="font-medium">Password</label>
                                 <input
                                     type="password"
@@ -39,18 +55,11 @@ const Login = () => {
                                     required=""
                                 />
                             </div>
-                            <div className="text-right mt-2">
-                                <a
-                                    href="#"
-                                    className="text-sm font-semibold hover:text-primary focus:text-primary"
-                                >
-                                    Forgot Password?
-                                </a>
-                            </div>
+                           
                             <NavLink to={`/login`} className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">
                                 <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-black opacity-[3%]"></span>
                                 <span className="absolute top-0 left-0 w-1/2 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
-                                <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white inline-flex gap-2 items-center justify-center">Login<FaArrowRightToBracket /></span>
+                                <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white inline-flex gap-2 items-center justify-center">Register<FaArrowRightToBracket /></span>
                                 <span className="absolute inset-0 rounded-md"></span>
                             </NavLink>
                         </form>
@@ -58,7 +67,7 @@ const Login = () => {
                         <div className="flex gap-4">
                             <button
                                 type="button"
-                                className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
+                                className="w-full block  font-semibold rounded-lg px-4 py-3 border border-gray-300"
                             >
                                 <div className="flex items-center justify-center">
                                     <svg
@@ -93,16 +102,16 @@ const Login = () => {
                                             d="M48 48L17 24l-4-3 35-10z"
                                         />
                                     </svg>
-                                    <span className="ml-4">Log in with Google</span>
+                                    <span className="ml-4">Sign up with Google</span>
                                 </div>
                             </button>
                             <button
                                 type="button"
-                                className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
+                                className="w-full block font-semibold rounded-lg px-4 py-3 border"
                             >
                                 <div className="flex items-center justify-center">
                                     <FaGithub className="text-2xl" />
-                                    <span className="ml-4">Log in with GitHub</span>
+                                    <span className="ml-4">Sign up with GitHub</span>
                                 </div>
                             </button>
                         </div>
@@ -121,4 +130,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

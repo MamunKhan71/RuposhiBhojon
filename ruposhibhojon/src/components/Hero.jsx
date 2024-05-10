@@ -19,10 +19,10 @@ export default function Hero() {
         modules={[Autoplay]}
         className="mySwiper h-full rounded-lg"
       >
-        <SwiperSlide><img src="/src/assets/header1.jpg" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="/src/assets/header2.jpg" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="/src/assets/header3.jpg" alt="" /></SwiperSlide>
-        <SwiperSlide><img src="/src/assets/header4.jpg" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="./src/assets/header1.jpg" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="./src/assets/header2.jpg" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="./src/assets/header3.jpg" alt="" /></SwiperSlide>
+        <SwiperSlide><img src="./src/assets/header4.jpg" alt="" /></SwiperSlide>
       </Swiper>
     </>
   );
