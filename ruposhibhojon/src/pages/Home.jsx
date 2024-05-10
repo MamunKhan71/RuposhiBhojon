@@ -2,8 +2,12 @@ import { Helmet } from "react-helmet";
 import Hero from "../components/Hero";
 import { FaCircleArrowRight, FaArrowRightToBracket } from "react-icons/fa6";
 import FeaturedSection from "../components/FeaturedSection";
-import WorkSteps from "../components/WorkSteps";
 import { Typewriter } from 'react-simple-typewriter'
+import Testimonials from "../components/Testimonials";
+import WhyRuposhi from "../components/WhyRuposhi";
+import WorkSteps from "../components/WorkSteps";
+import CompanySlider from "../components/CompanySlider";
+import Subscribe from "../components/Subscribe";
 const Home = () => {
     return (
         <div>
@@ -11,7 +15,7 @@ const Home = () => {
                 <title>RuposhiBhojon | Home</title>
             </Helmet>
             <div className="space-y-40">
-                <div className="h-[550px] relative w-full">
+                <div className="h-[650px] relative w-full">
                     <div className="p-24 font-bold absolute flex items-start justify-center flex-col z-10 text-white  w-full h-full rounded-lg bg-opacity-30">
                         <div className="flex justify-between items-center w-full">
                             <div className="space-y-4 basis-2/3">
@@ -29,7 +33,9 @@ const Home = () => {
                                         />
                                     </span>
                                 </h1>
-                                <p>Buy food at your fingertips. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, rem?</p>
+                                <p>The simple solution
+                                    for feeding more and
+                                    wasting less</p>
                                 <a href="#_" className="relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md">
                                     <span className="w-full h-full bg-gradient-to-br from-primary via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
                                     <span className="relative px-6 py-3 transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400">
@@ -96,8 +102,12 @@ const Home = () => {
                     </div>
                     <Hero />
                 </div>
-                <WorkSteps />
+                <CompanySlider />
+                <WhyRuposhi />
                 <FeaturedSection />
+                <Testimonials />
+                <WorkSteps />
+                <Subscribe />
             </div>
         </div>
     );
