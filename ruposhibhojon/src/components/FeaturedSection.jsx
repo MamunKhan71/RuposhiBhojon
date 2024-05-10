@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { MdOutlineArrowOutward } from "react-icons/md";
+import { Link } from "react-router-dom";
 const FeaturedSection = () => {
     const { isLoading, data } = useQuery({
         queryKey: "foods",
@@ -83,7 +84,7 @@ const FeaturedSection = () => {
                 </div>
                 {
                         data && <div className="flex items-center justify-center w-full mt-24 ">
-                            <button className="text-center btn bg-primary btn-wide text-white">Show All <MdOutlineArrowOutward/></button>
+                            <Link to={`/available-food`} className="text-center btn bg-primary btn-wide text-white">Show All <MdOutlineArrowOutward/></Link>
                         </div>
                     }
             </div>

@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Pricing from "../pages/Pricing";
 import AvailableFood from "../pages/AvailableFood";
+import AddProducts from "../pages/AddProducts";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: '/available-food',
                 element: <AvailableFood />
+            },
+            {
+                path: '/add-food',
+                element: <AddProducts />
             }
         ]
     },

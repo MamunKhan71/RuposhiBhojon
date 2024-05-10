@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
 const Navbar = () => {
     const navLink = <>
@@ -20,7 +20,7 @@ const Navbar = () => {
                     <img className="h-20" src="./src/assets/logo2.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 gap-4">
                         {
                             navLink
                         }
@@ -28,7 +28,7 @@ const Navbar = () => {
                             <details>
                                 <summary>My Food</summary>
                                 <ul className="p-2">
-                                    <li><a>Manage My Food</a></li>
+                                    <li><Link to={`/add-food`}>Manage My Food</Link></li>
                                     <li><a>My Food Request</a></li>
                                 </ul>
                             </details>

@@ -116,6 +116,10 @@ const AvailableFood = () => {
                     </nav>
                 </div>
 
+                <div className="bg-primary opacity-5 w-1/2 h-[600px] mx-auto rounded-full blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
+
+                </div>
+
             </div>
         </div>
     );
