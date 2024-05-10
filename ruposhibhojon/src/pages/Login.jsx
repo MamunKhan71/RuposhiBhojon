@@ -1,6 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 import { FaArrowRightToBracket } from "react-icons/fa6"
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Lottie from "lottie-react";
 import loginAnimation from '../assets/lottie/loginLottie.json'
 const Login = () => {
@@ -108,9 +108,9 @@ const Login = () => {
                         </div>
                         <p className="mt-8 font-medium">
                             Need an account?{" "}
-                            <a href="#" className="text-black hover:text-primary font-semibold">
+                            <Link to={`/register`} className="text-black hover:text-primary font-semibold">
                                 Create an account
-                            </a>
+                            </Link>
                         </p>
                     </div>
                 </div>
