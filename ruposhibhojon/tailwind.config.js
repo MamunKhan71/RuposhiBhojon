@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "montserrat": ["Montserrat", "sans-serif"],
+      },
+      colors: {
+        "primary" : "#F68712",
+      }
+    },
   },
   plugins: [require("daisyui")],
- }
+  daisyui: {
+    themes: ["light", "sunset"]
+  }
+}
