@@ -39,6 +39,9 @@ const AddProducts = () => {
                                 className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-primary focus:shadow-md"
                             />
                         </div>
+                        <div className="mb-6 border border-dashed h-48 rounded-md p-4">
+                            <img className="w-full h-full object-cover rounded-md" src="/src/assets/header2.jpg" alt="" />
+                        </div>
                         <div className="mb-6 pt-4">
                             <label className="mb-5 block text-base font-semibold ">
                                 Food Quantity

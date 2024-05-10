@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { MdOutlineArrowOutward } from "react-icons/md";
+import { TbClock12 } from "react-icons/tb";
 import { BsFilterRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { TbListNumbers } from "react-icons/tb";
+import { MdShareLocation } from "react-icons/md";
 const AvailableFood = () => {
     const { isLoading, data } = useQuery({
         queryKey: "foods",
@@ -14,18 +17,60 @@ const AvailableFood = () => {
     return (
         <div>
             <h1 className="text-3xl font-bold text-center mb-6">Available Foods</h1>
-            <p className="text-center font-medium max-w-4xl mx-auto text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
+            <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
             <div className="mt-24 space-y-8">
+                <form className="max-w-lg mx-auto">
+                    <label
+                        htmlFor="default-search"
+                        className="mb-2 text-sm font-medium sr-only dark:text-white"
+                    >
+                        Search
+                    </label>
+                    <div className="relative">
+                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg
+                                className="w-4 h-4 dark:text-gray-400"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                                />
+                            </svg>
+                        </div>
+                        <input
+                            type="search"
+                            id="default-search"
+                            className="block w-full p-4 ps-10 text-sm border rounded-lg"
+                            placeholder="Search available foods"
+                            required=""
+                        />
+                        <button
+                            type="submit"
+                            className="text-white absolute end-2.5 bottom-2.5 bg-primary hover:bg-black font-medium rounded-lg text-sm px-4 py-2"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </form>
                 <div className="flex justify-end items-center">
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn m-1"><BsFilterRight /> Filter by</div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><a>Date</a></li>
-                            <li><a>Time</a></li>
+                            <li><Link to={`/`} className="inline-flex gap-2 items-center font-semibold"><TbClock12 />Expiration Date</Link></li>
+                            <li><Link to={`/`} className="inline-flex gap-2 items-center font-semibold"><TbListNumbers />Quantity</Link></li>
+
                         </ul>
                     </div>
                     <hr />
                 </div>
+
                 <div className="grid grid-cols-3 gap-6">
                     {
                         isLoading ? <>
@@ -72,13 +117,28 @@ const AvailableFood = () => {
                                         <>
                                             <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
                                                 <div className="card bg-base-100 shadow-xl h-[500px]">
-                                                    <figure><img src={food.food_image} alt="Shoes" /></figure>
-                                                    <div className="card-body">
+                                                    <figure className="relative"><img src={food.food_image} alt="Shoes" />
+                                                        <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />2 days remaining</h1></figure>
+                                                    <div className="card-body space-y-2">
+                                                        <div className="flex gap-2 items-center font-medium">
+                                                            <MdShareLocation />
+                                                            <p>Mirpur #01, Dhaka , Bangladesh</p>
+                                                        </div>
                                                         <h2 className="card-title">
                                                             {food.food_name}
                                                             <div className="badge bg-primary text-white">{food.food_quantity}</div>
                                                         </h2>
                                                         <p>{food.additional_notes}</p>
+
+                                                        <div>
+                                                            <div className="flex gap-3 items-center">
+                                                                <div>
+                                                                    <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
+                                                                </div>
+                                                                <p className="font-semibold">Md. Mamun</p>
+                                                            </div>
+                                                        </div>
+
                                                         <div className="card-actions">
                                                             <button className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></button>
                                                         </div>
@@ -92,6 +152,7 @@ const AvailableFood = () => {
                             </>
                     }
                 </div>
+
                 <div className="flex items-center justify-center w-full pt-12">
                     <nav aria-label="Pagination" className="inline-flex -space-x-px rounded-md shadow-sm">
                         <button type="button" className="inline-flex items-center px-2 py-2 text-sm font-semibold rounded-l-md">
