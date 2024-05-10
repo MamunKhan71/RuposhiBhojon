@@ -4,25 +4,41 @@
 
 
 .box {
-    border: 3px solid #0000;
-    border-radius: 12px;
-    background: linear-gradient(#131219, #131219) padding-box, linear-gradient(
-          var(--angle),
-          #070707,
-          #F68712
-        ) border-box;
-    animation: 8s rotate linear infinite;
+  border: 3px solid #0000;
+  border-radius: 12px;
+  background: linear-gradient(#131219, #131219) padding-box, linear-gradient(var(--angle),
+      #070707,
+      #F68712) border-box;
+  animation: 8s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animated-background {
+  background-size: 400%;
+
+  -webkit-animation: animation 3s ease infinite;
+  -moz-animation: animation 3s ease infinite;
+  animation: animation 3s ease infinite;
+}
+
+@keyframes animation {
+  0%,
+  100% {
+      background-position: 0% 50%;
   }
   
-  @keyframes rotate {
-    to {
-      --angle: 360deg;
-    }
+  50% {
+      background-position: 100% 50%;
   }
-  
-  @property --angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-  }
-  
+}

@@ -70,7 +70,7 @@ const FeaturedSection = () => {
                                                         </h2>
                                                         <p>{food.additional_notes}</p>
                                                         <div className="card-actions">
-                                                            <button className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></button>
+                                                            <Link to={`/details`} className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></Link>
                                                         </div>
                                                     </div>
                                                 </div>
