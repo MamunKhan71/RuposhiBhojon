@@ -1,5 +1,6 @@
-import { ImFacebook2 } from "react-icons/im";
-import { FaSquareGithub, FaSquareFacebook  } from "react-icons/fa6";
+import { GrConnect, GrLink  } from "react-icons/gr";
+
+import { FaSquareGithub, FaSquareFacebook } from "react-icons/fa6";
 const AccountSettings = () => {
     return (
         <div className="md:p-4 w-full">
@@ -14,7 +15,7 @@ const AccountSettings = () => {
                             <h1 className="font-semibold">Facebook</h1>
                             <p>https://fb.com/mkmamun111</p>
                         </div>
-                        <button className="btn bg-primary btn-sm">Connected</button>
+                        <button className="btn bg-primary btn-sm text-white"><GrLink />Connected</button>
                     </div>
                     <hr />
                     <div className="flex justify-between items-center w-full">
@@ -23,7 +24,7 @@ const AccountSettings = () => {
                             <h1 className="font-semibold">GitHub</h1>
                             <p>https://fb.com/mkmamun111</p>
                         </div>
-                        <button className="btn bg-primary btn-sm">Connected</button>
+                        <button className="btn bg-black text-white btn-sm"><GrConnect />Connect</button>
                     </div>
                 </div>
             </div>
