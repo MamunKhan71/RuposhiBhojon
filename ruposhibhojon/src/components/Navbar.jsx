@@ -17,7 +17,7 @@ const Navbar = () => {
                             {navLink}
                         </ul>
                     </div>
-                    <img className="h-20" src="./src/assets/logo2.png" alt="" />
+                    <img className="h-16" src="./src/assets/logoWhite.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-4">
@@ -30,7 +30,7 @@ const Navbar = () => {
                                 <ul className="p-2">
                                     <li><Link to={`/add-food`}>Add Food</Link></li>
                                     <li><Link to={`/my-food`}>Manage My Food</Link></li>
-                                    <li><Link to={`/`}>My Food Request</Link></li>
+                                    <li><Link to={`/my-request`}>My Food Request</Link></li>
                                 </ul>
                             </details>
                         </li>
