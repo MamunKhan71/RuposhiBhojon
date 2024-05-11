@@ -1,5 +1,9 @@
 import Lottie from "lottie-react";
 import ErrorPageFiles from "../assets/lottie/404.json"
+import { IoReturnUpBackSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
+import 'animate.css';
 const ErrorPage = () => {
     return (
         <div className="font-montserrat">
@@ -11,18 +15,28 @@ const ErrorPage = () => {
                             <div className="mb-10 lg:mb-20">
                                 <img src="/src/assets/logo2.png" alt="" />
                             </div>
-                            <div className="mb-10 md:mb-20 text-gray-600 font-light">
-                                <h1 className="font-black uppercase text-3xl lg:text-5xl text-primary mb-10">
-                                    You seem to be lost!
+                            <div className="mb-10 md:mb-20 font-light">
+                                <h1 className="font-black uppercase text-3xl lg:text-5xl text-primary mb-10 w-full">
+                                    You seem to be{' '} <br/>
+                                    <span style={{ color: 'red'}}>
+                                        <Typewriter
+                                            words={['lost!', 'disoriented!', 'off-tracked!']}
+                                            loop={5}
+                                            cursor
+                                            cursorStyle='_'
+                                            typeSpeed={70}
+                                            deleteSpeed={50}
+                                            delaySpeed={1000}
+                                        />
+                                    </span>
                                 </h1>
-                                <p>The page you're looking for isn't available.</p>
-                                <p>Try searching again or use the Go Back button below.</p>
+                                <p className="font-medium">The page you're looking for isn't available.</p>
+                                <p className="font-medium">Try searching again or use the Go Back button below.</p>
                             </div>
                             <div className="mb-20 md:mb-0">
-                                <button className="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600">
-                                    <i className="mdi mdi-arrow-left mr-2" />
-                                    Go Back
-                                </button>
+                                <Link to={`/`} className="text-lg outline-none focus:outline-none transform transition-all hover:scale-110 bg-primary btn text-white font-medium">
+                                    Go Back <IoReturnUpBackSharp />
+                                </Link>
                             </div>
                         </div>
                         <div className="w-full md:w-4/12 text-center">
