@@ -5,9 +5,28 @@ import Lottie from "lottie-react";
 import loginAnimation from '../assets/lottie/loginLottie.json'
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { useForm } from "react-hook-form"
 const Login = () => {
-    const { userGoogleAuth, userGithubAuth } = useContext(AuthContext)
-    
+    const { userGoogleAuth, userGithubAuth, userEmailSignIn } = useContext(AuthContext)
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
+
+    const handleLogin = data => {
+        const email = data.email
+        const password = data.password
+        console.log(email, password);
+        userEmailSignIn(email, password)
+            .then(user => {
+                console.log("User: ", user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
     const handleGoogleSignUp = () => {
         userGoogleAuth()
             .then(user => {
@@ -36,10 +55,10 @@ const Login = () => {
                             <span className="text-primary font-bold">Log in</span> to your account
                         </h1>
                         <hr />
-                        <form className="mt-6" action="#" method="POST">
+                        <form onSubmit={handleSubmit(handleLogin)} className="mt-6" action="#" method="POST">
                             <div>
                                 <label className="font-medium">Email Address</label>
-                                <input
+                                <input {...register('email')}
                                     type="email"
                                     placeholder="Enter Email Address"
                                     className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
@@ -48,6 +67,7 @@ const Login = () => {
                             <div className="mt-4">
                                 <label className="font-medium">Password</label>
                                 <input
+                                    {...register('password')}
                                     type="password"
                                     placeholder="Enter Password"
                                     minLength={6}
@@ -63,12 +83,12 @@ const Login = () => {
                                     Forgot Password?
                                 </a>
                             </div>
-                            <NavLink to={`/login`} className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">
+                            <button type="submit" className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">
                                 <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-black opacity-[3%]"></span>
                                 <span className="absolute top-0 left-0 w-1/2 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
                                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white inline-flex gap-2 items-center justify-center">Login<FaArrowRightToBracket /></span>
                                 <span className="absolute inset-0 rounded-md"></span>
-                            </NavLink>
+                            </button>
                         </form>
                         <hr className="my-6 border-gray-300 w-full" />
                         <div className="flex gap-4">
