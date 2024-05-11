@@ -9,7 +9,7 @@ import { MdShareLocation } from "react-icons/md";
 import { useEffect, useState } from "react";
 const AvailableFood = () => {
     const [count, setCount] = useState(0)
-    const [itemsPerPage, setItemsPerPage] = useState(1)
+    const [itemsPerPage, setItemsPerPage] = useState(6)
     const numberOfPages = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPages).keys()]
 
@@ -20,12 +20,17 @@ const AvailableFood = () => {
             .then(data => setCount(data.data.count))
     }, [])
 
-    const { isLoading, data } = useQuery({
+    const { isLoading, data, refetch } = useQuery({
         queryKey: "foods",
-        queryFn: () => axios.get('local.json'),
+        queryFn: () => axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`),
         refetchOnWindowFocus: false,
         retry: 5,
     })
+
+    useEffect(() => {
+        refetch();
+    }, [currentPage, itemsPerPage, refetch]);
+
     const handlePrevious = () => {
         if (currentPage > 0) {
             setCurrentPage(currentPage - 1)
@@ -35,6 +40,9 @@ const AvailableFood = () => {
         if (currentPage < pages.length - 1) {
             setCurrentPage(currentPage + 1)
         }
+    }
+    const handleItemsPerPage = e => {
+        setItemsPerPage(e.target.value)
     }
     return (
         <div>
@@ -175,9 +183,9 @@ const AvailableFood = () => {
                     }
                 </div>
 
-                <div className="flex items-center justify-center w-full pt-12">
+                <div className="flex gap-4 items-center justify-center w-full pt-12">
                     <nav aria-label="Pagination" className="inline-flex gap-4 rounded-md shadow-sm">
-                        <button onClick={handlePrevious} type="button" className="inline-flex items-center bg-gray-200 hover:bg-black text-white px-2 py-2 text-sm font-semibold rounded-l-md">
+                        <button onClick={handlePrevious} type="button" className="inline-flex items-center transition-all duration-300 bg-base-200 hover:bg-black text-white px-2 py-2 text-sm font-semibold rounded-l-md">
                             <span className="sr-only">Previous</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="w-5 h-5">
                                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path>
@@ -186,16 +194,31 @@ const AvailableFood = () => {
 
                         <div className="flex gap-2 items-center">
                             {
-                                pages.map(page => <button type="button" onClick={() => setCurrentPage(page)} key={page} className={`${currentPage === page ? 'bg-primary text-white animate-pulse' : ''} inline-flex items-center px-4 py-2 text-sm font-semibold`}>{page + 1}</button>)
+                                pages.map(page => <button type="button" onClick={() => setCurrentPage(page)} key={page} className={`${currentPage === page ? 'bg-primary text-white animate-pulse transition-all duration-300' : ''} inline-flex items-center px-4 py-2 text-sm font-semibold`}>{page + 1}</button>)
                             }
                         </div>
-                        <button onClick={handleNext} type="button" className="inline-flex items-center bg-gray-200 hover:bg-black text-white px-2 py-2 text-sm font-semibold  rounded-r-md">
+                        <button onClick={handleNext} type="button" className="inline-flex items-center transition-all duration-300 bg-base-200 hover:bg-black text-white px-2 py-2 text-sm font-semibold  rounded-r-md">
                             <span className="sr-only">Next</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="w-5 h-5">
                                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
                             </svg>
                         </button>
                     </nav>
+                    <div>
+                        <select
+                            onChange={handleItemsPerPage}
+                            className="text-sm rounded-lg block w-full p-2.5 bg-base-200"
+                        >
+                            <option selected={true} disabled>Items per page</option>
+                            <option value={3}>3</option>
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={50}>50</option>
+                        </select>
+                    </div>
+
+
+
                 </div>
 
                 <div className="bg-primary opacity-5 w-1/2 h-[600px] mx-auto rounded-full blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
