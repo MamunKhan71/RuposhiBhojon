@@ -8,6 +8,8 @@ import { TbListNumbers } from "react-icons/tb";
 import { MdShareLocation } from "react-icons/md";
 import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form"
+import notFound from '../assets/lottie/notFound.json'
+import Lottie from "lottie-react";
 const AvailableFood = () => {
     const {
         register,
@@ -20,7 +22,6 @@ const AvailableFood = () => {
     const numberOfPages = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPages).keys()]
     const [currentPage, setCurrentPage] = useState(0)
-
     useEffect(() => {
         axios.get('http://localhost:5000/foodCount')
             .then(data => setCount(data.data.count))
@@ -114,7 +115,7 @@ const AvailableFood = () => {
                     <hr />
                 </div>
 
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-3 gap-6 w-full">
                     {
                         isLoading ? <>
                             <div className="flex flex-col gap-6">
@@ -156,40 +157,47 @@ const AvailableFood = () => {
                         </> :
                             <>
                                 {
-                                    food?.map(food => (
-                                        <>
-                                            <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
-                                                <div className="card bg-base-100 shadow-xl h-[500px]">
-                                                    <figure className="relative"><img src={food.food_image} alt="Shoes" />
-                                                        <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />2 days remaining</h1></figure>
-                                                    <div className="card-body space-y-2">
-                                                        <div className="flex gap-2 items-center font-medium">
-                                                            <MdShareLocation />
-                                                            <p>Mirpur #01, Dhaka , Bangladesh</p>
-                                                        </div>
-                                                        <h2 className="card-title">
-                                                            {food.food_name}
-                                                            <div className="badge bg-primary text-white">{food.food_quantity}</div>
-                                                        </h2>
-                                                        <p>{food.additional_notes}</p>
-
-                                                        <div>
-                                                            <div className="flex gap-3 items-center">
-                                                                <div>
-                                                                    <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
-                                                                </div>
-                                                                <p className="font-semibold">Md. Mamun</p>
+                                    food.length === 0 ?
+                                        <div className="col-span-3 flex items-center justify-center w-full">
+                                            <div className="relative flex items-center justify-center">
+                                                <h1 className="text-4xl font-bold text- absolute top-10 text-center">Food Not Found</h1>
+                                                <Lottie animationData={notFound}></Lottie>
+                                            </div>
+                                        </div> :
+                                        food?.map(food => (
+                                            <>
+                                                <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
+                                                    <div className="card bg-base-100 shadow-xl h-[500px]">
+                                                        <figure className="relative"><img src={food.food_image} alt="Shoes" />
+                                                            <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />2 days remaining</h1></figure>
+                                                        <div className="card-body space-y-2">
+                                                            <div className="flex gap-2 items-center font-medium">
+                                                                <MdShareLocation />
+                                                                <p>Mirpur #01, Dhaka , Bangladesh</p>
                                                             </div>
-                                                        </div>
+                                                            <h2 className="card-title">
+                                                                {food.food_name}
+                                                                <div className="badge bg-primary text-white">{food.food_quantity}</div>
+                                                            </h2>
+                                                            <p>{food.additional_notes}</p>
 
-                                                        <div className="card-actions">
-                                                            <button className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></button>
+                                                            <div>
+                                                                <div className="flex gap-3 items-center">
+                                                                    <div>
+                                                                        <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
+                                                                    </div>
+                                                                    <p className="font-semibold">Md. Mamun</p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="card-actions">
+                                                                <button className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </>
-                                    ))
+                                            </>
+                                        ))
                                 }
 
                             </>
