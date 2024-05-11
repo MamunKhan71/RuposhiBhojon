@@ -1,14 +1,42 @@
 import Lottie from "lottie-react";
 import { FaGithub } from "react-icons/fa";
 import { FaArrowRightToBracket } from "react-icons/fa6"
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SignUpLottie from '../assets/lottie/signUpLottie.json'
+import { useForm } from "react-hook-form"
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 const Register = () => {
+    const { userEmailSignUp } = useContext(AuthContext)
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
+    const handleRegister = data => {
+        const name = data.name
+        const email = data.email
+        const photo = data.photo
+        const password = data.password
+        const user = {
+            displayName: name,
+            email: email,
+            photoURL: photo,
+            password: password
+        }
+        userEmailSignUp(email, password)
+            .then(user => {
+                
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
     return (
         <div className="flex justify-between items-center gap-10 my-12 w-full">
             <div className="flex-1 flex items-center justify-center rounded-xl">
                 <Lottie animationData={SignUpLottie} loop={true} />
-                {/* <img className="h-[700px] rounded-xl w-full object-cover" src="./src/assets/login.jpg" alt="" /> */}
             </div>
             <div className="flex-1 w-1/2">
                 <div
@@ -20,18 +48,20 @@ const Register = () => {
                             <span className="text-primary font-bold">Register </span> your account
                         </h1>
                         <hr />
-                        <form className="space-y-4" action="#" method="POST">
+                        <form onSubmit={handleSubmit(handleRegister)} className="space-y-4" action="#" method="POST">
                             <div>
                                 <label className="font-medium">Your Name</label>
                                 <input
-                                    type="email"
-                                    placeholder="Enter Email Name"
+                                    {...register('name')}
+                                    type="text"
+                                    placeholder="Enter your Name"
                                     className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
                                 />
                             </div>
                             <div>
                                 <label className="font-medium">Email Address</label>
                                 <input
+                                    {...register('email')}
                                     type="email"
                                     placeholder="Enter Email Address"
                                     className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
@@ -40,7 +70,8 @@ const Register = () => {
                             <div>
                                 <label className="font-medium">Photo Url</label>
                                 <input
-                                    type="email"
+                                    {...register('photo')}
+                                    type="text"
                                     placeholder="Enter Photo Url"
                                     className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
                                 />
@@ -48,6 +79,7 @@ const Register = () => {
                             <div>
                                 <label className="font-medium">Password</label>
                                 <input
+                                    {...register('password')}
                                     type="password"
                                     placeholder="Enter Password"
                                     minLength={6}
@@ -55,13 +87,13 @@ const Register = () => {
                                     required=""
                                 />
                             </div>
-                           
-                            <NavLink to={`/login`} className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">
+
+                            <button type="submit" className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">
                                 <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-black opacity-[3%]"></span>
                                 <span className="absolute top-0 left-0 w-1/2 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
                                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white inline-flex gap-2 items-center justify-center">Register<FaArrowRightToBracket /></span>
                                 <span className="absolute inset-0 rounded-md"></span>
-                            </NavLink>
+                            </button>
                         </form>
                         <hr className="my-6 border-gray-300 w-full" />
                         <div className="flex gap-4">

@@ -38,7 +38,7 @@ const Testimonials = () => {
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
-                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/images/team/1.jpg" alt="" />
+                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/header3.jpg" alt="" />
                                         <div>
                                             <h2 className='font-bold text-[#151515] text-xl'>Awlad Hossain</h2>
                                             <p className='text-lg font-semibold'>Businessman</p>
@@ -61,7 +61,7 @@ const Testimonials = () => {
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
-                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/images/team/1.jpg" alt="" />
+                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/header1.jpg" alt="" />
                                         <div>
                                             <h2 className='font-bold text-[#151515] text-xl'>Awlad Hossain</h2>
                                             <p className='text-lg font-semibold'>Businessman</p>
@@ -84,7 +84,7 @@ const Testimonials = () => {
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
-                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/images/team/1.jpg" alt="" />
+                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/header2.jpg" alt="" />
                                         <div>
                                             <h2 className='font-bold text-[#151515] text-xl'>Awlad Hossain</h2>
                                             <p className='text-lg font-semibold'>Businessman</p>

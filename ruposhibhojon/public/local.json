@@ -1,75 +1,80 @@
 [
-    {
-      "food_image": "https://i.ibb.co/KzV1mJK/pexels-phuong-nguyen-nguyen-2042010-3663347.jpg",
-      "food_name": "Fresh Vegetable Soup",
-      "donator": {
-        "donator_image": "donator_image_url_1",
-        "donator_name": "Green Fields Organic Farm"
-      },
-      "food_quantity": "10 servings",
-      "pickup_location": "123 Main Street, Cityville",
-      "expired_datetime": "2024-05-15T12:00:00",
-      "additional_notes": "Made with locally sourced organic vegetables."
+  {
+    "food_image": "https://i.ibb.co/KzV1mJK/pexels-phuong-nguyen-nguyen-2042010-3663347.jpg",
+    "food_name": "Fresh Vegetable Soup",
+    "donator": {
+      "donator_image": "donator_image_url_1",
+      "donator_name": "Green Fields Organic Farm"
     },
-    {
-      "food_image": "https://i.ibb.co/s6yN21y/pexels-karolina-grabowska-4197905.jpg",
-      "food_name": "Homemade Bread",
-      "donator": {
-        "donator_image": "donator_image_url_2",
-        "donator_name": "Baker's Delight Bakery"
-      },
-      "food_quantity": "5 loaves",
-      "pickup_location": "456 Elm Street, Townsville",
-      "expired_datetime": "2024-05-13T18:00:00",
-      "additional_notes": "Freshly baked this morning."
+    "food_quantity": "10 servings",
+    "pickup_location": "123 Main Street, Cityville",
+    "expired_datetime": "2024-05-15T12:00:00",
+    "additional_notes": "Made with locally sourced organic vegetables.",
+    "availability": true
+  },
+  {
+    "food_image": "https://i.ibb.co/s6yN21y/pexels-karolina-grabowska-4197905.jpg",
+    "food_name": "Homemade Bread",
+    "donator": {
+      "donator_image": "donator_image_url_2",
+      "donator_name": "Baker's Delight Bakery"
     },
-    {
-      "food_image": "https://i.ibb.co/LdkkHfb/pexels-fotios-photos-4730662.jpg",
-      "food_name": "Chicken Alfredo Pasta",
-      "donator": {
-        "donator_image": "donator_image_url_3",
-        "donator_name": "Mama Mia's Italian Kitchen"
-      },
-      "food_quantity": "8 servings",
-      "pickup_location": "789 Oak Avenue, Villageton",
-      "expired_datetime": "2024-05-14T20:00:00",
-      "additional_notes": "Contains dairy and gluten."
+    "food_quantity": "5 loaves",
+    "pickup_location": "456 Elm Street, Townsville",
+    "expired_datetime": "2024-05-13T18:00:00",
+    "additional_notes": "Freshly baked this morning.",
+    "availability": false
+  },
+  {
+    "food_image": "https://i.ibb.co/LdkkHfb/pexels-fotios-photos-4730662.jpg",
+    "food_name": "Chicken Alfredo Pasta",
+    "donator": {
+      "donator_image": "donator_image_url_3",
+      "donator_name": "Mama Mia's Italian Kitchen"
     },
-    {
-      "food_image": "https://i.ibb.co/FB117nJ/pexels-karolina-grabowska-6660056.jpg",
-      "food_name": "Fresh Fruit Platter",
-      "donator": {
-        "donator_image": "donator_image_url_4",
-        "donator_name": "Nature's Bounty Grocery Store"
-      },
-      "food_quantity": "20 servings",
-      "pickup_location": "321 Pine Road, Hamletville",
-      "expired_datetime": "2024-05-16T10:00:00",
-      "additional_notes": "Assorted seasonal fruits."
+    "food_quantity": "8 servings",
+    "pickup_location": "789 Oak Avenue, Villageton",
+    "expired_datetime": "2024-05-14T20:00:00",
+    "additional_notes": "Contains dairy and gluten.",
+    "availability": true
+  },
+  {
+    "food_image": "https://i.ibb.co/FB117nJ/pexels-karolina-grabowska-6660056.jpg",
+    "food_name": "Fresh Fruit Platter",
+    "donator": {
+      "donator_image": "donator_image_url_4",
+      "donator_name": "Nature's Bounty Grocery Store"
     },
-    {
-      "food_image": "https://i.ibb.co/rQJGCgh/pexels-karolina-grabowska-4199062.jpg",
-      "food_name": "Vegetarian Chili",
-      "donator": {
-        "donator_image": "donator_image_url_5",
-        "donator_name": "Green Eats Restaurant"
-      },
-      "food_quantity": "12 servings",
-      "pickup_location": "567 Cedar Lane, Grovetown",
-      "expired_datetime": "2024-05-15T16:30:00",
-      "additional_notes": "Spicy and flavorful!"
+    "food_quantity": "20 servings",
+    "pickup_location": "321 Pine Road, Hamletville",
+    "expired_datetime": "2024-05-16T10:00:00",
+    "additional_notes": "Assorted seasonal fruits.",
+    "availability": false
+  },
+  {
+    "food_image": "https://i.ibb.co/rQJGCgh/pexels-karolina-grabowska-4199062.jpg",
+    "food_name": "Vegetarian Chili",
+    "donator": {
+      "donator_image": "donator_image_url_5",
+      "donator_name": "Green Eats Restaurant"
     },
-    {
-      "food_image": "https://i.ibb.co/59gxLWt/pexels-anete-lusina-4792401.jpg",
-      "food_name": "Assorted Pastries",
-      "donator": {
-        "donator_image": "donator_image_url_6",
-        "donator_name": "Sweet Treats Bakery"
-      },
-      "food_quantity": "15 pieces",
-      "pickup_location": "890 Maple Drive, Orchardtown",
-      "expired_datetime": "2024-05-13T14:00:00",
-      "additional_notes": "Includes croissants, muffins, and danishes."
-    }
-  ]
-  
+    "food_quantity": "12 servings",
+    "pickup_location": "567 Cedar Lane, Grovetown",
+    "expired_datetime": "2024-05-15T16:30:00",
+    "additional_notes": "Spicy and flavorful!",
+    "availability": true
+  },
+  {
+    "food_image": "https://i.ibb.co/59gxLWt/pexels-anete-lusina-4792401.jpg",
+    "food_name": "Assorted Pastries",
+    "donator": {
+      "donator_image": "donator_image_url_6",
+      "donator_name": "Sweet Treats Bakery"
+    },
+    "food_quantity": "15 pieces",
+    "pickup_location": "890 Maple Drive, Orchardtown",
+    "expired_datetime": "2024-05-13T14:00:00",
+    "additional_notes": "Includes croissants, muffins, and danishes.",
+    "availability": true
+  }
+]

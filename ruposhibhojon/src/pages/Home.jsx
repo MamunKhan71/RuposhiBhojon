@@ -21,7 +21,7 @@ const Home = () => {
                             <div className="space-y-4 basis-2/3">
                                 <h1 className="text-6xl font-bold">
                                     Don’t{' '}
-                                    <span style={{ color: 'red', fontWeight: 'bold' }}>
+                                    <span style={{ color: '#F68712', fontWeight: 'bold' }}>
                                         <Typewriter
                                             words={['buy it', 'bin it']}
                                             loop={5}
