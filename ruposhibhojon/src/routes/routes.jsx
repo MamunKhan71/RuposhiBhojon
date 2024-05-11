@@ -10,6 +10,10 @@ import FoodDetails from "../pages/FoodDetails";
 import MyFoodList from "../pages/MyFoodList";
 import MyRequestList from "../pages/MyRequestList";
 import ErrorPage from "../pages/ErrorPage";
+import Profile from "../pages/Profile";
+import ProfileSettings from "../components/ProfileSettings";
+import AccountSettings from "../components/AccountSettings";
+import Notifications from "../components/Notifications";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +56,24 @@ const router = createBrowserRouter([
             {
                 path: '/my-request',
                 element: <MyRequestList />
+            },
+            {
+                path: '/profile',
+                element: <Profile />,
+                children: [
+                    {
+                        path: 'profile-settings',
+                        element: <ProfileSettings />
+                    },
+                    {
+                        path: 'account-settings',
+                        element: <AccountSettings />
+                    },
+                    {
+                        path: 'notifications',
+                        element: <Notifications />
+                    }
+                ]
             }
         ]
     },
