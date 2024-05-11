@@ -6,26 +6,38 @@ import { BsFilterRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { TbListNumbers } from "react-icons/tb";
 import { MdShareLocation } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useForm } from "react-hook-form"
 const AvailableFood = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+    const [food, setFood] = useState([])
     const [count, setCount] = useState(0)
     const [itemsPerPage, setItemsPerPage] = useState(6)
     const numberOfPages = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPages).keys()]
-
     const [currentPage, setCurrentPage] = useState(0)
-    console.log(currentPage, pages);
+
     useEffect(() => {
         axios.get('http://localhost:5000/foodCount')
             .then(data => setCount(data.data.count))
     }, [])
 
-    const { isLoading, data, refetch } = useQuery({
+    const { isLoading, refetch } = useQuery({
         queryKey: "foods",
-        queryFn: () => axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`),
+        queryFn: () => axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`).then(data => setFood(data.data)),
         refetchOnWindowFocus: false,
         retry: 5,
     })
+
+    const handleSearch = (data) => {
+        const searchText = data.searchText
+        axios.get(`http://localhost:5000/search?search=${searchText}`)
+            .then(data => setFood(data.data))
+    }
 
     useEffect(() => {
         refetch();
@@ -49,7 +61,7 @@ const AvailableFood = () => {
             <h1 className="text-3xl font-bold text-center mb-6">Available Foods</h1>
             <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
             <div className="mt-24 space-y-8">
-                <form className="max-w-lg mx-auto">
+                <form onSubmit={handleSubmit(handleSearch)} className="max-w-lg mx-auto">
                     <label
                         htmlFor="default-search"
                         className="mb-2 text-sm font-medium sr-only dark:text-white"
@@ -75,6 +87,7 @@ const AvailableFood = () => {
                             </svg>
                         </div>
                         <input
+                            {...register('searchText')}
                             type="search"
                             id="default-search"
                             className="block w-full p-4 ps-10 text-sm border rounded-lg"
@@ -143,7 +156,7 @@ const AvailableFood = () => {
                         </> :
                             <>
                                 {
-                                    data?.data?.map(food => (
+                                    food?.map(food => (
                                         <>
                                             <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
                                                 <div className="card bg-base-100 shadow-xl h-[500px]">
