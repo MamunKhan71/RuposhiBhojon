@@ -3,8 +3,9 @@
     "food_image": "https://i.ibb.co/KzV1mJK/pexels-phuong-nguyen-nguyen-2042010-3663347.jpg",
     "food_name": "Fresh Vegetable Soup",
     "donator": {
-      "donator_image": "donator_image_url_1",
-      "donator_name": "Green Fields Organic Farm"
+      "uid": "dummy_uid_1",
+      "userName": "JohnDoe",
+      "userImage": "user_image_url_1"
     },
     "food_quantity": "10 servings",
     "pickup_location": "123 Main Street, Cityville",
@@ -16,8 +17,9 @@
     "food_image": "https://i.ibb.co/s6yN21y/pexels-karolina-grabowska-4197905.jpg",
     "food_name": "Homemade Bread",
     "donator": {
-      "donator_image": "donator_image_url_2",
-      "donator_name": "Baker's Delight Bakery"
+      "uid": "dummy_uid_2",
+      "userName": "JaneSmith",
+      "userImage": "user_image_url_2"
     },
     "food_quantity": "5 loaves",
     "pickup_location": "456 Elm Street, Townsville",
@@ -29,8 +31,9 @@
     "food_image": "https://i.ibb.co/LdkkHfb/pexels-fotios-photos-4730662.jpg",
     "food_name": "Chicken Alfredo Pasta",
     "donator": {
-      "donator_image": "donator_image_url_3",
-      "donator_name": "Mama Mia's Italian Kitchen"
+      "uid": "dummy_uid_3",
+      "userName": "MikeJohnson",
+      "userImage": "user_image_url_3"
     },
     "food_quantity": "8 servings",
     "pickup_location": "789 Oak Avenue, Villageton",
@@ -42,8 +45,9 @@
     "food_image": "https://i.ibb.co/FB117nJ/pexels-karolina-grabowska-6660056.jpg",
     "food_name": "Fresh Fruit Platter",
     "donator": {
-      "donator_image": "donator_image_url_4",
-      "donator_name": "Nature's Bounty Grocery Store"
+      "uid": "dummy_uid_4",
+      "userName": "EmilyBrown",
+      "userImage": "user_image_url_4"
     },
     "food_quantity": "20 servings",
     "pickup_location": "321 Pine Road, Hamletville",
@@ -55,8 +59,9 @@
     "food_image": "https://i.ibb.co/rQJGCgh/pexels-karolina-grabowska-4199062.jpg",
     "food_name": "Vegetarian Chili",
     "donator": {
-      "donator_image": "donator_image_url_5",
-      "donator_name": "Green Eats Restaurant"
+      "uid": "dummy_uid_5",
+      "userName": "SarahMiller",
+      "userImage": "user_image_url_5"
     },
     "food_quantity": "12 servings",
     "pickup_location": "567 Cedar Lane, Grovetown",
@@ -68,8 +73,9 @@
     "food_image": "https://i.ibb.co/59gxLWt/pexels-anete-lusina-4792401.jpg",
     "food_name": "Assorted Pastries",
     "donator": {
-      "donator_image": "donator_image_url_6",
-      "donator_name": "Sweet Treats Bakery"
+      "uid": "dummy_uid_6",
+      "userName": "DavidWilson",
+      "userImage": "user_image_url_6"
     },
     "food_quantity": "15 pieces",
     "pickup_location": "890 Maple Drive, Orchardtown",

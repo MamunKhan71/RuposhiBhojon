@@ -8,7 +8,7 @@ import { MdShareLocation } from "react-icons/md";
 const FeaturedSection = () => {
     const { isLoading, data } = useQuery({
         queryKey: "foods",
-        queryFn: () => axios.get('local.json'),
+        queryFn: () => axios.get(`http://localhost:5000/featured`),
         refetchOnWindowFocus: false,
         retry: 5,
     }

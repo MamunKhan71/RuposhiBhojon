@@ -6,14 +6,36 @@ import { BsFilterRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { TbListNumbers } from "react-icons/tb";
 import { MdShareLocation } from "react-icons/md";
+import { useEffect, useState } from "react";
 const AvailableFood = () => {
+    const [count, setCount] = useState(0)
+    const [itemsPerPage, setItemsPerPage] = useState(1)
+    const numberOfPages = Math.ceil(count / itemsPerPage)
+    const pages = [...Array(numberOfPages).keys()]
+
+    const [currentPage, setCurrentPage] = useState(0)
+    console.log(currentPage, pages);
+    useEffect(() => {
+        axios.get('http://localhost:5000/foodCount')
+            .then(data => setCount(data.data.count))
+    }, [])
+
     const { isLoading, data } = useQuery({
         queryKey: "foods",
         queryFn: () => axios.get('local.json'),
         refetchOnWindowFocus: false,
         retry: 5,
+    })
+    const handlePrevious = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1)
+        }
     }
-    )
+    const handleNext = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
     return (
         <div>
             <h1 className="text-3xl font-bold text-center mb-6">Available Foods</h1>
@@ -154,21 +176,20 @@ const AvailableFood = () => {
                 </div>
 
                 <div className="flex items-center justify-center w-full pt-12">
-                    <nav aria-label="Pagination" className="inline-flex -space-x-px rounded-md shadow-sm">
-                        <button type="button" className="inline-flex items-center px-2 py-2 text-sm font-semibold rounded-l-md">
+                    <nav aria-label="Pagination" className="inline-flex gap-4 rounded-md shadow-sm">
+                        <button onClick={handlePrevious} type="button" className="inline-flex items-center bg-gray-200 hover:bg-black text-white px-2 py-2 text-sm font-semibold rounded-l-md">
                             <span className="sr-only">Previous</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="w-5 h-5">
                                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path>
                             </svg>
                         </button>
-                        <button type="button" aria-current="page" className="inline-flex items-center px-4 py-2 text-sm font-semibold ">1</button>
-                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold">2</button>
-                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold">3</button>
-                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold">...</button>
-                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold">7</button>
-                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold">8</button>
-                        <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-semibold">9</button>
-                        <button type="button" className="inline-flex items-center px-2 py-2 text-sm font-semibold  rounded-r-md">
+
+                        <div className="flex gap-2 items-center">
+                            {
+                                pages.map(page => <button type="button" onClick={() => setCurrentPage(page)} key={page} className={`${currentPage === page ? 'bg-primary text-white animate-pulse' : ''} inline-flex items-center px-4 py-2 text-sm font-semibold`}>{page + 1}</button>)
+                            }
+                        </div>
+                        <button onClick={handleNext} type="button" className="inline-flex items-center bg-gray-200 hover:bg-black text-white px-2 py-2 text-sm font-semibold  rounded-r-md">
                             <span className="sr-only">Next</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" className="w-5 h-5">
                                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path>
