@@ -23,16 +23,16 @@ const Footer = () => {
                     <a className="link link-hover">Cookie policy</a>
                 </nav>
                 <form>
-                    <h6 className="footer-title">Newsletter</h6>
-                    <fieldset className="form-control w-80">
-                        <label className="label">
-                            <span className="label-text">Enter your email address</span>
-                        </label>
-                        <div className="join">
-                            <input type="text" placeholder="username@site.com" className="input input-bordered join-item" />
-                            <button className="btn bg-primary text-white join-item">Subscribe</button>
-                        </div>
-                    </fieldset>
+                    <h6 className="footer-title">Address</h6>
+                    <h1>Road 04, Block D, Mirpur 01, Mirpur, Dhaka</h1>
+                    <iframe
+                    height={100}
+                        className="rounded-xl shadow-sm"
+                        src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d4258.471041413782!2d90.35589153306954!3d23.79909566596411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sroad%2001%20block%20d%20mirpur%201!5e0!3m2!1sen!2sbd!4v1715462989432!5m2!1sen!2sbd"
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    />
                 </form>
             </footer>
             <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300  container mx-auto">
@@ -40,7 +40,7 @@ const Footer = () => {
                     <img className="w-16" src="./src/assets/footerlogo.png" alt="" />
                     <div className="flex flex-col">
                         <span className="font-bold text-lg">RuposhiBangla </span>
-                        <span className="font-medium">Reliable Food Delivery Service</span>
+                        <span className="font-medium">All rights reserved by &copy; <a className="font-bold" href="https://www.fb.com/mkmamun111" target="_blank"> Md.Mamun</a> | Copyright @ <span className="font-bold">{new Date().getFullYear()}</span></span>
                     </div>
                 </aside>
                 <nav className="md:place-self-center md:justify-self-end">

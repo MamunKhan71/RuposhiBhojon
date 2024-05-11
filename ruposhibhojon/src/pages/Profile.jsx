@@ -1,8 +1,13 @@
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 const Profile = () => {
     return (
         <div>
+            <Helmet>
+                <title>RuposhiBhojon | Profile</title>
+            </Helmet>
             <div className="bg-primary opacity-5 w-1/2 h-[600px] mx-auto rounded-xl blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
 
             </div>
@@ -30,12 +35,12 @@ const Profile = () => {
                             <a
                                 className="flex gap-2 items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full  "
                             >
-                               <CiLogout /> Logout 
+                                <CiLogout /> Logout
                             </a>
                         </div>
                     </aside>
                     <div className="w-full py-1 basis-2/5 flex items-center justify-center">
-                       <Outlet/>
+                        <Outlet />
                     </div>
                 </div>
             </div>

@@ -10,6 +10,8 @@ import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form"
 import notFound from '../assets/lottie/notFound.json'
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
+
 const AvailableFood = () => {
     const {
         register,
@@ -57,8 +59,19 @@ const AvailableFood = () => {
     const handleItemsPerPage = e => {
         setItemsPerPage(e.target.value)
     }
+    const handleTimeRemaining = (time) => {
+        const dateAndTime = new Date(time);
+        const dateNow = new Date();
+        const differenceInMilliseconds = dateAndTime.getTime() - dateNow.getTime();
+        const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+        return differenceInDays;
+    }
+
     return (
         <div>
+            <Helmet>
+                <title>RuposhiBhojon | Available Food</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-center mb-6">Available Foods</h1>
             <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
             <div className="mt-24 space-y-8">
@@ -107,8 +120,8 @@ const AvailableFood = () => {
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn m-1"><BsFilterRight /> Filter by</div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><Link to={`/`} className="inline-flex gap-2 items-center font-semibold"><TbClock12 />Expiration Date</Link></li>
-                            <li><Link to={`/`} className="inline-flex gap-2 items-center font-semibold"><TbListNumbers />Quantity</Link></li>
+                            <li><button onClick={() => handleFilter('time')} className="inline-flex gap-2 items-center font-semibold"><TbClock12 />Expiration Date</button></li>
+                            <li><button className="inline-flex gap-2 items-center font-semibold"><TbListNumbers />Quantity</button></li>
 
                         </ul>
                     </div>
@@ -169,7 +182,7 @@ const AvailableFood = () => {
                                                 <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
                                                     <div className="card bg-base-100 shadow-xl h-[500px]">
                                                         <figure className="relative"><img src={food.food_image} alt="Shoes" />
-                                                            <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />2 days remaining</h1></figure>
+                                                            <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />{handleTimeRemaining(food.expired_datetime)} days remaining</h1></figure>
                                                         <div className="card-body space-y-2">
                                                             <div className="flex gap-2 items-center font-medium">
                                                                 <MdShareLocation />

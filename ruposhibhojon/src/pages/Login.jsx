@@ -6,6 +6,8 @@ import loginAnimation from '../assets/lottie/loginLottie.json'
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useForm } from "react-hook-form"
+import { Helmet } from "react-helmet";
+
 const Login = () => {
     const { userGoogleAuth, userGithubAuth, userEmailSignIn } = useContext(AuthContext)
     const {
@@ -41,6 +43,9 @@ const Login = () => {
     }
     return (
         <div className="flex justify-between items-center gap-10 my-12 w-full">
+            <Helmet>
+                <title>RuposhiBhojon | Login</title>
+            </Helmet>
             <div className="flex-1 flex items-center justify-center rounded-xl">
                 <Lottie animationData={loginAnimation} loop={true} />
                 {/* <img className="h-[700px] rounded-xl w-full object-cover" src="./src/assets/login.jpg" alt="" /> */}

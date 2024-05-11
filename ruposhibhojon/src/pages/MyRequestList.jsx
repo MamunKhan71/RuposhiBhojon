@@ -1,8 +1,13 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdViewCompact } from "react-icons/md";
+import { Helmet } from "react-helmet";
+
 const MyRequestList = () => {
     return (
         <div>
+            <Helmet>
+                <title>RuposhiBhojon | My Food Request</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-center mb-6">My Food Request</h1>
             <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
             <div className="mt-24">
@@ -45,7 +50,7 @@ const MyRequestList = () => {
                                         <button className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
                                             <MdViewCompact />
                                             <span>View</span>
-                                        </button> 
+                                        </button>
                                     </div>
                                 </th>
                             </tr>

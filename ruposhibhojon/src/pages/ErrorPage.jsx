@@ -4,9 +4,14 @@ import { IoReturnUpBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import 'animate.css';
+import { Helmet } from "react-helmet";
+
 const ErrorPage = () => {
     return (
         <div className="font-montserrat">
+              <Helmet>
+                <title>RuposhiBhojon | 404 Not Found</title>
+            </Helmet>
             <>
                 {/* component */}
                 <div className="min-w-screen min-h-screen bg-blue-100 flex items-center p-5 lg:p-20 overflow-hidden relative">

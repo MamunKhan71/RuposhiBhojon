@@ -6,6 +6,8 @@ import SignUpLottie from '../assets/lottie/signUpLottie.json'
 import { useForm } from "react-hook-form"
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import { Helmet } from "react-helmet";
+
 const Register = () => {
     const { userEmailSignUp, userGoogleAuth, userGithubAuth } = useContext(AuthContext)
     const {
@@ -48,6 +50,9 @@ const Register = () => {
     }
     return (
         <div className="flex justify-between items-center gap-10 my-12 w-full">
+            <Helmet>
+                <title>RuposhiBhojon | Register</title>
+            </Helmet>
             <div className="flex-1 flex items-center justify-center rounded-xl">
                 <Lottie animationData={SignUpLottie} loop={true} />
             </div>

@@ -1,7 +1,12 @@
 import { BiPurchaseTag } from "react-icons/bi";
+import { Helmet } from "react-helmet";
+
 const FoodDetails = () => {
     return (
         <div>
+            <Helmet>
+                <title>RuposhiBhojon | Details</title>
+            </Helmet>
             <div className="bg-primary animated-background bg-gradient-to-r from-primary via-blue-500 to-indigo-500 opacity-10 w-1/2 h-[600px] mx-auto rounded-xl blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
 
             </div>

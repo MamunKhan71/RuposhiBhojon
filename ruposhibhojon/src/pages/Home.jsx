@@ -8,6 +8,7 @@ import WhyRuposhi from "../components/WhyRuposhi";
 import WorkSteps from "../components/WorkSteps";
 import CompanySlider from "../components/CompanySlider";
 import Subscribe from "../components/Subscribe";
+
 const Home = () => {
     return (
         <div>

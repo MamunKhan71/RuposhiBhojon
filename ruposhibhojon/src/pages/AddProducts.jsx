@@ -1,7 +1,13 @@
 import { IoMdAdd } from "react-icons/io";
+import { Helmet } from "react-helmet";
+
 const AddProducts = () => {
+
     return (
         <>
+            <Helmet>
+                <title>RuposhiBhojon | Add Product</title>
+            </Helmet>
             <div className="bg-primary blur-3xl h-96 w-full rounded-full opacity-5 absolute top-64 rotate-12 -z-10">
 
             </div>
