@@ -62,6 +62,10 @@ const router = createBrowserRouter([
                 element: <Profile />,
                 children: [
                     {
+                        path: '',
+                        element: <ProfileSettings />
+                    },
+                    {
                         path: 'profile-settings',
                         element: <ProfileSettings />
                     },

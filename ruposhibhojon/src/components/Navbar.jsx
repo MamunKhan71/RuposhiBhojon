@@ -1,6 +1,7 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
 const Navbar = () => {
+    const navigate = useNavigate()
     const navLink = <>
         <li><NavLink to={`/`}>Home</NavLink></li>
         <li><NavLink to={`/available-food`}>Available Food</NavLink></li>
@@ -17,7 +18,7 @@ const Navbar = () => {
                             {navLink}
                         </ul>
                     </div>
-                    <img className="h-16" src="./src/assets/logoWhite.png" alt="" />
+                    <img onClick={()=> navigate('/')} className="h-16 hover:cursor-pointer" src="./src/assets/logoWhite.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-4">
