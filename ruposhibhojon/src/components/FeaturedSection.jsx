@@ -3,6 +3,8 @@ import axios from "axios";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { TbClock12 } from "react-icons/tb";
+import { MdShareLocation } from "react-icons/md";
 const FeaturedSection = () => {
     const { isLoading, data } = useQuery({
         queryKey: "foods",
@@ -62,15 +64,30 @@ const FeaturedSection = () => {
                                         <>
                                             <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
                                                 <div className="card bg-base-100 shadow-xl h-[500px]">
-                                                    <figure><img src={food.food_image} alt="Shoes" /></figure>
-                                                    <div className="card-body">
+                                                    <figure className="relative"><img src={food.food_image} alt="Shoes" />
+                                                        <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />2 days remaining</h1></figure>
+                                                    <div className="card-body space-y-2">
+                                                        <div className="flex gap-2 items-center font-medium">
+                                                            <MdShareLocation />
+                                                            <p>Mirpur #01, Dhaka , Bangladesh</p>
+                                                        </div>
                                                         <h2 className="card-title">
                                                             {food.food_name}
                                                             <div className="badge bg-primary text-white">{food.food_quantity}</div>
                                                         </h2>
                                                         <p>{food.additional_notes}</p>
+
+                                                        <div>
+                                                            <div className="flex gap-3 items-center">
+                                                                <div>
+                                                                    <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
+                                                                </div>
+                                                                <p className="font-semibold">Md. Mamun</p>
+                                                            </div>
+                                                        </div>
+
                                                         <div className="card-actions">
-                                                            <Link to={`/details`} className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></Link>
+                                                            <button className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -83,10 +100,10 @@ const FeaturedSection = () => {
                     }
                 </div>
                 {
-                        data && <div className="flex items-center justify-center w-full mt-24 ">
-                            <Link to={`/available-food`} className="text-center btn bg-primary btn-wide text-white">Show All <MdOutlineArrowOutward/></Link>
-                        </div>
-                    }
+                    data && <div className="flex items-center justify-center w-full mt-24 ">
+                        <Link to={`/available-food`} className="text-center btn bg-primary btn-wide text-white">Show All <MdOutlineArrowOutward /></Link>
+                    </div>
+                }
             </div>
         </div>
     );
