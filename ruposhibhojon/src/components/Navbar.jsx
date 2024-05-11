@@ -28,8 +28,9 @@ const Navbar = () => {
                             <details>
                                 <summary>My Food</summary>
                                 <ul className="p-2">
-                                    <li><Link to={`/add-food`}>Manage My Food</Link></li>
-                                    <li><a>My Food Request</a></li>
+                                    <li><Link to={`/add-food`}>Add Food</Link></li>
+                                    <li><Link to={`/my-food`}>Manage My Food</Link></li>
+                                    <li><Link to={`/`}>My Food Request</Link></li>
                                 </ul>
                             </details>
                         </li>

@@ -7,6 +7,7 @@ import Pricing from "../pages/Pricing";
 import AvailableFood from "../pages/AvailableFood";
 import AddProducts from "../pages/AddProducts";
 import FoodDetails from "../pages/FoodDetails";
+import MyFoodList from "../pages/MyFoodList";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: '/details',
                 element: <FoodDetails />
+            },
+            {
+                path: '/my-food',
+                element: <MyFoodList />
             }
         ]
     },
