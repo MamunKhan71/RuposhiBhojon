@@ -3,11 +3,27 @@ import { FaArrowRightToBracket } from "react-icons/fa6"
 import { Link, NavLink } from "react-router-dom";
 import Lottie from "lottie-react";
 import loginAnimation from '../assets/lottie/loginLottie.json'
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 const Login = () => {
+    const { userGoogleAuth, userGithubAuth } = useContext(AuthContext)
+    
+    const handleGoogleSignUp = () => {
+        userGoogleAuth()
+            .then(user => {
+                console.log(user);
+            })
+    }
+    const handleGithubSignUp = () => {
+        userGithubAuth()
+            .then(user => {
+                console.log(user);
+            })
+    }
     return (
         <div className="flex justify-between items-center gap-10 my-12 w-full">
             <div className="flex-1 flex items-center justify-center rounded-xl">
-            <Lottie animationData={loginAnimation} loop={true} />
+                <Lottie animationData={loginAnimation} loop={true} />
                 {/* <img className="h-[700px] rounded-xl w-full object-cover" src="./src/assets/login.jpg" alt="" /> */}
             </div>
             <div className="flex-1 w-1/2">
@@ -56,7 +72,7 @@ const Login = () => {
                         </form>
                         <hr className="my-6 border-gray-300 w-full" />
                         <div className="flex gap-4">
-                            <button
+                            <button onClick={handleGoogleSignUp}
                                 type="button"
                                 className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
                             >
@@ -96,7 +112,7 @@ const Login = () => {
                                     <span className="ml-4">Log in with Google</span>
                                 </div>
                             </button>
-                            <button
+                            <button onClick={handleGithubSignUp}
                                 type="button"
                                 className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
                             >

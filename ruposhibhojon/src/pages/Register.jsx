@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 const Register = () => {
-    const { userEmailSignUp } = useContext(AuthContext)
+    const { userEmailSignUp, userGoogleAuth, userGithubAuth } = useContext(AuthContext)
     const {
         register,
         handleSubmit,
@@ -27,10 +27,23 @@ const Register = () => {
         }
         userEmailSignUp(email, password)
             .then(user => {
-                
+
             })
             .catch(error => {
                 console.log(error);
+            })
+    }
+
+    const handleGoogleSignUp = () => {
+        userGoogleAuth()
+            .then(user => {
+                console.log(user);
+            })
+    }
+    const handleGithubSignUp = () => {
+        userGithubAuth()
+            .then(user => {
+                console.log(user);
             })
     }
     return (
@@ -97,7 +110,7 @@ const Register = () => {
                         </form>
                         <hr className="my-6 border-gray-300 w-full" />
                         <div className="flex gap-4">
-                            <button
+                            <button onClick={handleGoogleSignUp}
                                 type="button"
                                 className="w-full block  font-semibold rounded-lg px-4 py-3 border border-gray-300"
                             >
@@ -137,7 +150,7 @@ const Register = () => {
                                     <span className="ml-4">Sign up with Google</span>
                                 </div>
                             </button>
-                            <button
+                            <button onClick={handleGithubSignUp}
                                 type="button"
                                 className="w-full block font-semibold rounded-lg px-4 py-3 border"
                             >
