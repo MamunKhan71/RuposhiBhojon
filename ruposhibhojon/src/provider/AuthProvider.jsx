@@ -17,23 +17,29 @@ const AuthProvider = ({ children }) => {
     })
     console.log(user);
     const userEmailSignUp = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     const userEmailSignIn = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(email, password)
     }
     const userGoogleAuth = () => {
+        setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
     const userGithubAuth = () => {
+        setLoading(true)
         return signInWithPopup(auth, githubProvider)
     }
     const userUpdateProfile = (name, photoUrl) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photoUrl
         })
     }
     const userSignOut = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
