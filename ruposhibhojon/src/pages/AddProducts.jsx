@@ -1,8 +1,46 @@
 import { IoMdAdd } from "react-icons/io";
 import { Helmet } from "react-helmet";
+import { useForm } from "react-hook-form";
+import axios from 'axios'
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const AddProducts = () => {
+    const { user } = useContext(AuthContext)
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
 
+    const handleFormData = data => {
+        const food_name = data.foodName
+        const food_image = data.foodImage
+        const food_quantity = data.foodQty
+        const expired_datetime = data.expiryDate
+        const pickup_location = data.pickup
+        const availability = data.available
+        const additional_notes = data.notes
+        const newFoodItem = {
+            food_name: food_name,
+            food_image: food_image,
+            food_quantity: food_quantity,
+            donator: {
+                uid: user?.uid,
+                userName: user?.displayName,
+                userImage: user?.photoURL,
+            },
+            expired_datetime: expired_datetime,
+            pickup_location: pickup_location,
+            availability: availability,
+            additional_notes: additional_notes,
+        }
+        console.log(newFoodItem);
+        axios.post(`http://localhost:5000/add-food`, newFoodItem)
+            .then(data => console.log(data.data))
+
+    }
     return (
         <>
             <Helmet>
@@ -17,10 +55,8 @@ const AddProducts = () => {
             </div>
             <div className="flex items-center justify-center">
                 <div className="mx-auto w-full max-w-[750px]">
-                    <form
+                    <form onSubmit={handleSubmit(handleFormData)}
                         className="py-6 px-9"
-                        action="https://formbold.com/s/FORM_ID"
-                        method="POST"
                     >
                         <div className="mb-5">
                             <label
@@ -30,6 +66,7 @@ const AddProducts = () => {
                                 Food Name
                             </label>
                             <input
+                                {...register('foodName')}
                                 type="text"
                                 placeholder="Your Food Name"
                                 className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
@@ -40,6 +77,7 @@ const AddProducts = () => {
                                 Food Image Url
                             </label>
                             <input
+                                {...register('foodImage')}
                                 type="text"
                                 placeholder="Your Food Photo Url"
                                 className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
@@ -54,6 +92,7 @@ const AddProducts = () => {
                                     Food Quantity
                                 </label>
                                 <input
+                                    {...register('foodQty')}
                                     type="number"
                                     min="0"
                                     placeholder="Your Food Quantity"
@@ -65,7 +104,8 @@ const AddProducts = () => {
                                     Expired Date/Time
                                 </label>
                                 <input
-                                    type="date"
+                                    {...register('expiryDate')}
+                                    type="datetime-local"
                                     className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                 />
                             </div>
@@ -76,6 +116,7 @@ const AddProducts = () => {
                                     Pickup Location
                                 </label>
                                 <input
+                                    {...register('pickup')}
                                     type="text"
                                     placeholder="Your Food Pickup Location"
                                     className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
@@ -91,9 +132,10 @@ const AddProducts = () => {
                                         className="flex p-3.5 w-full bg-base-200 rounded-lg focus:border-primary focus:ring-primary"
                                     >
                                         <input
+                                            {...register('available')}
                                             defaultChecked={true}
+                                            value="true"
                                             type="radio"
-                                            name="hs-radio-in-form"
                                             className="shrink-0 mt-0.5 rounded-full text-primary focus:ring-black"
                                             id="hs-radio-in-form"
                                         />
@@ -102,21 +144,23 @@ const AddProducts = () => {
                                         </span>
                                     </label>
                                     <label
-                                        htmlFor="hs-radio-checked-in-form"
+                                        htmlFor="hs-radio-checked-in-form-1"
                                         className="flex p-3.5 w-full bg-base-200 rounded-lg focus:border-primary focus:ring-primary"
                                     >
                                         <input
+                                            {...register('available')}
+                                            defaultChecked={false}
+                                            value="false"
                                             type="radio"
-                                            name="hs-radio-in-form"
                                             className="shrink-0 mt-0.5 rounded-full text-primary focus:ring-black"
-                                            id="hs-radio-checked-in-form"
-                                            defaultChecked=""
+                                            id="hs-radio-checked-in-form-2"
                                         />
                                         <span className="text-sm font-medium ms-3">
                                             Not Available
                                         </span>
                                     </label>
                                 </div>
+
 
                             </div>
 
@@ -126,12 +170,12 @@ const AddProducts = () => {
                             <label className="mb-5 block text-base font-semibold ">
                                 Additional Notes
                             </label>
-                            <textarea placeholder="Your Message" className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md">
+                            <textarea {...register('notes')} placeholder="Your Message" className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md">
 
                             </textarea>
                         </div>
                         <div>
-                            <button className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                            <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                 Add Food <IoMdAdd />
                             </button>
                         </div>
