@@ -190,7 +190,7 @@ const AvailableFood = () => {
                                                             </div>
                                                             <h2 className="card-title">
                                                                 {food.food_name}
-                                                                <div className="badge bg-primary text-white">{food.food_quantity}</div>
+                                                                <div className="badge bg-primary text-white p-3">{food.food_quantity} servings</div>
                                                             </h2>
                                                             <p>{food.additional_notes}</p>
 
@@ -199,7 +199,7 @@ const AvailableFood = () => {
                                                                     <div>
                                                                         <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
                                                                     </div>
-                                                                    <p className="font-semibold">Md. Mamun</p>
+                                                                    <p className="font-semibold">{food.donator.userName}</p>
                                                                 </div>
                                                             </div>
 

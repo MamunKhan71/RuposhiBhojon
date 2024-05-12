@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { MdEditSquare } from "react-icons/md";
+import { AuthContext } from "../provider/AuthProvider";
 
 const ProfileSettings = () => {
+    const { user } = useContext(AuthContext)
     return (
         <div className="md:p-4">
             <div className="w-full mt-8 sm:rounded-lg space-y-4">
@@ -10,12 +13,12 @@ const ProfileSettings = () => {
                     <div className="flex gap-4 items-center">
                         <img
                             className="object-cover w-28 h-28 p-1 rounded-xl ring-2 ring-indigo-300 dark:ring-indigo-500"
-                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                            src={user?.photoURL}
                             alt="Bordered avatar"
                         />
                         <div>
-                            <h1 className="text-2xl font-bold">Md. Mamun</h1>
-                            <h1>01643091606</h1>
+                            <h1 className="text-2xl font-bold">{user?.displayName}</h1>
+                            <h1>{user?.email}</h1>
                         </div>
                     </div>
                     <div className="items-center border p-6 backdrop-blur-3xl sm:mt-14 rounded-xl">

@@ -73,7 +73,7 @@ const FeaturedSection = () => {
                                                         </div>
                                                         <h2 className="card-title">
                                                             {food.food_name}
-                                                            <div className="badge bg-primary text-white">{food.food_quantity}</div>
+                                                            <div className="badge bg-primary text-white p-3">{food.food_quantity} servings</div>
                                                         </h2>
                                                         <p>{food.additional_notes}</p>
 
@@ -82,12 +82,12 @@ const FeaturedSection = () => {
                                                                 <div>
                                                                     <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
                                                                 </div>
-                                                                <p className="font-semibold">Md. Mamun</p>
+                                                                <p className="font-semibold">{food.donator.userName}</p>
                                                             </div>
                                                         </div>
 
                                                         <div className="card-actions">
-                                                            <Link to={`/details`} className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></Link>
+                                                            <Link to={`/food/${food._id}`} className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></Link>
                                                         </div>
                                                     </div>
                                                 </div>
