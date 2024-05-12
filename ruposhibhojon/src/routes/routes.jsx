@@ -16,6 +16,7 @@ import AccountSettings from "../components/AccountSettings";
 import Notifications from "../components/Notifications";
 import axios from "axios";
 import PrivateRoute from "./PrivateRoute";
+import LoginProtection from "./LoginProtection";
 
 const router = createBrowserRouter([
     {
@@ -29,11 +30,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <Login />
+                element: <LoginProtection><Login /></LoginProtection>
             },
             {
                 path: '/register',
-                element: <Register />
+                element: <LoginProtection><Register /></LoginProtection>
             },
             {
                 path: '/pricing',
