@@ -1,7 +1,13 @@
 import { BiPurchaseTag } from "react-icons/bi";
 import { Helmet } from "react-helmet";
+import { useLoaderData, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const FoodDetails = () => {
+    const food = useLoaderData().data
+
+    console.log(food);
     return (
         <div>
             <Helmet>
@@ -18,9 +24,9 @@ const FoodDetails = () => {
                                 <div>
                                     <div>
                                         <img
-                                            src="https://pagedone.io/asset/uploads/1700472379.png"
+                                            src={food.food_image}
                                             alt="Summer Travel Bag image"
-                                            className="cursor-pointer rounded-xl transition-all duration-500 "
+                                            className="cursor-pointer rounded-xl object-cover h-[650px] w-full transition-all duration-500 "
                                         />
                                     </div>
                                 </div>
@@ -31,7 +37,7 @@ const FoodDetails = () => {
                                 <div className="flex items-center justify-between gap-6 mb-6">
                                     <div className="text">
                                         <h2 className="font-manrope font-bold text-3xl leading-10  mb-2">
-                                            Yellow Summer Travel Bag
+                                           {food.food_name}
                                         </h2>
                                         <p className="font-normal text-base text-gray-500">ABS LUGGAGE</p>
                                     </div>

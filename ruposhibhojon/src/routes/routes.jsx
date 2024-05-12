@@ -14,6 +14,7 @@ import Profile from "../pages/Profile";
 import ProfileSettings from "../components/ProfileSettings";
 import AccountSettings from "../components/AccountSettings";
 import Notifications from "../components/Notifications";
+import axios from "axios";
 
 const router = createBrowserRouter([
     {
@@ -46,7 +47,8 @@ const router = createBrowserRouter([
                 element: <AddProducts />
             },
             {
-                path: '/details',
+                path: '/food/:id',
+                loader: ({ params }) => axios.get(`http://localhost:5000/food/${params.id}`),
                 element: <FoodDetails />
             },
             {
