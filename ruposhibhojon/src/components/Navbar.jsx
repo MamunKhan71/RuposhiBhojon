@@ -29,16 +29,18 @@ const Navbar = () => {
                         {
                             navLink
                         }
-                        <li>
-                            <details>
-                                <summary>My Food</summary>
-                                <ul className="p-2">
-                                    <li><Link to={`/add-food`}>Add Food</Link></li>
-                                    <li><Link to={`/my-food`}>Manage My Food</Link></li>
-                                    <li><Link to={`/my-request`}>My Food Request</Link></li>
-                                </ul>
-                            </details>
-                        </li>
+                        {
+                            user && <li>
+                                <details>
+                                    <summary>My Food</summary>
+                                    <ul className="p-2">
+                                        <li><Link to={`/add-food`}>Add Food</Link></li>
+                                        <li><Link to={`/my-food`}>Manage My Food</Link></li>
+                                        <li><Link to={`/my-request`}>My Food Request</Link></li>
+                                    </ul>
+                                </details>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <div className="navbar-end">

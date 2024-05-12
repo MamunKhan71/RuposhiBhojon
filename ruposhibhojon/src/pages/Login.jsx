@@ -23,7 +23,7 @@ const Login = () => {
         console.log(email, password);
         userEmailSignIn(email, password)
             .then(user => {
-                console.log("User: ", user);
+                localStorage.setItem('isAuth', 'authenticated')
             })
             .catch(error => {
                 console.log(error);
@@ -32,13 +32,13 @@ const Login = () => {
     const handleGoogleSignUp = () => {
         userGoogleAuth()
             .then(user => {
-                console.log(user);
+                localStorage.setItem('isAuth', 'authenticated')
             })
     }
     const handleGithubSignUp = () => {
         userGithubAuth()
             .then(user => {
-                console.log(user);
+                localStorage.setItem('isAuth', 'authenticated')
             })
     }
     return (

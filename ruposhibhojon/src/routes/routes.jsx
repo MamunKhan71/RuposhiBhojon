@@ -15,6 +15,7 @@ import ProfileSettings from "../components/ProfileSettings";
 import AccountSettings from "../components/AccountSettings";
 import Notifications from "../components/Notifications";
 import axios from "axios";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/add-food',
-                element: <AddProducts />
+                element: <PrivateRoute><AddProducts /></PrivateRoute>
             },
             {
                 path: '/food/:id',
@@ -53,15 +54,15 @@ const router = createBrowserRouter([
             },
             {
                 path: '/my-food',
-                element: <MyFoodList />
+                element: <PrivateRoute><MyFoodList /></PrivateRoute>
             },
             {
                 path: '/my-request',
-                element: <MyRequestList />
+                element: <PrivateRoute><MyRequestList /></PrivateRoute>
             },
             {
                 path: '/profile',
-                element: <Profile />,
+                element: <PrivateRoute><Profile /></PrivateRoute>,
                 children: [
                     {
                         path: '',

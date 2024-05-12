@@ -3,10 +3,16 @@ import { Helmet } from "react-helmet";
 import { useLoaderData } from "react-router-dom";
 import { IoIosTimer } from "react-icons/io";
 import { MdShareLocation } from "react-icons/md";
-import { useState } from "react";
+import { IoMdAdd } from "react-icons/io";
+import { useContext, useEffect, useState } from "react";
+import Swal from 'sweetalert2'
+import { AuthContext } from "../provider/AuthProvider";
+
+import moment from 'moment';
 const FoodDetails = () => {
     const food = useLoaderData().data
     const [qty, setQty] = useState(0)
+    const { user } = useContext(AuthContext)
     const handleTimeRemaining = (time) => {
         const dateAndTime = new Date(time);
         const dateNow = new Date();
@@ -14,6 +20,17 @@ const FoodDetails = () => {
         const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
         return differenceInDays;
     }
+    const [time, setTime] = useState(null);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(moment().format('MMMM Do YYYY, h:mm:ss a'));
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
     const handleChooseQtyPlus = () => {
         if (qty < food.food_quantity) {
             setQty(qty + 1)
@@ -209,9 +226,193 @@ const FoodDetails = () => {
                                         Add to cart
                                     </button>
                                 </div>
-                                <button className="text-center w-full px-5 py-4 rounded-xl bg-primary flex gap-2 items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300">
-                                   Make a request <BiPurchaseTag />
-                                </button>
+                                <button className="text-center w-full px-5 py-4 rounded-xl bg-primary flex gap-2 items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300" onClick={() => document.getElementById('my_modal_4').showModal()}>Make a request <BiPurchaseTag /></button>
+                                <dialog id="my_modal_4" className="modal">
+                                    <div className="modal-box w-11/12 max-w-5xl">
+                                        <div>
+                                            <form method="dialog">
+                                                <div>
+                                                    <div className="space-y-4">
+                                                        <h1 className="font-bold text-4xl text-center">Request Food</h1>
+                                                        <p className="text-center">Request food to the community</p>
+                                                        <hr />
+                                                    </div>
+                                                    <div className="flex items-center justify-center">
+                                                        <div className="w-full">
+                                                            <form
+                                                                className="py-6 px-9"
+                                                                action="https://formbold.com/s/FORM_ID"
+                                                                method="POST"
+                                                            >
+                                                                <div className="grid grid-cols-2 gap-6">
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            Food ID
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={food._id}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            Food Name
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={food.food_name}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="grid grid-cols-2 gap-6">
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            Donator Email
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={food.donator.email ? food.donator.email : 'N/A'}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            Donator Name
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={food.donator.userName}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="grid grid-cols-2 gap-6">
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            User Email
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={user?.email ? user.email : 'N/A'}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            User Name
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={user?.displayName ? user.displayName : 'N/A'}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="mb-6 pt-4">
+                                                                    <label className="mb-5 block text-base font-semibold ">
+                                                                        Food Image Url
+                                                                    </label>
+                                                                    <input
+                                                                        disabled
+                                                                        type="text"
+                                                                        value={food.food_image}
+                                                                        className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                    />
+                                                                </div>
+                                                                <div className="mb-6 border border-dashed h-48 rounded-md p-4 bg-base-200">
+                                                                    <img className="w-full h-full object-cover rounded-md" src="/src/assets/header2.jpg" alt="" />
+                                                                </div>
+                                                                <div className="grid grid-cols-2 gap-6">
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            Request Time
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={time}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="mb-5">
+                                                                        <label
+                                                                            htmlFor="email"
+                                                                            className="mb-3 block text-base font-semibold"
+                                                                        >
+                                                                            User Name
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            type="text"
+                                                                            value={user?.displayName ? user.displayName : 'N/A'}
+                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                                <div className="grid grid-cols-1 gap-6">
+                                                                    <div className="mb-6 pt-4">
+                                                                        <label className="mb-5 block text-base font-semibold ">
+                                                                            Expire Date
+                                                                        </label>
+                                                                        <input
+                                                                            disabled
+                                                                            value={moment(food.expired_datetime).format('MMMM Do YYYY, h:mm:ss a')}
+                                                                            placeholder="Your Food Quantity"
+                                                                            className="w-full text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+                                                
+                                                                </div>
+                                                                <div className="mb-6 pt-4">
+                                                                    <label className="mb-5 block text-base font-semibold ">
+                                                                        Additional Notes
+                                                                    </label>
+                                                                    <textarea placeholder="Your Message" className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md">
+
+                                                                    </textarea>
+                                                                </div>
+                                                                <div>
+                                                                    <button className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                                                        Request Food <IoMdAdd />
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </dialog>
                             </div>
                         </div>
                     </div>
