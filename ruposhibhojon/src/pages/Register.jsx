@@ -1,19 +1,23 @@
 import Lottie from "lottie-react";
 import { FaGithub } from "react-icons/fa";
 import { FaArrowRightToBracket } from "react-icons/fa6"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SignUpLottie from '../assets/lottie/signUpLottie.json'
 import { useForm } from "react-hook-form"
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
-    const { userEmailSignUp, userGoogleAuth, userGithubAuth } = useContext(AuthContext)
+    const { userEmailSignUp, userGoogleAuth, userGithubAuth, userUpdateProfile, userSignOut } = useContext(AuthContext)
+    const [info, setInfo] = useState(null)
+    const [pass, setPass] = useState(null)
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/
+    const [passInfo, setPassInfo] = useState(null)
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm()
     const handleRegister = data => {
@@ -28,25 +32,46 @@ const Register = () => {
             password: password
         }
         userEmailSignUp(email, password)
-            .then(user => {
-
+            .then(() => {
+                userUpdateProfile(name, photo)
+                    .then(async () => {
+                        await userSignOut()
+                        navigate('/login')
+                    })
+                    .catch(error => setInfo(error.code))
             })
             .catch(error => {
-                console.log(error);
+                setInfo(error);
             })
     }
 
     const handleGoogleSignUp = () => {
         userGoogleAuth()
-            .then(user => {
-                console.log(user);
+            .then(async () => {
+                await userSignOut()
+                navigate('/login')
+            })
+            .catch(error => {
+                setInfo(error);
             })
     }
     const handleGithubSignUp = () => {
         userGithubAuth()
-            .then(user => {
-                console.log(user);
+            .then(async () => {
+                await userSignOut()
+                navigate('/login')
             })
+            .catch(error => {
+                setInfo(error);
+            })
+    }
+    const handlePass = e => {
+        setPass(e.target.value)
+        if (passRegex.test(pass)) {
+            setPassInfo("Valid Password");
+        } else {
+            setPassInfo("Invalid Password");
+        }
     }
     return (
         <div className="flex justify-between items-center gap-10 my-12 w-full">
@@ -64,12 +89,16 @@ const Register = () => {
                     <div className="w-full h-100 space-y-4">
                         <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">
                             <span className="text-primary font-bold">Register </span> your account
+                            {
+                                info && <p className="text-gray-400 text-sm font-medium text-center">{info}</p>
+                            }
                         </h1>
                         <hr />
                         <form onSubmit={handleSubmit(handleRegister)} className="space-y-4" action="#" method="POST">
                             <div>
                                 <label className="font-medium">Your Name</label>
                                 <input
+                                    required
                                     {...register('name')}
                                     type="text"
                                     placeholder="Enter your Name"
@@ -79,6 +108,7 @@ const Register = () => {
                             <div>
                                 <label className="font-medium">Email Address</label>
                                 <input
+                                    required
                                     {...register('email')}
                                     type="email"
                                     placeholder="Enter Email Address"
@@ -88,6 +118,7 @@ const Register = () => {
                             <div>
                                 <label className="font-medium">Photo Url</label>
                                 <input
+                                    required
                                     {...register('photo')}
                                     type="text"
                                     placeholder="Enter Photo Url"
@@ -97,13 +128,16 @@ const Register = () => {
                             <div>
                                 <label className="font-medium">Password</label>
                                 <input
+                                    onKeyUp={handlePass}
+                                    required
                                     {...register('password')}
                                     type="password"
                                     placeholder="Enter Password"
                                     minLength={6}
                                     className="w-full px-4 py-3 rounded-lg mt-2 bg-base-200"
-                                    required=""
                                 />
+                                <p className="font-semibold text-right text-gray-400">{passInfo}</p>
+
                             </div>
 
                             <button type="submit" className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">

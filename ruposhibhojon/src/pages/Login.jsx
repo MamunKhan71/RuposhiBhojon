@@ -3,13 +3,14 @@ import { FaArrowRightToBracket } from "react-icons/fa6"
 import { Link, NavLink } from "react-router-dom";
 import Lottie from "lottie-react";
 import loginAnimation from '../assets/lottie/loginLottie.json'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useForm } from "react-hook-form"
 import { Helmet } from "react-helmet";
 
 const Login = () => {
     const { userGoogleAuth, userGithubAuth, userEmailSignIn } = useContext(AuthContext)
+    const [info, setInfo]= useState(null)
     const {
         register,
         handleSubmit,
@@ -26,7 +27,7 @@ const Login = () => {
                 localStorage.setItem('isAuth', 'authenticated')
             })
             .catch(error => {
-                console.log(error);
+                setInfo(error.code);
             })
     }
     const handleGoogleSignUp = () => {
@@ -34,11 +35,17 @@ const Login = () => {
             .then(user => {
                 localStorage.setItem('isAuth', 'authenticated')
             })
+            .catch(error => {
+                setInfo(error.code);
+            })
     }
     const handleGithubSignUp = () => {
         userGithubAuth()
             .then(user => {
                 localStorage.setItem('isAuth', 'authenticated')
+            })
+            .catch(error => {
+                setInfo(error.code);
             })
     }
     return (
@@ -57,7 +64,10 @@ const Login = () => {
                 >
                     <div className="w-full h-100 space-y-4">
                         <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">
-                            <span className="text-primary font-bold">Log in</span> to your account
+                            <span className="text-primary font- text-2xl">Log in</span> to your account
+                            {
+                                info && <p className="text-gray-400 text-sm font-medium text-center">{info}</p>
+                            }
                         </h1>
                         <hr />
                         <form onSubmit={handleSubmit(handleLogin)} className="mt-6" action="#" method="POST">
