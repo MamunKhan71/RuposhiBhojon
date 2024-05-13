@@ -6,10 +6,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 
 const FoodForm = ({ formData, isUpdate, foodData }) => {
-    console.log(foodData);
     const { user } = useContext(AuthContext)
-    const [availability, setAvailability] = useState(foodData && foodData?.availability === true ? true : false || foodData === undefined && true );
-    console.log(availability);
+    const [availability, setAvailability] = useState(foodData && (foodData?.availability === true || foodData === undefined) ? true : false);
     const {
         register,
         handleSubmit,
@@ -23,7 +21,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
     return (
         <>
             <div className="flex items-center justify-center">
-                <div className="mx-auto w-full max-w-[750px]">
+                <div className={`mx-auto ${isUpdate ? 'w-full' : 'max-w-[750px]'}`}>
                     <form onSubmit={handleSubmit(handleFormData)}
                         className="py-6 px-9"
                     >
@@ -107,6 +105,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                             className="flex p-3.5 w-full bg-base-200 rounded-lg focus:border-primary focus:ring-primary"
                                         >
                                             <input
+                                                onChange={() => setAvailability(true)}
                                                 {...register('available')}
                                                 defaultChecked={availability === true && true}
                                                 value="true"
@@ -123,6 +122,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                             className="flex p-3.5 w-full bg-base-200 rounded-lg focus:border-primary focus:ring-primary"
                                         >
                                             <input
+                                                onChange={() => setAvailability(false)}
                                                 {...register('available')}
                                                 defaultChecked={availability === false && true}
                                                 value="false"
@@ -149,18 +149,11 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                 </textarea>
                             </div>
                         </div>
-                        {
-                            isUpdate ? <div>
-                                <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                                    Update Food <IoMdAdd />
-                                </button>
-                            </div> :
-                                <div>
-                                    <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                                        Add Food <IoMdAdd />
-                                    </button>
-                                </div>
-                        }
+                        <div>
+                        <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                {`${isUpdate ? 'Update Food' : 'Add Food'}`} <IoMdAdd />
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

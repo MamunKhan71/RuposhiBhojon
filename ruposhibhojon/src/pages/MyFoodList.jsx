@@ -3,21 +3,24 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import FoodForm from "../components/FoodForm";
-
+import { RiCloseCircleLine } from "react-icons/ri"
 const MyFoodList = () => {
     const { user } = useContext(AuthContext)
+    const [foodId, setFoodId] = useState(null)
     const { data } = useQuery({
         queryKey: 'my-food',
         queryFn: () => axios.get(`http://localhost:5000/my-food?user=${user?.uid}`),
         retry: 5,
     })
-    const handleForm = data => {
-        console.log(data);
+    const handleFormData = foodData => {
+        const updateForm = { ...foodData, _id: foodId };
+        axios.patch(`http://localhost:5000/update-food`, updateForm)
+            .then(data => console.log(data))
     }
-    console.log(data?.data);
+
     return (
         <div>
             <Helmet>
@@ -65,7 +68,10 @@ const MyFoodList = () => {
                                         <td>{food.availability ? "Available" : "Not Available"}</td>
                                         <th>
                                             <div className="flex items-center gap-6">
-                                                <button onClick={() => document.getElementById(`my_modal_${food._id}`).showModal()} className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
+                                                <button onClick={() => {
+                                                    setFoodId(food._id)
+                                                    document.getElementById(`my_modal_${food._id}`).showModal()
+                                                }} className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
                                                     <FaRegEdit />
                                                     <span>Update</span>
                                                 </button>
@@ -74,8 +80,15 @@ const MyFoodList = () => {
                                                         <div className="space-y-4">
                                                             <h1 className="text-3xl font-bold text-center">Update Food</h1>
                                                             <hr className="border border-dashed border-gray-700" />
-                                                            <FoodForm formData={handleForm} isUpdate={true} foodData={food} />
+                                                            <div className="modal-action">
+                                                                <form method="dialog">
+                                                                    {/* if there is a button in form, it will close the modal */}
+                                                                    <button className="btn btn-circle"><RiCloseCircleLine className="text-4xl" /></button>
+                                                                </form>
+                                                            </div>
+                                                            <FoodForm formData={handleFormData} isUpdate={true} foodData={food} />
                                                         </div>
+
                                                     </div>
                                                 </dialog>
                                                 <button className="bg-red-500 text-white hover:bg-red-700 font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
