@@ -14,7 +14,9 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
         watch,
         formState: { errors },
     } = useForm()
-
+    
+    const foodPhoto = watch('foodImage')
+    console.log(foodPhoto);
     const handleFormData = data => {
         formData(data)
     }
@@ -54,7 +56,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                 />
                             </div>
                             <div className="mb-6 border border-dashed h-48 rounded-md p-4 bg-base-200">
-                                <img className="w-full h-full object-cover rounded-md" src="/src/assets/header2.jpg" alt="" />
+                                <img className="w-full h-full object-cover rounded-md" src={foodPhoto?foodPhoto : 'https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg'} alt="" />
                             </div>
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="mb-6 pt-4">

@@ -17,7 +17,7 @@ const MyFoodList = () => {
         retry: 5,
     })
     useEffect(() => {
-        setFood(data.data)
+        setFood(data?.data)
     }, [data])
     const handleFormData = foodData => {
         const updateForm = { ...foodData, _id: foodId };
@@ -27,7 +27,7 @@ const MyFoodList = () => {
     const handleDelete = id => {
         axios.delete(`http://localhost:5000/delete-food/${id}`)
             .then(data => {
-                if (data.data.acknowledged) {
+                if (data?.data?.acknowledged) {
                     setFood(food.filter(fd => fd._id !== id))
                 } else {
                     console.log("Something wrong!");
@@ -97,7 +97,7 @@ const MyFoodList = () => {
                                                             <div className="modal-action">
                                                                 <form method="dialog">
                                                                     {/* if there is a button in form, it will close the modal */}
-                                                                    <button className="btn btn-circle"><RiCloseCircleLine className="text-4xl" /></button>
+                                                                    <button className="tooltip tooltip-bottom " data-tip="Close"><RiCloseCircleLine className="text-4xl" /></button>
                                                                 </form>
                                                             </div>
                                                             <FoodForm formData={handleFormData} isUpdate={true} foodData={food} />

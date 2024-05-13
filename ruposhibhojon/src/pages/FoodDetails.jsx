@@ -5,8 +5,10 @@ import { IoIosTimer } from "react-icons/io";
 import { MdShareLocation } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { useContext, useEffect, useState } from "react";
+import { RiCloseCircleLine } from "react-icons/ri"
 import Swal from 'sweetalert2'
 import { AuthContext } from "../provider/AuthProvider";
+import { useForm } from "react-hook-form";
 
 import moment from 'moment';
 const FoodDetails = () => {
@@ -41,6 +43,19 @@ const FoodDetails = () => {
             setQty(qty - 1)
         }
     }
+
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
+
+    const handleFormData = data => {
+        console.log(data);
+    }
+
 
     return (
         <div>
@@ -236,13 +251,17 @@ const FoodDetails = () => {
                                                         <h1 className="font-bold text-4xl text-center">Request Food</h1>
                                                         <p className="text-center">Request food to the community</p>
                                                         <hr />
+                                                        <div className="modal-action">
+                                                            <form method="dialog">
+                                                                {/* if there is a button in form, it will close the modal */}
+                                                                <button className="tooltip tooltip-bottom " data-tip="Close"><RiCloseCircleLine className="text-4xl" /></button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                     <div className="flex items-center justify-center">
                                                         <div className="w-full">
-                                                            <form
+                                                            <form onSubmit={handleSubmit(handleFormData)}
                                                                 className="py-6 px-9"
-                                                                action="https://formbold.com/s/FORM_ID"
-                                                                method="POST"
                                                             >
                                                                 <div className="grid grid-cols-2 gap-6">
                                                                     <div className="mb-5">
@@ -253,6 +272,7 @@ const FoodDetails = () => {
                                                                             Food ID
                                                                         </label>
                                                                         <input
+                                                                            {...register('foodId')}
                                                                             disabled
                                                                             type="text"
                                                                             value={food._id}
@@ -267,6 +287,8 @@ const FoodDetails = () => {
                                                                             Food Name
                                                                         </label>
                                                                         <input
+                                                                            {...register('food_name')}
+
                                                                             disabled
                                                                             type="text"
                                                                             value={food.food_name}
@@ -283,6 +305,8 @@ const FoodDetails = () => {
                                                                             Donator Email
                                                                         </label>
                                                                         <input
+                                                                            {...register('donorEmail')}
+
                                                                             disabled
                                                                             type="text"
                                                                             value={food.donator.email ? food.donator.email : 'N/A'}
@@ -291,13 +315,14 @@ const FoodDetails = () => {
                                                                     </div>
                                                                     <div className="mb-5">
                                                                         <label
-                                                                            htmlFor="email"
+                                                                            htmlFor="name"
                                                                             className="mb-3 block text-base font-semibold"
                                                                         >
                                                                             Donator Name
                                                                         </label>
                                                                         <input
                                                                             disabled
+                                                                            {...register('donorName')}
                                                                             type="text"
                                                                             value={food.donator.userName}
                                                                             className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
@@ -313,6 +338,8 @@ const FoodDetails = () => {
                                                                             User Email
                                                                         </label>
                                                                         <input
+                                                                            {...register('userEmail')}
+
                                                                             disabled
                                                                             type="text"
                                                                             value={user?.email ? user.email : 'N/A'}
@@ -327,6 +354,7 @@ const FoodDetails = () => {
                                                                             User Name
                                                                         </label>
                                                                         <input
+                                                                            {...register('userName')}
                                                                             disabled
                                                                             type="text"
                                                                             value={user?.displayName ? user.displayName : 'N/A'}
@@ -340,6 +368,7 @@ const FoodDetails = () => {
                                                                     </label>
                                                                     <input
                                                                         disabled
+                                                                        {...register('food_image')}
                                                                         type="text"
                                                                         value={food.food_image}
                                                                         className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
@@ -351,7 +380,7 @@ const FoodDetails = () => {
                                                                 <div className="grid grid-cols-2 gap-6">
                                                                     <div className="mb-5">
                                                                         <label
-                                                                            htmlFor="email"
+                                                                            htmlFor="time"
                                                                             className="mb-3 block text-base font-semibold"
                                                                         >
                                                                             Request Time
@@ -390,13 +419,13 @@ const FoodDetails = () => {
                                                                             className="w-full text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
-                                                
+
                                                                 </div>
                                                                 <div className="mb-6 pt-4">
                                                                     <label className="mb-5 block text-base font-semibold ">
                                                                         Additional Notes
                                                                     </label>
-                                                                    <textarea placeholder="Your Message" className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md">
+                                                                    <textarea {...register('additionalNotes')} placeholder="Your Message" className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md">
 
                                                                     </textarea>
                                                                 </div>
