@@ -1,8 +1,24 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdViewCompact } from "react-icons/md";
 import { Helmet } from "react-helmet";
-
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { AuthContext } from "../provider/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import { FaDeleteLeft } from "react-icons/fa6";
 const MyRequestList = () => {
+    const { user } = useContext(AuthContext)
+    const [requests, setRequests] = useState(null)
+    const { data } = useQuery({
+        queryKey: 'my-requests',
+        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-requests?user=${user?.uid}`).then(data => setRequests(data.data)) : null,
+        retry: 5,
+    });
+    const handleDelete = id => {
+        axios.delete(`http://localhost:5000/delete-request?id=${id}`)
+            .then(data => console.log(data.data))
+    }
+    console.log(requests);
     return (
         <div>
             <Helmet>
@@ -24,36 +40,45 @@ const MyRequestList = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="bg-base-200 font-medium">
-                                <td>
-                                    <div className="flex items-center gap-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                            {
+                                requests && requests.map(req => <>
+                                    <tr className="bg-base-200 font-medium">
+                                        <td>
+                                            <div className="flex items-center gap-3">
+                                                <div className="avatar">
+                                                    <div className="mask mask-squircle w-12 h-12">
+                                                        <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold">{req.donator.donator_name}</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <div className="font-bold">Md. Mamun</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    20 Pc
-                                </td>
-                                <td>2024-05-15</td>
-                                <td>
-                                    20 Tk
-                                </td>
-                                <td>Available</td>
-                                <th>
-                                    <div className="flex items-center gap-6">
-                                        <button className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
-                                            <MdViewCompact />
-                                            <span>View</span>
-                                        </button>
-                                    </div>
-                                </th>
-                            </tr>
+                                        </td>
+                                        <td>
+                                            {req.pickup_location}
+                                        </td>
+                                        <td>{req.expired_datetime}</td>
+                                        <td>
+                                            {req.request_time}
+                                        </td>
+                                        <td>{req.donation_amount}</td>
+                                        <th>
+                                            <div className="flex items-center gap-6">
+                                                <button className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
+                                                    <MdViewCompact />
+                                                    <span>View</span>
+                                                </button>
+                                                <button onClick={() => handleDelete(req._id)} className="bg-red-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
+                                                    <FaDeleteLeft />
+                                                    <span>Delete</span>
+                                                </button>
+                                            </div>
+                                        </th>
+                                    </tr>
+
+                                </>)
+                            }
 
                         </tbody>
                     </table>

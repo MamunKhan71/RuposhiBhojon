@@ -13,7 +13,7 @@ const MyFoodList = () => {
     const [food, setFood] = useState(null)
     const { data } = useQuery({
         queryKey: 'my-food',
-        queryFn: () => axios.get(`http://localhost:5000/my-food?user=${user?.uid}`),
+        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-food?user=${user?.uid}`) : null,
         retry: 5,
     })
     useEffect(() => {

@@ -62,16 +62,24 @@ const FoodDetails = () => {
                 user_name: user?.displayName,
                 user_email: user?.email,
             },
+            food_quantity: qty,
             food_image: data.food_image,
             request_time: time,
             donation_amount: parseFloat(data.donation_amount),
             pickup_location: data.pickup_location,
             expired_datetime: data.expired_datetime,
             additional_notes: data.additional_notes,
-
         }
-        axios.post('http://localhost:5000/food-request', newRequest)
-            .then(data => console.log(data))
+        axios.post(`http://localhost:5000/food-request`, newRequest)
+            .then(data => {
+                const updateStatus = {
+                    _id: newRequest.food_id,
+                    available: "Reserved"
+                }
+                console.log(updateStatus);
+                axios.patch(`http://localhost:5000/update-food?statusUpdate=true`,updateStatus)
+                    .then(data => console.log(data.data))
+            })
     }
 
 

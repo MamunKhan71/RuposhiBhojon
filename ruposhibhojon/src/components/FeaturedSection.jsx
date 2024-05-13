@@ -13,6 +13,13 @@ const FeaturedSection = () => {
         retry: 5,
     }
     )
+    const handleTimeRemaining = (time) => {
+        const dateAndTime = new Date(time);
+        const dateNow = new Date();
+        const differenceInMilliseconds = dateAndTime.getTime() - dateNow.getTime();
+        const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+        return differenceInDays;
+    }
     return (
         <div>
             <h1 className="text-3xl font-bold text-center mb-6">Featured Products</h1>
@@ -65,7 +72,7 @@ const FeaturedSection = () => {
                                             <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
                                                 <div className="card bg-base-100 shadow-xl h-[500px]">
                                                     <figure className="relative"><img src={food.food_image} alt="Shoes" />
-                                                        <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />2 days remaining</h1></figure>
+                                                        <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />{handleTimeRemaining(food.expired_datetime)} days remaining</h1></figure>
                                                     <div className="card-body space-y-2">
                                                         <div className="flex gap-2 items-center font-medium">
                                                             <MdShareLocation />
