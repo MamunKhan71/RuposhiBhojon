@@ -3,22 +3,36 @@ import { FaDeleteLeft } from "react-icons/fa6";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import FoodForm from "../components/FoodForm";
 import { RiCloseCircleLine } from "react-icons/ri"
 const MyFoodList = () => {
     const { user } = useContext(AuthContext)
     const [foodId, setFoodId] = useState(null)
+    const [food, setFood] = useState(null)
     const { data } = useQuery({
         queryKey: 'my-food',
         queryFn: () => axios.get(`http://localhost:5000/my-food?user=${user?.uid}`),
         retry: 5,
     })
+    useEffect(() => {
+        setFood(data.data)
+    }, [data])
     const handleFormData = foodData => {
         const updateForm = { ...foodData, _id: foodId };
         axios.patch(`http://localhost:5000/update-food`, updateForm)
             .then(data => console.log(data))
+    }
+    const handleDelete = id => {
+        axios.delete(`http://localhost:5000/delete-food/${id}`)
+            .then(data => {
+                if (data.data.acknowledged) {
+                    setFood(food.filter(fd => fd._id !== id))
+                } else {
+                    console.log("Something wrong!");
+                }
+            })
     }
 
     return (
@@ -43,7 +57,7 @@ const MyFoodList = () => {
                         </thead>
                         <tbody>
                             {
-                                data?.data?.map(food => <>
+                                food?.map(food => <>
 
                                     <tr className="font-medium">
                                         <td>
@@ -91,9 +105,9 @@ const MyFoodList = () => {
 
                                                     </div>
                                                 </dialog>
-                                                <button className="bg-red-500 text-white hover:bg-red-700 font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
+                                                <button onClick={() => handleDelete(food._id)} className="bg-red-500 text-white hover:bg-red-700 font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
                                                     <FaDeleteLeft />
-                                                    <span>Download</span>
+                                                    <span>Delete</span>
                                                 </button>
                                             </div>
                                         </th>
