@@ -1,18 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import {  useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
-    const navigate = useNavigate()
-    const [isAuth, setIsAuth] = useState(localStorage.getItem('isAuth'))
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [isAuth, setIsAuth] = useState(localStorage.getItem('isAuth'));
 
     useEffect(() => {
         if (!isAuth) {
-            navigate('/login')
+            navigate('/login', { state: { from: location.pathname } });
         }
-    }, [isAuth, navigate])
+    }, [isAuth, navigate, location]);
 
-    return isAuth ? children : null
+    return isAuth ? children : null;
 };
 
 export default PrivateRoute;

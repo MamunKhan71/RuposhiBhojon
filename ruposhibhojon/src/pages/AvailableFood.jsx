@@ -24,6 +24,7 @@ const AvailableFood = () => {
     const numberOfPages = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPages).keys()]
     const [currentPage, setCurrentPage] = useState(0)
+    const [filteredFood, setFilteredFood] = useState([])
     useEffect(() => {
         axios.get('http://localhost:5000/foodCount')
             .then(data => setCount(data.data.count))
@@ -31,7 +32,9 @@ const AvailableFood = () => {
 
     const { isLoading, refetch } = useQuery({
         queryKey: "foods",
-        queryFn: () => axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`).then(data => setFood(data.data)),
+        queryFn: () => axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`).then(data => {
+            setFood(data.data)
+        }),
         refetchOnWindowFocus: false,
         retry: 5,
     })
@@ -66,6 +69,11 @@ const AvailableFood = () => {
         const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
         return differenceInDays;
     }
+    const handleFilter = filter => {
+        axios.get(`http://localhost:5000/time-sort?filter=${filter}&currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`)
+            .then(data => setFood(data.data))
+    }
+
 
     return (
         <div>
@@ -121,7 +129,7 @@ const AvailableFood = () => {
                         <div tabIndex={0} role="button" className="btn m-1"><BsFilterRight /> Filter by</div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                             <li><button onClick={() => handleFilter('time')} className="inline-flex gap-2 items-center font-semibold"><TbClock12 />Expiration Date</button></li>
-                            <li><button className="inline-flex gap-2 items-center font-semibold"><TbListNumbers />Quantity</button></li>
+                            <li><button onClick={() => handleFilter('quantity')} className="inline-flex gap-2 items-center font-semibold"><TbListNumbers />Quantity</button></li>
 
                         </ul>
                     </div>

@@ -8,7 +8,6 @@ import FoodForm from "../components/FoodForm";
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext)
-
     const handleFormData = data => {
         const food_name = data.foodName
         const food_image = data.foodImage
@@ -29,7 +28,7 @@ const AddProducts = () => {
             },
             expired_datetime: expired_datetime,
             pickup_location: pickup_location,
-            availability: Boolean(availability === "true"),
+            availability: availability,
             additional_notes: additional_notes,
         }
         console.log(newFoodItem);

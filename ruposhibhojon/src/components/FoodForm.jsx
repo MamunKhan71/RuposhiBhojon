@@ -7,7 +7,6 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const FoodForm = ({ formData, isUpdate, foodData }) => {
     const { user } = useContext(AuthContext)
-    const [availability, setAvailability] = useState(foodData && (foodData?.availability === true || foodData === undefined) ? true : false);
     const {
         register,
         handleSubmit,
@@ -16,7 +15,6 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
     } = useForm()
     
     const foodPhoto = watch('foodImage')
-    console.log(foodPhoto);
     const handleFormData = data => {
         formData(data)
     }
@@ -109,8 +107,8 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                             <input
                                                 onChange={() => setAvailability(true)}
                                                 {...register('available')}
-                                                defaultChecked={availability === true && true}
-                                                value="true"
+                                                defaultChecked={foodData?.availability === "Available" && true}
+                                                value="Available"
                                                 type="radio"
                                                 className="shrink-0 mt-0.5 rounded-full text-primary focus:ring-black"
                                                 id="hs-radio-in-form"
@@ -126,8 +124,8 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                             <input
                                                 onChange={() => setAvailability(false)}
                                                 {...register('available')}
-                                                defaultChecked={availability === false && true}
-                                                value="false"
+                                                defaultChecked={foodData?.availability === "Not Available" && true}
+                                                value="Not Available"
                                                 type="radio"
                                                 className="shrink-0 mt-0.5 rounded-full text-primary focus:ring-black"
                                                 id="hs-radio-checked-in-form-2"
@@ -137,11 +135,8 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                             </span>
                                         </label>
                                     </div>
-
                                 </div>
-
                             </div>
-
                             <div className="mb-6 pt-4">
                                 <label className="mb-5 block text-base font-semibold ">
                                     Additional Notes

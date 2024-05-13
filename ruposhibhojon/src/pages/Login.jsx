@@ -1,16 +1,21 @@
 import { FaGithub } from "react-icons/fa";
 import { FaArrowRightToBracket } from "react-icons/fa6"
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import loginAnimation from '../assets/lottie/loginLottie.json'
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useForm } from "react-hook-form"
 import { Helmet } from "react-helmet";
 
 const Login = () => {
     const { userGoogleAuth, userGithubAuth, userEmailSignIn } = useContext(AuthContext)
-    const [info, setInfo]= useState(null)
+    const location = useLocation()
+    const navigate = useNavigate()
+    if (location?.state) {
+        navigate(location.state.from)
+    }
+    const [info, setInfo] = useState(null)
     const {
         register,
         handleSubmit,

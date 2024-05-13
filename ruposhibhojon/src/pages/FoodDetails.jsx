@@ -9,9 +9,15 @@ import { RiCloseCircleLine } from "react-icons/ri"
 import Swal from 'sweetalert2'
 import { AuthContext } from "../provider/AuthProvider";
 import { useForm } from "react-hook-form";
-
+import axios from 'axios'
 import moment from 'moment';
 const FoodDetails = () => {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
     const food = useLoaderData().data
     const [qty, setQty] = useState(0)
     const { user } = useContext(AuthContext)
@@ -22,11 +28,10 @@ const FoodDetails = () => {
         const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
         return differenceInDays;
     }
-    const [time, setTime] = useState(null);
-
+    const [time, setTime] = useState("");
     useEffect(() => {
         const interval = setInterval(() => {
-            setTime(moment().format('MMMM Do YYYY, h:mm:ss a'));
+            setTime(moment().format('MMMM Do YYYY, h:mm:ss a').toString());
         }, 1000);
 
         return () => {
@@ -44,16 +49,29 @@ const FoodDetails = () => {
         }
     }
 
-
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm()
-
     const handleFormData = data => {
-        console.log(data);
+        const newRequest = {
+            food_id: data.foodId,
+            food_name: data.food_name,
+            donator: {
+                donator_email: data.donorEmail,
+                donator_name: data.donorName,
+            },
+            user: {
+                user_id: user?.uid,
+                user_name: user?.displayName,
+                user_email: user?.email,
+            },
+            food_image: data.food_image,
+            request_time: time,
+            donation_amount: parseFloat(data.donation_amount),
+            pickup_location: data.pickup_location,
+            expired_datetime: data.expired_datetime,
+            additional_notes: data.additional_notes,
+
+        }
+        axios.post('http://localhost:5000/food-request', newRequest)
+            .then(data => console.log(data))
     }
 
 
@@ -245,7 +263,7 @@ const FoodDetails = () => {
                                 <dialog id="my_modal_4" className="modal">
                                     <div className="modal-box w-11/12 max-w-5xl">
                                         <div>
-                                            <form method="dialog">
+                                            <div method="dialog">
                                                 <div>
                                                     <div className="space-y-4">
                                                         <h1 className="font-bold text-4xl text-center">Request Food</h1>
@@ -273,10 +291,10 @@ const FoodDetails = () => {
                                                                         </label>
                                                                         <input
                                                                             {...register('foodId')}
-                                                                            disabled
+                                                                            readOnly
                                                                             type="text"
                                                                             value={food._id}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                     <div className="mb-5">
@@ -288,11 +306,10 @@ const FoodDetails = () => {
                                                                         </label>
                                                                         <input
                                                                             {...register('food_name')}
-
-                                                                            disabled
+                                                                            readOnly
                                                                             type="text"
                                                                             value={food.food_name}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -307,10 +324,10 @@ const FoodDetails = () => {
                                                                         <input
                                                                             {...register('donorEmail')}
 
-                                                                            disabled
+                                                                            readOnly
                                                                             type="text"
                                                                             value={food.donator.email ? food.donator.email : 'N/A'}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                     <div className="mb-5">
@@ -321,11 +338,11 @@ const FoodDetails = () => {
                                                                             Donator Name
                                                                         </label>
                                                                         <input
-                                                                            disabled
+                                                                            readOnly
                                                                             {...register('donorName')}
                                                                             type="text"
                                                                             value={food.donator.userName}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -340,10 +357,10 @@ const FoodDetails = () => {
                                                                         <input
                                                                             {...register('userEmail')}
 
-                                                                            disabled
+                                                                            readOnly
                                                                             type="text"
                                                                             value={user?.email ? user.email : 'N/A'}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                     <div className="mb-5">
@@ -355,10 +372,10 @@ const FoodDetails = () => {
                                                                         </label>
                                                                         <input
                                                                             {...register('userName')}
-                                                                            disabled
+                                                                            readOnly
                                                                             type="text"
                                                                             value={user?.displayName ? user.displayName : 'N/A'}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -367,11 +384,11 @@ const FoodDetails = () => {
                                                                         Food Image Url
                                                                     </label>
                                                                     <input
-                                                                        disabled
+                                                                        readOnly
                                                                         {...register('food_image')}
                                                                         type="text"
                                                                         value={food.food_image}
-                                                                        className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                     />
                                                                 </div>
                                                                 <div className="mb-6 border border-dashed h-48 rounded-md p-4 bg-base-200">
@@ -386,24 +403,27 @@ const FoodDetails = () => {
                                                                             Request Time
                                                                         </label>
                                                                         <input
-                                                                            disabled
+                                                                            {...register('request_time')}
+                                                                            readOnly
                                                                             type="text"
                                                                             value={time}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                     <div className="mb-5">
                                                                         <label
-                                                                            htmlFor="email"
+                                                                            htmlFor="text"
                                                                             className="mb-3 block text-base font-semibold"
                                                                         >
-                                                                            User Name
+                                                                            Pickup Location
                                                                         </label>
                                                                         <input
-                                                                            disabled
+                                                                            {...register('pickup_location')}
+
+                                                                            readOnly
                                                                             type="text"
-                                                                            value={user?.displayName ? user.displayName : 'N/A'}
-                                                                            className="w-full disabled:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                            value={food.pickup_location}
+                                                                            className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -413,10 +433,27 @@ const FoodDetails = () => {
                                                                             Expire Date
                                                                         </label>
                                                                         <input
-                                                                            disabled
+                                                                            {...register('expired_datetime')}
+
+                                                                            readOnly
                                                                             value={moment(food.expired_datetime).format('MMMM Do YYYY, h:mm:ss a')}
                                                                             placeholder="Your Food Quantity"
                                                                             className="w-full text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
+                                                                        />
+                                                                    </div>
+
+                                                                </div>
+                                                                <div className="grid grid-cols-1 gap-6">
+                                                                    <div className="mb-6 pt-4">
+                                                                        <label className="mb-5 block text-base font-semibold ">
+                                                                            Donation Amount
+                                                                        </label>
+                                                                        <input
+                                                                        type="number"
+                                                                            {...register('donation_amount')}
+                                                                            defaultValue={0}
+                                                                            placeholder="Your Food Quantity"
+                                                                            className="w-full  rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
 
@@ -425,12 +462,12 @@ const FoodDetails = () => {
                                                                     <label className="mb-5 block text-base font-semibold ">
                                                                         Additional Notes
                                                                     </label>
-                                                                    <textarea {...register('additionalNotes')} placeholder="Your Message" className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md">
+                                                                    <textarea {...register('additional_notes')} placeholder="Your Message" className="w-full rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md">
 
                                                                     </textarea>
                                                                 </div>
                                                                 <div>
-                                                                    <button className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                                                                    <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                                                         Request Food <IoMdAdd />
                                                                     </button>
                                                                 </div>
@@ -438,7 +475,7 @@ const FoodDetails = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </dialog>

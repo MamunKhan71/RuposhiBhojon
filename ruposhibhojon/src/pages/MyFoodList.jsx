@@ -79,7 +79,7 @@ const MyFoodList = () => {
                                         <td>
                                             {food.additional_notes}
                                         </td>
-                                        <td>{food.availability ? "Available" : "Not Available"}</td>
+                                        <td>{food.availability}</td>
                                         <th>
                                             <div className="flex items-center gap-6">
                                                 <button onClick={() => {
