@@ -11,8 +11,10 @@ import { BsPencilSquare } from "react-icons/bs";
 import { useForm } from "react-hook-form"
 import notFound from '../assets/lottie/notFound.json'
 import Lottie from "lottie-react";
+import { PiTextColumnsBold  } from "react-icons/pi";
 import { Helmet } from "react-helmet";
 const AvailableFood = () => {
+    const [column, setColumn] = useState(true)
     const {
         register,
         handleSubmit,
@@ -130,13 +132,15 @@ const AvailableFood = () => {
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                             <li><button onClick={() => handleFilter('time')} className="inline-flex gap-2 items-center font-semibold"><TbClock12 />Expiration Date</button></li>
                             <li><button onClick={() => handleFilter('quantity')} className="inline-flex gap-2 items-center font-semibold"><TbListNumbers />Quantity</button></li>
-
                         </ul>
+                    </div>
+                    <div className="dropdown dropdown-end">
+                        <button onClick={()=> setColumn(!column)} tabIndex={0} role="button" className="btn m-1"><PiTextColumnsBold /></button>
                     </div>
                     <hr />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                <div className={`grid grid-cols-1 md:grid-cols-2 lg:${column?"grid-cols-3": "grid-cols-2"} gap-6 w-full`}>
                     {
                         isLoading ? <>
                             <div className="flex flex-col gap-6">
@@ -188,7 +192,7 @@ const AvailableFood = () => {
                                     food?.map(foodItem => (
                                         <div key={foodItem._id} className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105">
                                             <div className="card bg-base-100 shadow-xl h-[500px]">
-                                                <figure className="relative"><img src={foodItem.food_image} alt="Shoes" />
+                                                <figure className="relative"><img className="w-full object-cover" src={foodItem.food_image} alt="Shoes" />
                                                     <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />{handleTimeRemaining(foodItem.expired_datetime)} days remaining</h1></figure>
                                                 <div className="card-body space-y-2">
                                                     <div className="flex gap-2 items-center font-medium">
@@ -199,7 +203,7 @@ const AvailableFood = () => {
                                                         {foodItem.food_name}
                                                         <div className="badge bg-primary text-white p-3">{foodItem.food_quantity} servings</div>
                                                     </h2>
-                                                    <p className="inline-flex items-center gap-2"><BsPencilSquare/>{foodItem.additional_notes}</p>
+                                                    <p className="inline-flex items-center gap-2"><BsPencilSquare />{foodItem.additional_notes}</p>
 
                                                     <div>
                                                         <div className="flex gap-3 items-center">

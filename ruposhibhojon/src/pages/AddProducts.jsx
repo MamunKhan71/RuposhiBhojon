@@ -6,9 +6,15 @@ import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import FoodForm from "../components/FoodForm";
 import Swal from "sweetalert2";
-
+import { useMutation } from "@tanstack/react-query";
 const AddProducts = () => {
     const { user } = useContext(AuthContext)
+    const mutation = useMutation({
+        mutationFn: (newTodo) => {
+            return axios.post(`http://localhost:5000/add-food`, newTodo)
+        },
+    })
+
     const handleFormData = data => {
         const food_name = data.foodName
         const food_image = data.foodImage
@@ -32,16 +38,17 @@ const AddProducts = () => {
             availability: availability,
             additional_notes: additional_notes,
         }
+
         Swal.fire({
             title: "Are you sure?",
             showClass: {
                 popup: `
-                font-montserrat
-                  animate__animated
-                  animate__flipInX
-                  rounded-xl
-                  animate__faster
-                `
+                        font-montserrat
+                          animate__animated
+                          animate__flipInX
+                          rounded-xl
+                          animate__faster
+                        `
             },
             text: "You won't be able to revert this!",
             icon: "warning",
@@ -49,28 +56,30 @@ const AddProducts = () => {
             confirmButtonColor: "#F68712",
             cancelButtonColor: "#d33",
             confirmButtonText: `Add`
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.post(`http://localhost:5000/add-food`, newFoodItem)
-                    .then(() => Swal.fire({
-                        title: "Added!",
-                        showClass: {
-                            popup: `
-                            font-montserrat
-                              animate__animated
-                              animate__flipInX
-                              rounded-xl
-                              animate__faster
-                            `
-                        },
-                        text: "Your food has been added successfully!.",
-                        icon: ``
-                    }))
-            }
+        }).then(() => {
+            mutation.mutate(newFoodItem)
+            mutation.isSuccess(
+                Swal.fire({
+                    title: "Added!",
+                    showClass: {
+                        popup: `
+                                font-montserrat
+                                  animate__animated
+                                  animate__flipInX
+                                  rounded-xl
+                                  animate__faster
+                                `
+                    },
+                    text: "Your food has been added successfully!.",
+                    icon: ``
+                })
+            )
         })
+
     }
+
     return (
-        <>
+        <div className="w-full">
             <Helmet>
                 <title>RuposhiBhojon | Add Product</title>
             </Helmet>
@@ -83,7 +92,7 @@ const AddProducts = () => {
 
             </div>
             <FoodForm formData={handleFormData} isUpdate={false} />
-        </>
+        </div>
 
     );
 };

@@ -333,7 +333,7 @@ const FoodDetails = () => {
                                                                         <input
                                                                             readOnly
                                                                             type="text"
-                                                                            value={data?.donator?.email ? data?.donator?.email : 'N/A'}
+                                                                            value={data?.donator?.userEmail ? data?.donator?.userEmail : 'N/A'}
                                                                             className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
@@ -384,7 +384,7 @@ const FoodDetails = () => {
                                                                 </div>
                                                                 <div className="mb-6 pt-4">
                                                                     <label className="mb-5 block text-base font-semibold ">
-                                                                        data Image Url
+                                                                        Food Image Url
                                                                     </label>
                                                                     <input
                                                                         readOnly
