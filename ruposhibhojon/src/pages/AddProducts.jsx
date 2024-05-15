@@ -6,8 +6,6 @@ import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import FoodForm from "../components/FoodForm";
 import Swal from "sweetalert2";
-import success from '../assets/lottie/success.json'
-import Lottie from "lottie-react";
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext)
@@ -38,12 +36,13 @@ const AddProducts = () => {
             title: "Are you sure?",
             showClass: {
                 popup: `
+                font-montserrat
                   animate__animated
                   animate__flipInX
                   rounded-xl
                   animate__faster
                 `
-              },
+            },
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
@@ -55,14 +54,20 @@ const AddProducts = () => {
                 axios.post(`http://localhost:5000/add-food`, newFoodItem)
                     .then(() => Swal.fire({
                         title: "Added!",
+                        showClass: {
+                            popup: `
+                            font-montserrat
+                              animate__animated
+                              animate__flipInX
+                              rounded-xl
+                              animate__faster
+                            `
+                        },
                         text: "Your food has been added successfully!.",
                         icon: ``
                     }))
             }
         })
-        console.log(newFoodItem);
-
-
     }
     return (
         <>

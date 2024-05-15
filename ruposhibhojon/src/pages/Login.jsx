@@ -30,6 +30,7 @@ const Login = () => {
         userEmailSignIn(email, password)
             .then(user => {
                 localStorage.setItem('isAuth', 'authenticated')
+                navigate('/')
             })
             .catch(error => {
                 setInfo(error.code);
@@ -39,6 +40,7 @@ const Login = () => {
         userGoogleAuth()
             .then(user => {
                 localStorage.setItem('isAuth', 'authenticated')
+                navigate('/')
             })
             .catch(error => {
                 setInfo(error.code);
@@ -48,6 +50,7 @@ const Login = () => {
         userGithubAuth()
             .then(user => {
                 localStorage.setItem('isAuth', 'authenticated')
+                navigate('/')
             })
             .catch(error => {
                 setInfo(error.code);

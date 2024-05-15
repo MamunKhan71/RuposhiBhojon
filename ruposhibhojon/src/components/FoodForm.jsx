@@ -1,10 +1,7 @@
 import { IoMdAdd } from "react-icons/io";
-import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import axios from 'axios'
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
-
 const FoodForm = ({ formData, isUpdate, foodData }) => {
     const { user } = useContext(AuthContext)
     const {
@@ -13,7 +10,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
         watch,
         formState: { errors },
     } = useForm()
-    
+
     const foodPhoto = watch('foodImage')
     const handleFormData = data => {
         formData(data)
@@ -21,6 +18,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
     return (
         <>
             <div className="flex items-center justify-center">
+
                 <div className={`mx-auto ${isUpdate ? 'w-full' : 'w-full lg:max-w-[750px]'}`}>
                     <form onSubmit={handleSubmit(handleFormData)}
                         className="py-6 lg:px-9 w-full"
@@ -54,7 +52,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                 />
                             </div>
                             <div className="mb-6 border border-dashed h-48 rounded-md p-4 bg-base-200">
-                                <img className="w-full h-full object-cover rounded-md" src={foodPhoto?foodPhoto : 'https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg'} alt="" />
+                                <img className="w-full h-full object-cover rounded-md" src={foodPhoto ? foodPhoto : 'https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg'} alt="" />
                             </div>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div className="mb-6 pt-4">
@@ -107,7 +105,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                             <input
                                                 onChange={() => setAvailability(true)}
                                                 {...register('available')}
-                                                defaultChecked={foodData?.availability === "Available" && true}
+                                                defaultChecked={foodData?.availability === "Available" && true || true}
                                                 value="Available"
                                                 type="radio"
                                                 className="shrink-0 mt-0.5 rounded-full text-primary focus:ring-black"
@@ -137,6 +135,23 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                     </div>
                                 </div>
                             </div>
+                            <div className="grid grid-cols-1 gap-6">
+                                <div className="mb-5">
+                                    <label
+                                        htmlFor="email"
+                                        className="mb-3 block text-base font-semibold"
+                                    >
+                                        Donor Info
+                                    </label>
+                                    <div className="flex items-center gap-4 bg-base-200 p-4 rounded-lg">
+                                        <img className="h-12 w-12 rounded-md object-cover" src={user?.photoURL} alt="" />
+                                        <div>
+                                            <h1 className="font-semibold">{user?.displayName}</h1>
+                                            <p className="font-semibold">{user?.email}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="mb-6 pt-4">
                                 <label className="mb-5 block text-base font-semibold ">
                                     Additional Notes
@@ -147,7 +162,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                             </div>
                         </div>
                         <div>
-                        <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                            <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
                                 {`${isUpdate ? 'Update Food' : 'Add Food'}`} <IoMdAdd />
                             </button>
                         </div>

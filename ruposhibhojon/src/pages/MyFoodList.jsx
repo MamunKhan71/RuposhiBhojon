@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import FoodForm from "../components/FoodForm";
 import { RiCloseCircleLine } from "react-icons/ri"
+import Swal from "sweetalert2";
+import { Toaster, toast } from 'sonner'
 const MyFoodList = () => {
     const { user } = useContext(AuthContext)
     const [foodId, setFoodId] = useState(null)
@@ -18,32 +20,89 @@ const MyFoodList = () => {
     });
     useEffect(() => {
         if (user) {
-            refetch(); 
+            refetch();
         }
     }, [user, refetch]);
 
     useEffect(() => {
         setFood(data?.data)
     }, [data])
-    
+
     const handleFormData = foodData => {
         const updateForm = { ...foodData, _id: foodId };
         axios.patch(`http://localhost:5000/update-food`, updateForm)
-            .then(data => console.log(data))
-    }
-    const handleDelete = id => {
-        axios.delete(`http://localhost:5000/delete-food/${id}`)
             .then(data => {
-                if (data?.data?.acknowledged) {
-                    setFood(food?.filter(fd => fd._id !== id))
-                } else {
-                    console.log("Something wrong!");
+                if (data.data.acknowledged) {
+                    refetch()
+                    toast.success('Food info updated successfully!')
                 }
             })
+            .catch(error => {
+                toast.error('Something went wrong!')
+            })
+    }
+    const handleDelete = id => {
+        Swal.fire({
+            title: "Are you sure?",
+            showClass: {
+                popup: `
+                font-montserrat
+                  animate__animated
+                  animate__flipInX
+                  rounded-xl
+                  animate__faster
+                `
+            },
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/delete-food/${id}`)
+                    .then(data => {
+                        if (data?.data?.acknowledged) {
+                            setFood(food?.filter(fd => fd._id !== id))
+                            Swal.fire({
+                                title: "Deleted!",
+                                showClass: {
+                                    popup: `
+                                    font-montserrat
+                                      animate__animated
+                                      animate__flipInX
+                                      rounded-xl
+                                      animate__faster
+                                    `
+                                },
+                                text: "Your food has been deleted.",
+                                icon: "success"
+                            })
+                        } else {
+                            Swal.fire({
+                                title: "Error!",
+                                showClass: {
+                                    popup: `
+                                    font-montserrat
+                                      animate__animated
+                                      animate__flipInX
+                                      rounded-xl
+                                      animate__faster
+                                    `
+                                },
+                                text: "Something went wrong when deleting your file",
+                                icon: "error"
+                            })
+                        }
+                    })
+            }
+        })
+
     }
 
     if (isLoading) {
-        return <div>Loading...</div>; // Display a loading indicator
+        return <><div className="flex items-center justify-center w-full h-auto"><span className="loading loading-infinity loading-lg"></span></div></>
     }
     return (
         <div>
@@ -111,7 +170,7 @@ const MyFoodList = () => {
                                                             </div>
                                                             <FoodForm formData={handleFormData} isUpdate={true} foodData={food} />
                                                         </div>
-                                
+
                                                     </div>
                                                 </dialog>
                                                 <button onClick={() => handleDelete(food._id)} className="bg-red-500 text-white hover:bg-red-700 font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
@@ -122,13 +181,14 @@ const MyFoodList = () => {
                                         </th>
                                     </tr>
                                 ))
-                                
+
                             }
 
                         </tbody>
                     </table>
                 </div>
             </div>
+            <Toaster richColors position="top-right" />
         </div>
     );
 };

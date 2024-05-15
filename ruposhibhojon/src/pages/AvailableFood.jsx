@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 import { TbListNumbers } from "react-icons/tb";
 import { MdShareLocation } from "react-icons/md";
 import { useEffect, useState, useRef } from "react";
+import { BsPencilSquare } from "react-icons/bs";
 import { useForm } from "react-hook-form"
 import notFound from '../assets/lottie/notFound.json'
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet";
-
 const AvailableFood = () => {
     const {
         register,
@@ -79,6 +79,7 @@ const AvailableFood = () => {
             <Helmet>
                 <title>RuposhiBhojon | Available Food</title>
             </Helmet>
+
             <h1 className="text-3xl font-bold text-center mb-6">Available Foods</h1>
             <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
             <div className="mt-24 space-y-8">
@@ -198,12 +199,12 @@ const AvailableFood = () => {
                                                         {foodItem.food_name}
                                                         <div className="badge bg-primary text-white p-3">{foodItem.food_quantity} servings</div>
                                                     </h2>
-                                                    <p>{foodItem.additional_notes}</p>
+                                                    <p className="inline-flex items-center gap-2"><BsPencilSquare/>{foodItem.additional_notes}</p>
 
                                                     <div>
                                                         <div className="flex gap-3 items-center">
                                                             <div>
-                                                                <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
+                                                                <img className="w-10 h-10 rounded-full object-cover" src={foodItem.donator.userImage} alt="" />
                                                             </div>
                                                             <p className="font-semibold">{foodItem.donator.userName}</p>
                                                         </div>
@@ -268,6 +269,7 @@ const AvailableFood = () => {
 
             </div>
         </div>
+
     );
 };
 

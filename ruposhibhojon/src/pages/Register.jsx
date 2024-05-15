@@ -7,11 +7,13 @@ import { useForm } from "react-hook-form"
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Helmet } from "react-helmet";
-
+import Swal from "sweetalert2";
+import { Toaster, toast } from 'sonner'
 const Register = () => {
     const { userEmailSignUp, userGoogleAuth, userGithubAuth, userUpdateProfile, userSignOut } = useContext(AuthContext)
     const [info, setInfo] = useState(null)
     const [pass, setPass] = useState(null)
+    const [passCheck, setPassCheck] = useState(false)
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/
     const [passInfo, setPassInfo] = useState(null)
     const navigate = useNavigate()
@@ -20,33 +22,62 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm()
-    const handleRegister = data => {
-        const name = data.name
-        const email = data.email
-        const photo = data.photo
-        const password = data.password
-        const user = {
-            displayName: name,
-            email: email,
-            photoURL: photo,
-            password: password
+    const handlePass = e => {
+        setPass(e.target.value)
+        if (passRegex.test(pass)) {
+            setPassInfo("Valid Password");
+            setPassCheck(true)
+        } else {
+            setPassInfo("Invalid Password");
+            setPassCheck(false)
         }
-        userEmailSignUp(email, password)
-            .then(() => {
-                userUpdateProfile(name, photo)
-                    .then(async () => {
-                        await userSignOut()
-                        navigate('/login')
-                    })
-                    .catch(error => setInfo(error.code))
+    }
+    const handleRegister = data => {
+        if (passCheck) {
+            const name = data.name
+            const email = data.email
+            const photo = data.photo
+            const password = data.password
+            const user = {
+                displayName: name,
+                email: email,
+                photoURL: photo,
+                password: password
+            }
+            userEmailSignUp(email, password)
+                .then(() => toast.success("Account Created. Please Login!"))
+                .then(() => {
+                    userUpdateProfile(name, photo)
+                        .then(async () => {
+                            await userSignOut()
+                            navigate('/login')
+                        })
+                        .catch(error => setInfo(error.code))
+                })
+                .catch(error => {
+                    setInfo(error);
+                })
+        } else {
+            Swal.fire({
+                title: "Invalid Password",
+                showClass: {
+                    popup: `
+                    font-montserrat
+                      animate__animated
+                      animate__flipInX
+                      rounded-xl
+                      animate__faster
+                    `
+                },
+                text: "Please enter a valid password",
+                icon: "error",
             })
-            .catch(error => {
-                setInfo(error);
-            })
+        }
     }
 
     const handleGoogleSignUp = () => {
         userGoogleAuth()
+            .then(() => toast.success("Account Created. Please Login!"))
             .then(async () => {
                 await userSignOut()
                 navigate('/login')
@@ -57,6 +88,7 @@ const Register = () => {
     }
     const handleGithubSignUp = () => {
         userGithubAuth()
+            .then(() => toast.success("Account Created. Please Login!"))
             .then(async () => {
                 await userSignOut()
                 navigate('/login')
@@ -65,14 +97,7 @@ const Register = () => {
                 setInfo(error);
             })
     }
-    const handlePass = e => {
-        setPass(e.target.value)
-        if (passRegex.test(pass)) {
-            setPassInfo("Valid Password");
-        } else {
-            setPassInfo("Invalid Password");
-        }
-    }
+
     return (
         <div className="lg:flex justify-between items-center gap-10 lg:my-12 w-full">
             <Helmet>
@@ -140,13 +165,13 @@ const Register = () => {
                                 <p className="font-semibold text-right text-gray-400">{passInfo}</p>
 
                             </div>
-
                             <button type="submit" className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">
                                 <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-black opacity-[3%]"></span>
                                 <span className="absolute top-0 left-0 w-1/2 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-primary opacity-100 group-hover:-translate-x-8"></span>
                                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white inline-flex gap-2 items-center justify-center">Register<FaArrowRightToBracket /></span>
                                 <span className="absolute inset-0 rounded-md"></span>
                             </button>
+
                         </form>
                         <hr className="my-6 border-gray-300 w-full" />
                         <div className="flex gap-4">
@@ -208,8 +233,7 @@ const Register = () => {
                         </p>
                     </div>
                 </div>
-
-
+                <Toaster richColors position="top-right" />
             </div>
         </div>
     );

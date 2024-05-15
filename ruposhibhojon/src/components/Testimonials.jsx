@@ -38,7 +38,7 @@ const Testimonials = () => {
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
-                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/header3.jpg" alt="" />
+                                        <img className='btn-circle btn object-cover h-20 w-20' src="https://i.ibb.co/RPKvWsT/1.jpg" alt="" />
                                         <div>
                                             <h2 className='font-bold text-[#151515] text-xl'>Awlad Hossain</h2>
                                             <p className='text-lg font-semibold'>Businessman</p>
@@ -50,7 +50,7 @@ const Testimonials = () => {
                                     </svg>
                                 </div>
                                 <div className="card-body px-0 text-justify items-start">
-                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                    Absolutely love using this food sharing platform! It's such a simple yet powerful way to connect with my community and make a real difference. I've donated excess groceries that would have otherwise gone to waste.
                                     <Rating className='fe' style={{ maxWidth: 150 }} value={rating} onChange={setRating} readOnly={true} itemStyles={myStyles} />
                                 </div>
                             </div>
@@ -61,10 +61,10 @@ const Testimonials = () => {
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
-                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/header1.jpg" alt="" />
+                                        <img className='btn-circle btn object-cover h-20 w-20' src={"https://i.ibb.co/RDhcSMf/4.jpg"} alt="" />
                                         <div>
-                                            <h2 className='font-bold text-[#151515] text-xl'>Awlad Hossain</h2>
-                                            <p className='text-lg font-semibold'>Businessman</p>
+                                            <h2 className='font-bold text-[#151515] text-xl'>Sarah Miller</h2>
+                                            <p className='text-lg font-semibold'>Accountant</p>
                                         </div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
@@ -73,7 +73,7 @@ const Testimonials = () => {
                                     </svg>
                                 </div>
                                 <div className="card-body px-0 text-justify items-start">
-                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                    I stumbled upon this website when I was looking for ways to reduce food waste, and I'm so glad I did! It's incredibly easy to use, and I've been able to find local organizations and individuals who are in need of the extra food I have.
                                     <Rating className='fe' style={{ maxWidth: 150 }} value={rating} onChange={setRating} readOnly={true} itemStyles={myStyles} />
                                 </div>
                             </div>
@@ -84,10 +84,10 @@ const Testimonials = () => {
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
-                                        <img className='btn-circle btn object-cover h-20 w-20' src="/src/assets/header2.jpg" alt="" />
+                                        <img className='btn-circle btn object-cover h-20 w-20' src="https://i.ibb.co/Njwysy7/6.jpg" alt="" />
                                         <div>
-                                            <h2 className='font-bold text-[#151515] text-xl'>Awlad Hossain</h2>
-                                            <p className='text-lg font-semibold'>Businessman</p>
+                                            <h2 className='font-bold text-[#151515] text-xl'>Jane Anderson</h2>
+                                            <p className='text-lg font-semibold'>Software Engineer</p>
                                         </div>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
@@ -96,8 +96,9 @@ const Testimonials = () => {
                                     </svg>
                                 </div>
                                 <div className="card-body px-0 text-justify items-start">
-                                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                                    <Rating className='fe' style={{ maxWidth: 150 }} value={rating} onChange={setRating} readOnly={true} itemStyles={myStyles} />
+                                    The platform is intuitive, and I appreciate the transparency it offers regarding where my donations are going. It's inspiring to see so many people coming together to tackle the issue of food insecurity. 5 stars all the way                                    
+                                    <Rating className='fe' style={{ maxWidth: 150 }} value={5} onChange={setRating} readOnly={true} itemStyles={myStyles} />
+                                    
                                 </div>
                             </div>
                         </div>

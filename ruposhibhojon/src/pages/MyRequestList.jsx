@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { FaDeleteLeft } from "react-icons/fa6";
+import Swal from "sweetalert2";
 const MyRequestList = () => {
     const { user } = useContext(AuthContext)
     const [requests, setRequests] = useState(null)
@@ -24,9 +25,64 @@ const MyRequestList = () => {
         setRequests(data?.data)
     }, [data])
     const handleDelete = id => {
-        axios.delete(`http://localhost:5000/delete-request?id=${id}`)
-            .then(data => console.log(data.data))
+        Swal.fire({
+            title: "Are you sure?",
+            showClass: {
+                popup: `
+                font-montserrat
+                  animate__animated
+                  animate__flipInX
+                  rounded-xl
+                  animate__faster
+                `
+            },
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:5000/delete-request?id=${id}`)
+                    .then(data => {
+                        refetch()
+                        if (data?.data?.acknowledged) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                showClass: {
+                                    popup: `
+                                    font-montserrat
+                                      animate__animated
+                                      animate__flipInX
+                                      rounded-xl
+                                      animate__faster
+                                    `
+                                },
+                                text: "Your food has been deleted.",
+                                icon: "success"
+                            })
+                        } else {
+                            Swal.fire({
+                                title: "Error!",
+                                showClass: {
+                                    popup: `
+                                    font-montserrat
+                                      animate__animated
+                                      animate__flipInX
+                                      rounded-xl
+                                      animate__faster
+                                    `
+                                },
+                                text: "Something went wrong when deleting your file",
+                                icon: "error"
+                            })
+                        }
+                    })
+            }
+        })
     }
+    console.log(requests);
     return (
         <div>
             <Helmet>
@@ -68,10 +124,10 @@ const MyRequestList = () => {
                                     <td>{req.donation_amount}</td>
                                     <td>
                                         <div className="flex items-center gap-6">
-                                            <button className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
+                                            {/* <button className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
                                                 <MdViewCompact />
                                                 <span>View</span>
-                                            </button>
+                                            </button> */}
                                             <button onClick={() => handleDelete(req._id)} className="bg-red-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
                                                 <FaDeleteLeft />
                                                 <span>Delete</span>

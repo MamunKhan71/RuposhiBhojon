@@ -14,7 +14,6 @@ import Profile from "../pages/Profile";
 import ProfileSettings from "../components/ProfileSettings";
 import AccountSettings from "../components/AccountSettings";
 import Notifications from "../components/Notifications";
-import axios from "axios";
 import PrivateRoute from "./PrivateRoute";
 import LoginProtection from "./LoginProtection";
 
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <Login />
+                element: <LoginProtection><Login /></LoginProtection>
             },
             {
                 path: '/register',
@@ -50,8 +49,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/food/:id',
-                loader: ({ params }) => axios.get(`http://localhost:5000/food/${params.id}`),
-                element: <FoodDetails />
+                element: <PrivateRoute><FoodDetails /></PrivateRoute>
             },
             {
                 path: '/my-food',
