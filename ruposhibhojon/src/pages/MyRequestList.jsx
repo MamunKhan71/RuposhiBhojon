@@ -12,7 +12,7 @@ const MyRequestList = () => {
     const [requests, setRequests] = useState(null)
     const { data, refetch } = useQuery({
         queryKey: ['my-requests'],
-        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-requests?user=${user?.uid}`) : null,
+        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-requests?user=${user?.email}`, {withCredentials: true}) : null,
         retry: 5,
     });
     useEffect(() => {
@@ -82,7 +82,6 @@ const MyRequestList = () => {
             }
         })
     }
-    console.log(requests);
     return (
         <div>
             <Helmet>

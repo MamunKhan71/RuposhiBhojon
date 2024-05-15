@@ -6,7 +6,7 @@ const Profile = () => {
     return (
         <div>
             <Helmet>
-                <title>RuposhiBhojon | Profile</title>
+                <title>RuposhiBhojon | Profile Settings</title>
             </Helmet>
             <div className="bg-primary opacity-5 w-1/2 h-[600px] mx-auto rounded-xl blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
 

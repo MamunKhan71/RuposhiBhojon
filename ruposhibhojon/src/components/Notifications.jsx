@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet";
+
 const Notifications = () => {
     return (
         <div className="md:p-4">
+            <Helmet>
+                <title>RuposhiBhojon | Notification Settings</title>
+            </Helmet>
             <div className="w-full mt-8 sm:rounded-lg space-y-4">
                 <h2 className="text-2xl text-center font-bold sm:text-xl">Notifications</h2>
                 <hr />

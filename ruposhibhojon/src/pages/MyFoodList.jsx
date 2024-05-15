@@ -15,7 +15,7 @@ const MyFoodList = () => {
     const [food, setFood] = useState(null)
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['my-food'],
-        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-food?user=${user?.uid}`) : null,
+        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-food?user=${user?.email}`, { withCredentials: true }) : null,
         retry: 5,
     });
     useEffect(() => {

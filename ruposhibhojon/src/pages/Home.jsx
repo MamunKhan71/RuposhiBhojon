@@ -8,6 +8,7 @@ import WhyRuposhi from "../components/WhyRuposhi";
 import WorkSteps from "../components/WorkSteps";
 import CompanySlider from "../components/CompanySlider";
 import Subscribe from "../components/Subscribe";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -37,12 +38,12 @@ const Home = () => {
                                 <p>The simple solution
                                     for feeding more and
                                     wasting less</p>
-                                <a href="#_" className="relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md">
+                                <Link to={`/available-food`} className="relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md">
                                     <span className="w-full h-full bg-gradient-to-br from-primary via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
                                     <span className="relative px-6 py-3 transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400">
                                         <span className="relative text-white inline-flex gap-2 items-center">Browse Available Food <FaCircleArrowRight /></span>
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                             <div className="flex-1 space-y-4 backdrop-blur-xl shadow-xl p-8 rounded-xl border-2 box w-full">
                                 <h1 className="text-center text-lg">Get in touch</h1>

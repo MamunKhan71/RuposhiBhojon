@@ -9,7 +9,7 @@ import { BsPencilSquare } from "react-icons/bs";
 const FeaturedSection = () => {
     const { isLoading, data } = useQuery({
         queryKey: ['foods'],
-        queryFn: async() => await axios.get(`http://localhost:5000/featured`),
+        queryFn: async () => await axios.get(`http://localhost:5000/featured`),
         refetchOnWindowFocus: false,
         retry: 5,
     }
@@ -23,8 +23,8 @@ const FeaturedSection = () => {
     }
     return (
         <div>
-            <h1 className="text-3xl font-bold text-center mb-6">Featured Products</h1>
-            <p className="text-center font-medium max-w-4xl mx-auto text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
+            <h1 className="text-3xl font-bold text-center mb-6">Featured Foods</h1>
+            <p className="text-center font-medium max-w-4xl mx-auto text-gray-500">Discover our curated selection of mouthwatering dishes crafted with the finest ingredients. From tantalizing appetizers to decadent desserts, each dish is a culinary masterpiece designed to delight your senses. </p>
             <div className="mt-24">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {
@@ -83,7 +83,7 @@ const FeaturedSection = () => {
                                                         {food?.food_name}
                                                         <div className="badge bg-primary text-white p-3">{food?.food_quantity} servings</div>
                                                     </h2>
-                                                    <p className="inline-flex items-center gap-2"><BsPencilSquare/>{food?.additional_notes}</p>
+                                                    <p className="inline-flex items-center gap-2"><BsPencilSquare />{food?.additional_notes}</p>
 
                                                     <div>
                                                         <div className="flex gap-3 items-center">

@@ -9,6 +9,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 import { Toaster, toast } from 'sonner'
+import axios from "axios";
 const Register = () => {
     const { userEmailSignUp, userGoogleAuth, userGithubAuth, userUpdateProfile, userSignOut } = useContext(AuthContext)
     const [info, setInfo] = useState(null)
@@ -45,18 +46,23 @@ const Register = () => {
                 password: password
             }
             userEmailSignUp(email, password)
-                .then(() => toast.success("Account Created. Please Login!"))
-                .then(() => {
-                    userUpdateProfile(name, photo)
-                        .then(async () => {
-                            await userSignOut()
-                            navigate('/login')
+                .then((currentUser) => {
+                    user.uid = currentUser.user.uid // Assign the uid property
+                    axios.post('http://localhost:5000/user', user)
+                        .then(() => {
+                            userUpdateProfile(name, photo)
+                                .then(() => toast.success("Account Created. Please Login!"))
+                                .then(async () => {
+                                    await userSignOut()
+                                    navigate('/login')
+                                })
+                                .catch(error => setInfo(error.code))
                         })
-                        .catch(error => setInfo(error.code))
+                        .catch(error => {
+                            setInfo(error);
+                        })
                 })
-                .catch(error => {
-                    setInfo(error);
-                })
+
         } else {
             Swal.fire({
                 title: "Invalid Password",

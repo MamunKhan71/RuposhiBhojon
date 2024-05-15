@@ -26,7 +26,6 @@ const FoodDetails = () => {
         queryKey: ['data-details'],
         queryFn: async() => await axios.get(`http://localhost:5000/food/${id.id}`).then(response => response.data)
     });
-    console.log(data);
     const [qty, setQty] = useState(0)
     const { user } = useContext(AuthContext)
     const handleTimeRemaining = (time) => {
@@ -78,7 +77,7 @@ const FoodDetails = () => {
                 axios.patch(`http://localhost:5000/update-food?statusUpdate=true`, updateStatus)
                     .then(() => {
                         if (data.data.acknowledged) {
-                            toast.success('data requested successfully!')
+                            toast.success('Food requested successfully!')
                         }
                     })
             })
@@ -465,7 +464,7 @@ const FoodDetails = () => {
                                                                 </div>
                                                                 <div>
                                                                     <button type="submit" className="hover:shadow-form hover:bg-black inline-flex gap-2 items-center justify-center w-full rounded-md bg-primary py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                                                                        Request data <IoMdAdd />
+                                                                        Request Food <IoMdAdd />
                                                                     </button>
                                                                 </div>
                                                             </form>

@@ -57,31 +57,33 @@ const AddProducts = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: `Add`
         }).then(() => {
-            mutation.mutate(newFoodItem)
-            mutation.isSuccess(
-                Swal.fire({
-                    title: "Added!",
-                    showClass: {
-                        popup: `
+            mutation.mutate(newFoodItem, {
+                onSuccess: () => {
+                    Swal.fire({
+                        title: "Added!",
+                        showClass: {
+                            popup: `
                                 font-montserrat
-                                  animate__animated
-                                  animate__flipInX
-                                  rounded-xl
-                                  animate__faster
-                                `
-                    },
-                    text: "Your food has been added successfully!.",
-                    icon: ``
-                })
-            )
+                                animate__animated
+                                animate__flipInX
+                                rounded-xl
+                                animate__faster
+                            `
+                        },
+                        text: "Your food has been added successfully!.",
+                        icon: ""
+                    });
+                }
+            });
         })
+
 
     }
 
     return (
         <div className="w-full">
             <Helmet>
-                <title>RuposhiBhojon | Add Product</title>
+                <title>RuposhiBhojon | Add Food</title>
             </Helmet>
             <div className="bg-primary blur-3xl h-96 w-full rounded-full opacity-5 absolute top-64 rotate-12 -z-10">
 

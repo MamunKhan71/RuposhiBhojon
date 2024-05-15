@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { useForm } from "react-hook-form"
 import { Helmet } from "react-helmet";
-
+import { Toaster, toast } from "sonner";
 const Login = () => {
     const { userGoogleAuth, userGithubAuth, userEmailSignIn } = useContext(AuthContext)
     const location = useLocation()
@@ -26,7 +26,6 @@ const Login = () => {
     const handleLogin = data => {
         const email = data.email
         const password = data.password
-        console.log(email, password);
         userEmailSignIn(email, password)
             .then(user => {
                 localStorage.setItem('isAuth', 'authenticated')
@@ -34,6 +33,7 @@ const Login = () => {
             })
             .catch(error => {
                 setInfo(error.code);
+                toast.error("Wrong User Credentials!")
             })
     }
     const handleGoogleSignUp = () => {
@@ -58,6 +58,8 @@ const Login = () => {
     }
     return (
         <div className="lg:flex justify-between items-center lg:gap-10 lg:my-12 w-full">
+            <Toaster richColors position="top-right"/>
+
             <Helmet>
                 <title>RuposhiBhojon | Login</title>
             </Helmet>
