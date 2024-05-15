@@ -11,7 +11,7 @@ import { BsPencilSquare } from "react-icons/bs";
 import { useForm } from "react-hook-form"
 import notFound from '../assets/lottie/notFound.json'
 import Lottie from "lottie-react";
-import { PiTextColumnsBold  } from "react-icons/pi";
+import { PiTextColumnsBold } from "react-icons/pi";
 import { Helmet } from "react-helmet";
 const AvailableFood = () => {
     const [column, setColumn] = useState(true)
@@ -27,13 +27,13 @@ const AvailableFood = () => {
     const pages = [...Array(numberOfPages).keys()]
     const [currentPage, setCurrentPage] = useState(0)
     useEffect(() => {
-        axios.get('http://localhost:5000/foodCount')
+        axios.get('https://ruposhi-bhojhon.vercel.app/foodCount')
             .then(data => setCount(data.data.count))
     }, [])
 
     const { isLoading, refetch } = useQuery({
         queryKey: ["food"],
-        queryFn: async () => await axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`).then(data => {
+        queryFn: async () => await axios.get(`https://ruposhi-bhojhon.vercel.app/foods?page=${currentPage}&size=${itemsPerPage}`).then(data => {
             setFood(data.data)
         }),
         refetchOnWindowFocus: false,
@@ -42,7 +42,7 @@ const AvailableFood = () => {
 
     const handleSearch = (data) => {
         const searchText = data.searchText
-        axios.get(`http://localhost:5000/search?search=${searchText}`)
+        axios.get(`https://ruposhi-bhojhon.vercel.app/search?search=${searchText}`)
             .then(data => setFood(data.data))
     }
 
@@ -71,7 +71,7 @@ const AvailableFood = () => {
         return differenceInDays;
     }
     const handleFilter = filter => {
-        axios.get(`http://localhost:5000/time-sort?filter=${filter}&currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`)
+        axios.get(`https://ruposhi-bhojhon.vercel.app/time-sort?filter=${filter}&currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`)
             .then(data => setFood(data.data))
     }
 
@@ -83,7 +83,7 @@ const AvailableFood = () => {
             </Helmet>
 
             <h1 className="text-3xl font-bold text-center mb-6">Available Foods</h1>
-            <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
+            <p className="text-center font-medium max-w-4xl mx-auto">Explore our wide selection of delicious dishes made with fresh, locally-sourced ingredients. From savory entrees to delectable desserts, we have something to satisfy every craving.</p>
             <div className="mt-24 space-y-8">
                 <form onSubmit={handleSubmit(handleSearch)} className="max-w-lg mx-auto">
                     <label
@@ -135,12 +135,12 @@ const AvailableFood = () => {
                         </ul>
                     </div>
                     <div className="dropdown dropdown-end">
-                        <button onClick={()=> setColumn(!column)} tabIndex={0} role="button" className="btn m-1"><PiTextColumnsBold /></button>
+                        <button onClick={() => setColumn(!column)} tabIndex={0} role="button" className="btn m-1"><PiTextColumnsBold /></button>
                     </div>
                     <hr />
                 </div>
 
-                <div className={`grid grid-cols-1 md:grid-cols-2 lg:${column?"grid-cols-3": "grid-cols-2"} gap-6 w-full`}>
+                <div className={`grid grid-cols-1 md:grid-cols-2 lg:${column ? "grid-cols-3" : "grid-cols-2"} gap-6 w-full`}>
                     {
                         isLoading ? <>
                             <div className="flex flex-col gap-6">

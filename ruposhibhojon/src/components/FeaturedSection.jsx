@@ -9,7 +9,7 @@ import { BsPencilSquare } from "react-icons/bs";
 const FeaturedSection = () => {
     const { isLoading, data } = useQuery({
         queryKey: ['foods'],
-        queryFn: async () => await axios.get(`http://localhost:5000/featured`),
+        queryFn: async () => await axios.get(`https://ruposhi-bhojhon.vercel.app/featured`),
         refetchOnWindowFocus: false,
         retry: 5,
     }

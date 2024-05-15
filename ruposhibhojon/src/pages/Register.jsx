@@ -48,7 +48,7 @@ const Register = () => {
             userEmailSignUp(email, password)
                 .then((currentUser) => {
                     user.uid = currentUser.user.uid // Assign the uid property
-                    axios.post('http://localhost:5000/user', user)
+                    axios.post('https://ruposhi-bhojhon.vercel.app/user', user)
                         .then(() => {
                             userUpdateProfile(name, photo)
                                 .then(() => toast.success("Account Created. Please Login!"))

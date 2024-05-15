@@ -11,7 +11,7 @@ const AddProducts = () => {
     const { user } = useContext(AuthContext)
     const mutation = useMutation({
         mutationFn: (newTodo) => {
-            return axios.post(`http://localhost:5000/add-food`, newTodo)
+            return axios.post(`https://ruposhi-bhojhon.vercel.app/add-food`, newTodo)
         },
     })
 

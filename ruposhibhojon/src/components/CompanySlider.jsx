@@ -6,34 +6,34 @@ const CompanySlider = () => {
             <Marquee>
                 <div className="flex gap-16 items-center grayscale">
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/pran.png" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/MgKLbFB/pran.png" alt="" />
                     </div>
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/bdfood.png" alt="" />
-                    </div>
-
-                    <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/mojo.png" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/YWZSCqP/kacchi-bhai.webp" alt="" />
                     </div>
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/foodpanda.png" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/hgRbrhD/mojo.png" alt="" />
                     </div>
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/pathao.png" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/89dcC9g/pathao.png" alt="" />
                     </div>
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/Shezan.webp" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/wMxQMKD/Shezan.webp" alt="" />
                     </div>
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/ruchi.gif" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/6rjCfn9/ruchi.gif" alt="" />
                     </div>
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/kacchi bhai.webp" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/VNmG1PJ/kacchi-bhai.webp" alt="" />
                     </div>
                     <div className="h-16">
-                        <img className="h-full" src="/src/assets/logo/sultans.webp" alt="" />
+                        <img className="h-full" src="https://i.ibb.co/RQfXzCq/sultans.webp" alt="" />
+                    </div>
+                    <div className="h-16">
+                        <img className="h-full" src="https://i.ibb.co/C86nSX5/foodpanda.png" alt="" />
                     </div>
                 </div>
+
             </Marquee>
         </div>
     );

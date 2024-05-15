@@ -15,7 +15,7 @@ const MyFoodList = () => {
     const [food, setFood] = useState(null)
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['my-food'],
-        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-food?user=${user?.email}`, { withCredentials: true }) : null,
+        queryFn: async () => await user?.uid ? axios.get(`https://ruposhi-bhojhon.vercel.app/my-food?user=${user?.email}`, { withCredentials: true }) : null,
         retry: 5,
     });
     useEffect(() => {
@@ -30,7 +30,7 @@ const MyFoodList = () => {
 
     const handleFormData = foodData => {
         const updateForm = { ...foodData, _id: foodId };
-        axios.patch(`http://localhost:5000/update-food`, updateForm)
+        axios.patch(`https://ruposhi-bhojhon.vercel.app/update-food`, updateForm)
             .then(data => {
                 if (data.data.acknowledged) {
                     refetch()
@@ -61,7 +61,7 @@ const MyFoodList = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/delete-food/${id}`)
+                axios.delete(`https://ruposhi-bhojhon.vercel.app/delete-food/${id}`)
                     .then(data => {
                         if (data?.data?.acknowledged) {
                             setFood(food?.filter(fd => fd._id !== id))
@@ -110,7 +110,7 @@ const MyFoodList = () => {
                 <title>RuposhiBhojon | My Food List</title>
             </Helmet>
             <h1 className="text-3xl font-bold text-center mb-6">My Foods</h1>
-            <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
+            <p className="text-center font-medium max-w-4xl mx-auto">Discover a personalized selection of your favorite foods curated just for you. Indulge in familiar flavors and exciting new tastes that will tantalize your taste buds.</p>
             <div className="mt-24">
                 <div className="overflow-x-auto p-4">
                     <table className="table">

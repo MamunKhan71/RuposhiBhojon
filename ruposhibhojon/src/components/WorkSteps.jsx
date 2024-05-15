@@ -3,7 +3,7 @@ const WorkSteps = () => {
     return (
         <div className="lg:flex justify-between items-center">
             <div className="flex-1 lg:flex items-center justify-center w-full">
-                <img className="h-full lg:h-[700px] w-full lg:w-3/4 object-cover rounded-xl" src="/src/assets/pexels-ivan-samkov-7213605.jpg" alt="" />
+                <img className="h-full lg:h-[700px] w-full lg:w-3/4 object-cover rounded-xl" src="https://i.ibb.co/sWhxhj7/pexels-ivan-samkov-7213605.jpg" alt="" />
             </div>
 
             <div className="w-full flex-1">
@@ -22,7 +22,7 @@ const WorkSteps = () => {
                                             Prepare
                                         </h6>
                                         <p className="text-sm font-normal text-gray-500">
-                                            Staff set aside food for an Olio volunteer to collect.
+                                            Staff set aside food for an RuposhiBhojon volunteer to collect.
                                         </p>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@ const WorkSteps = () => {
                                         Collect
                                         </h6>
                                         <p className="text-sm font-normal text-gray-500">
-                                        An Olio volunteer collects your food and lists it on the Olio app, for people nearby to request.
+                                        An RuposhiBhojon volunteer collects your food and lists it on the RuposhiBhojon app, for people nearby to request.
                                         </p>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@ const WorkSteps = () => {
                                         Share
                                         </h6>
                                         <p className="text-sm font-normal text-gray-500">
-                                        Locals in the area collect food directly from your Olio volunteer.
+                                        Locals in the area collect food directly from your RuposhiBhojon volunteer.
                                         </p>
                                     </div>
                                 </div>

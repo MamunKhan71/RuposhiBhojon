@@ -29,7 +29,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <img onClick={() => navigate('/')} className="h-16 hover:cursor-pointer" src="./src/assets/logoWhite.png" alt="" />
+                    <img onClick={() => navigate('/')} className="h-16 hover:cursor-pointer" src="https://i.ibb.co/wywdSzJ/logo-White.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-4">

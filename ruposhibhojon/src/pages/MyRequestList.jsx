@@ -12,7 +12,7 @@ const MyRequestList = () => {
     const [requests, setRequests] = useState(null)
     const { data, refetch } = useQuery({
         queryKey: ['my-requests'],
-        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-requests?user=${user?.email}`, {withCredentials: true}) : null,
+        queryFn: async () => await user?.uid ? axios.get(`https://ruposhi-bhojhon.vercel.app/my-requests?user=${user?.email}`, { withCredentials: true }) : null,
         retry: 5,
     });
     useEffect(() => {
@@ -44,7 +44,7 @@ const MyRequestList = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/delete-request?id=${id}`)
+                axios.delete(`https://ruposhi-bhojhon.vercel.app/delete-request?id=${id}`)
                     .then(data => {
                         refetch()
                         if (data?.data?.acknowledged) {
@@ -88,7 +88,7 @@ const MyRequestList = () => {
                 <title>RuposhiBhojon | My Food Request</title>
             </Helmet>
             <h1 className="text-3xl font-bold text-center mb-6">My Food Request</h1>
-            <p className="text-center font-medium max-w-4xl mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque iusto cumque aut facere consectetur dolore quaerat, dignissimos repudiandae quisquam recusandae.</p>
+            <p className="text-center font-medium max-w-4xl mx-auto">Submit your food requests and let us fulfill your culinary desires. From comfort classics to gourmet delights, we're here to make your dining experience unforgettable.</p>
             <div className="mt-24">
                 <div className="overflow-x-auto p-4">
                     <table className="table">

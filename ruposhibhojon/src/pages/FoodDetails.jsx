@@ -24,7 +24,7 @@ const FoodDetails = () => {
     const id = useParams()
     const { data } = useQuery({
         queryKey: ['data-details'],
-        queryFn: async() => await axios.get(`http://localhost:5000/food/${id.id}`).then(response => response.data)
+        queryFn: async() => await axios.get(`https://ruposhi-bhojhon.vercel.app/food/${id.id}`).then(response => response.data)
     });
     const [qty, setQty] = useState(0)
     const { user } = useContext(AuthContext)
@@ -68,13 +68,13 @@ const FoodDetails = () => {
             expired_datetime: data?.expired_datetime,
             additional_notes: formData?.additional_notes,
         };
-        axios.post(`http://localhost:5000/food-request`, newRequest)
+        axios.post(`https://ruposhi-bhojhon.vercel.app/food-request`, newRequest)
             .then(data => {
                 const updateStatus = {
                     _id: newRequest.food_id,
                     available: "Reserved"
                 }
-                axios.patch(`http://localhost:5000/update-food?statusUpdate=true`, updateStatus)
+                axios.patch(`https://ruposhi-bhojhon.vercel.app/update-food?statusUpdate=true`, updateStatus)
                     .then(() => {
                         if (data.data.acknowledged) {
                             toast.success('Food requested successfully!')
