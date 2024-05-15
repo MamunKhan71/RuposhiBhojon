@@ -24,15 +24,14 @@ const AvailableFood = () => {
     const numberOfPages = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPages).keys()]
     const [currentPage, setCurrentPage] = useState(0)
-    const [filteredFood, setFilteredFood] = useState([])
     useEffect(() => {
         axios.get('http://localhost:5000/foodCount')
             .then(data => setCount(data.data.count))
     }, [])
 
     const { isLoading, refetch } = useQuery({
-        queryKey: "foods",
-        queryFn: () => axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`).then(data => {
+        queryKey: ["food"],
+        queryFn: async () => await axios.get(`http://localhost:5000/foods?page=${currentPage}&size=${itemsPerPage}`).then(data => {
             setFood(data.data)
         }),
         refetchOnWindowFocus: false,
@@ -177,51 +176,49 @@ const AvailableFood = () => {
                             </div>
                         </> :
                             <>
-                                {
-                                    food.length === 0 ?
-                                        <div className="col-span-3 flex items-center justify-center w-full">
-                                            <div className="relative flex items-center justify-center">
-                                                <h1 className="text-4xl font-bold text- absolute top-10 text-center">Food Not Found</h1>
-                                                <Lottie animationData={notFound}></Lottie>
-                                            </div>
-                                        </div> :
-                                        food?.map(food => (
-                                            <>
-                                                <div className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105 ">
-                                                    <div className="card bg-base-100 shadow-xl h-[500px]">
-                                                        <figure className="relative"><img src={food.food_image} alt="Shoes" />
-                                                            <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />{handleTimeRemaining(food.expired_datetime)} days remaining</h1></figure>
-                                                        <div className="card-body space-y-2">
-                                                            <div className="flex gap-2 items-center font-medium">
-                                                                <MdShareLocation />
-                                                                <p>Mirpur #01, Dhaka , Bangladesh</p>
-                                                            </div>
-                                                            <h2 className="card-title">
-                                                                {food.food_name}
-                                                                <div className="badge bg-primary text-white p-3">{food.food_quantity} servings</div>
-                                                            </h2>
-                                                            <p>{food.additional_notes}</p>
+                                {food?.length === 0 ? (
+                                    <div className="col-span-3 flex items-center justify-center w-full">
+                                        <div className="relative flex items-center justify-center">
+                                            <h1 className="text-4xl font-bold absolute top-10 text-center">Food Not Found</h1>
+                                            <Lottie animationData={notFound} />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    food?.map(foodItem => (
+                                        <div key={foodItem._id} className="transform rounded-xl shadow-xl transition duration-300 hover:scale-105">
+                                            <div className="card bg-base-100 shadow-xl h-[500px]">
+                                                <figure className="relative"><img src={foodItem.food_image} alt="Shoes" />
+                                                    <h1 className="absolute top-5 right-5 px-2 py-1 inline-flex gap-2 items-center rounded-lg backdrop-blur-2xl text-white font-bold"><TbClock12 />{handleTimeRemaining(foodItem.expired_datetime)} days remaining</h1></figure>
+                                                <div className="card-body space-y-2">
+                                                    <div className="flex gap-2 items-center font-medium">
+                                                        <MdShareLocation />
+                                                        <p>{foodItem.pickup_location}</p>
+                                                    </div>
+                                                    <h2 className="card-title">
+                                                        {foodItem.food_name}
+                                                        <div className="badge bg-primary text-white p-3">{foodItem.food_quantity} servings</div>
+                                                    </h2>
+                                                    <p>{foodItem.additional_notes}</p>
 
+                                                    <div>
+                                                        <div className="flex gap-3 items-center">
                                                             <div>
-                                                                <div className="flex gap-3 items-center">
-                                                                    <div>
-                                                                        <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
-                                                                    </div>
-                                                                    <p className="font-semibold">{food.donator.userName}</p>
-                                                                </div>
+                                                                <img className="w-10 h-10 rounded-full object-cover" src="/src/assets/footerlogo.png" alt="" />
                                                             </div>
-
-                                                            <div className="card-actions">
-                                                                <Link to={`/food/${food._id}`} className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></Link>
-                                                            </div>
+                                                            <p className="font-semibold">{foodItem.donator.userName}</p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </>
-                                        ))
-                                }
 
+                                                    <div className="card-actions">
+                                                        <Link to={`/food/${foodItem._id}`} className="btn bg-black hover:bg-primary text-white w-full inline-flex gap-2 items-center">View Details<IoIosArrowRoundForward className="text-xl" /></Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                )}
                             </>
+
                     }
                 </div>
 
@@ -249,15 +246,17 @@ const AvailableFood = () => {
                     <div>
                         <select
                             onChange={handleItemsPerPage}
+                            value={itemsPerPage} // Set the value prop to control the selected value
                             className="text-sm rounded-lg block w-full p-2.5 bg-base-200"
                         >
-                            <option selected={true} disabled>Items per page</option>
+                            <option disabled>Items per page</option>
                             <option value={3}>3</option>
                             <option value={5}>5</option>
                             <option value={10}>10</option>
                             <option value={50}>50</option>
                         </select>
                     </div>
+
 
 
 

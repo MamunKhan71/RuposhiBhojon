@@ -9,16 +9,24 @@ import { FaDeleteLeft } from "react-icons/fa6";
 const MyRequestList = () => {
     const { user } = useContext(AuthContext)
     const [requests, setRequests] = useState(null)
-    const { data } = useQuery({
-        queryKey: 'my-requests',
-        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-requests?user=${user?.uid}`).then(data => setRequests(data.data)) : null,
+    const { data, refetch } = useQuery({
+        queryKey: ['my-requests'],
+        queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-requests?user=${user?.uid}`) : null,
         retry: 5,
     });
+    useEffect(() => {
+        if (user) {
+            refetch();
+        }
+    }, [user, refetch]);
+
+    useEffect(() => {
+        setRequests(data?.data)
+    }, [data])
     const handleDelete = id => {
         axios.delete(`http://localhost:5000/delete-request?id=${id}`)
             .then(data => console.log(data.data))
     }
-    console.log(requests);
     return (
         <div>
             <Helmet>
@@ -40,48 +48,41 @@ const MyRequestList = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                requests && requests.map(req => <>
-                                    <tr className="bg-base-200 font-medium">
-                                        <td>
-                                            <div className="flex items-center gap-3">
-                                                <div className="avatar">
-                                                    <div className="mask mask-squircle w-12 h-12">
-                                                        <img src={req.food_image} />
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div className="font-bold">{req.donator.donator_name}</div>
+                            {requests && requests.map(req => (
+                                <tr key={req._id} className="bg-base-200 font-medium">
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={req.food_image} alt={req.donator.donator_name} />
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>
-                                            {req.pickup_location}
-                                        </td>
-                                        <td>{req.expired_datetime}</td>
-                                        <td>
-                                            {req.request_time}
-                                        </td>
-                                        <td>{req.donation_amount}</td>
-                                        <th>
-                                            <div className="flex items-center gap-6">
-                                                <button className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
-                                                    <MdViewCompact />
-                                                    <span>View</span>
-                                                </button>
-                                                <button onClick={() => handleDelete(req._id)} className="bg-red-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
-                                                    <FaDeleteLeft />
-                                                    <span>Delete</span>
-                                                </button>
+                                            <div>
+                                                <div className="font-bold">{req.donator.donator_name}</div>
                                             </div>
-                                        </th>
-                                    </tr>
-
-                                </>)
-                            }
-
+                                        </div>
+                                    </td>
+                                    <td>{req.pickup_location}</td>
+                                    <td>{req.expired_datetime}</td>
+                                    <td>{req.request_time}</td>
+                                    <td>{req.donation_amount}</td>
+                                    <td>
+                                        <div className="flex items-center gap-6">
+                                            <button className="bg-primary hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
+                                                <MdViewCompact />
+                                                <span>View</span>
+                                            </button>
+                                            <button onClick={() => handleDelete(req._id)} className="bg-red-600 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
+                                                <FaDeleteLeft />
+                                                <span>Delete</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

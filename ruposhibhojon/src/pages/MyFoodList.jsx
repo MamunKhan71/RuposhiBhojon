@@ -11,14 +11,21 @@ const MyFoodList = () => {
     const { user } = useContext(AuthContext)
     const [foodId, setFoodId] = useState(null)
     const [food, setFood] = useState(null)
-    const { data } = useQuery({
-        queryKey: 'my-food',
+    const { data, isLoading, refetch } = useQuery({
+        queryKey: ['my-food'],
         queryFn: async () => await user?.uid ? axios.get(`http://localhost:5000/my-food?user=${user?.uid}`) : null,
         retry: 5,
-    })
+    });
+    useEffect(() => {
+        if (user) {
+            refetch(); 
+        }
+    }, [user, refetch]);
+
     useEffect(() => {
         setFood(data?.data)
     }, [data])
+    
     const handleFormData = foodData => {
         const updateForm = { ...foodData, _id: foodId };
         axios.patch(`http://localhost:5000/update-food`, updateForm)
@@ -28,13 +35,16 @@ const MyFoodList = () => {
         axios.delete(`http://localhost:5000/delete-food/${id}`)
             .then(data => {
                 if (data?.data?.acknowledged) {
-                    setFood(food.filter(fd => fd._id !== id))
+                    setFood(food?.filter(fd => fd._id !== id))
                 } else {
                     console.log("Something wrong!");
                 }
             })
     }
 
+    if (isLoading) {
+        return <div>Loading...</div>; // Display a loading indicator
+    }
     return (
         <div>
             <Helmet>
@@ -57,9 +67,8 @@ const MyFoodList = () => {
                         </thead>
                         <tbody>
                             {
-                                food?.map(food => <>
-
-                                    <tr className="font-medium">
+                                food?.map(food => (
+                                    <tr key={food._id} className="font-medium">
                                         <td>
                                             <div className="flex items-center gap-3">
                                                 <div className="avatar">
@@ -102,7 +111,7 @@ const MyFoodList = () => {
                                                             </div>
                                                             <FoodForm formData={handleFormData} isUpdate={true} foodData={food} />
                                                         </div>
-
+                                
                                                     </div>
                                                 </dialog>
                                                 <button onClick={() => handleDelete(food._id)} className="bg-red-500 text-white hover:bg-red-700 font-bold py-2 px-4 rounded inline-flex gap-2 items-center">
@@ -112,7 +121,8 @@ const MyFoodList = () => {
                                             </div>
                                         </th>
                                     </tr>
-                                </>)
+                                ))
+                                
                             }
 
                         </tbody>

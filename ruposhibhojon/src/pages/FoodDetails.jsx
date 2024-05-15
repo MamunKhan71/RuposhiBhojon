@@ -39,7 +39,7 @@ const FoodDetails = () => {
         };
     }, []);
     const handleChooseQtyPlus = () => {
-        if (qty < food.food_quantity) {
+        if (qty < food?.food_quantity) {
             setQty(qty + 1)
         }
     }
@@ -86,7 +86,7 @@ const FoodDetails = () => {
     return (
         <div>
             <Helmet>
-                <title>RuposhiBhojon | Details</title>
+                <title>RuposhiBhojon | {food?.food_name}</title>
             </Helmet>
             <div className="bg-primary animated-background bg-gradient-to-r from-primary via-blue-500 to-indigo-500 opacity-10 w-1/2 h-[600px] mx-auto rounded-xl blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
 
@@ -99,7 +99,7 @@ const FoodDetails = () => {
                                 <div>
                                     <div>
                                         <img
-                                            src={food.food_image}
+                                            src={food?.food_image}
                                             alt="Summer Travel Bag image"
                                             className="cursor-pointer rounded-xl object-cover h-[650px] w-full transition-all duration-500 "
                                         />
@@ -112,7 +112,7 @@ const FoodDetails = () => {
                                 <div className="flex items-center justify-between gap-6 mb-6">
                                     <div className="text">
                                         <h2 className="font-manrope font-bold text-3xl leading-10 mb-2">
-                                            {food.food_name}
+                                            {food?.food_name}
                                         </h2>
                                     </div>
                                     <button className="group transition-all duration-500 p-0.5">
@@ -145,10 +145,10 @@ const FoodDetails = () => {
                                 <div className="lg:flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-8 gap-y-3">
                                     <div className="flex items-center">
                                         <h5 className="font-manrope font-semibold text-xl lg:text-2xl leading-9  ">
-                                            {food.food_quantity}{" "} Pieces Left
+                                            {food?.food_quantity}{" "} Pieces Left
                                         </h5>
                                         <span className="ml-3 font-semibold text-lg text-indigo-600">
-                                            ( {food.availability ? "In Stock" : "Out of Stock"} )
+                                            ( {food?.availability ? "In Stock" : "Out of Stock"} )
                                         </span>
                                     </div>
 
@@ -164,18 +164,18 @@ const FoodDetails = () => {
                                     </svg>
                                     <div className="flex items-center gap-2">
                                         <img className="w-10 h-10 rounded-xl ring-primary ring-offset-base-100" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                        <p className="text-base font-bold">{food.donator.userName}</p>
+                                        <p className="text-base font-bold">{food?.donator?.userName}</p>
                                     </div>
                                 </div>
                                 <div className="pb-4">
-                                    <p>{food.additional_notes}</p>
+                                    <p>{food?.additional_notes}</p>
                                 </div>
                                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3 min-[400px]:mb-8">
                                     <button className="border inline-flex gap-2 items-center border-gray-200 whitespace-nowrap  text-sm leading-6 py-2.5 rounded-xl px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300">
-                                        <IoIosTimer />{handleTimeRemaining(food.expired_datetime)} days left
+                                        <IoIosTimer />{handleTimeRemaining(food?.expired_datetime)} days left
                                     </button>
                                     <button className="col-span-2 inline-flex gap-2 items-center border border-gray-200 whitespace-nowrap  text-sm leading-6 py-2.5 rounded-xl px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300">
-                                        <MdShareLocation />{food.pickup_location}
+                                        <MdShareLocation />{food?.pickup_location}
                                     </button>
                                 </div>
                                 <div className="flex items-center flex-col min-[400px]:flex-row gap-3 mb-3 min-[400px]:mb-8">
@@ -301,7 +301,7 @@ const FoodDetails = () => {
                                                                             {...register('foodId')}
                                                                             readOnly
                                                                             type="text"
-                                                                            value={food._id}
+                                                                            value={food?._id}
                                                                             className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
@@ -316,7 +316,7 @@ const FoodDetails = () => {
                                                                             {...register('food_name')}
                                                                             readOnly
                                                                             type="text"
-                                                                            value={food.food_name}
+                                                                            value={food?.food_name}
                                                                             className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
@@ -334,7 +334,7 @@ const FoodDetails = () => {
 
                                                                             readOnly
                                                                             type="text"
-                                                                            value={food.donator.email ? food.donator.email : 'N/A'}
+                                                                            value={food?.donator?.email ? food?.donator?.email : 'N/A'}
                                                                             className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
@@ -349,7 +349,7 @@ const FoodDetails = () => {
                                                                             readOnly
                                                                             {...register('donorName')}
                                                                             type="text"
-                                                                            value={food.donator.userName}
+                                                                            value={food?.donator?.userName}
                                                                             className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
@@ -395,7 +395,7 @@ const FoodDetails = () => {
                                                                         readOnly
                                                                         {...register('food_image')}
                                                                         type="text"
-                                                                        value={food.food_image}
+                                                                        value={food?.food_image}
                                                                         className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                     />
                                                                 </div>
@@ -430,7 +430,7 @@ const FoodDetails = () => {
 
                                                                             readOnly
                                                                             type="text"
-                                                                            value={food.pickup_location}
+                                                                            value={food?.pickup_location}
                                                                             className="w-full read-only:text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
                                                                     </div>
@@ -444,7 +444,7 @@ const FoodDetails = () => {
                                                                             {...register('expired_datetime')}
 
                                                                             readOnly
-                                                                            value={moment(food.expired_datetime).format('MMMM Do YYYY, h:mm:ss a')}
+                                                                            value={moment(food?.expired_datetime).format('MMMM Do YYYY, h:mm:ss a')}
                                                                             placeholder="Your Food Quantity"
                                                                             className="w-full text-gray-500 rounded-md bg-base-200 py-3 px-6 text-base font-medium outline-none focus:border-primary focus:shadow-md"
                                                                         />
