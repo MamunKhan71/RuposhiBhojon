@@ -6,7 +6,7 @@ const WhyRuposhi = () => {
     return (
         <div className="space-y-12 lg:space-y-24">
             <h1 className="text-center font-bold text-2xl lg:text-4xl">Why RuposhiBhojon?</h1>
-            <div className="flex flex-wrap gap-4 items-center justify-between">
+            <div className="flex flex-wrap gap-4 items-center justify-center lg:justify-between">
                 <div className="text-center">
                     <Lottie className="h-24 lg:h-48" animationData={firstStep} loop={true} />
                     <h1 className="text-2xl font-bold">Give and get items</h1>
