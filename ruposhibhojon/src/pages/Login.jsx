@@ -54,22 +54,22 @@ const Login = () => {
             })
     }
     return (
-        <div className="flex justify-between items-center gap-10 my-12 w-full">
+        <div className="lg:flex justify-between items-center lg:gap-10 lg:my-12 w-full">
             <Helmet>
                 <title>RuposhiBhojon | Login</title>
             </Helmet>
             <div className="flex-1 flex items-center justify-center rounded-xl">
-                <Lottie animationData={loginAnimation} loop={true} />
-                {/* <img className="h-[700px] rounded-xl w-full object-cover" src="./src/assets/login.jpg" alt="" /> */}
+                <Lottie className="h-40 lg:h-auto" animationData={loginAnimation} loop={true} />
             </div>
-            <div className="flex-1 w-1/2">
+            <div className="flex-1 w-full lg:w-1/2">
                 <div
-                    className="w-full px-6 lg:px-16 xl:px-12
-  flex items-center justify-center py-12"
+                    className="w-full lg:px-16 xl:px-12
+  flex items-center justify-center lg:py-12"
                 >
                     <div className="w-full h-100 space-y-4">
                         <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">
-                            <span className="text-primary font- text-2xl">Log in</span> to your account
+                            <span className="text-primary font- text-2xl">Log in</span>
+                            <p className="text-base text-center font-normal text-gray-400">Please Login to your account</p>
                             {
                                 info && <p className="text-gray-400 text-sm font-medium text-center">{info}</p>
                             }
@@ -149,7 +149,7 @@ const Login = () => {
                                             d="M48 48L17 24l-4-3 35-10z"
                                         />
                                     </svg>
-                                    <span className="ml-4">Log in with Google</span>
+                                    <span className="ml-4">Google</span>
                                 </div>
                             </button>
                             <button onClick={handleGithubSignUp}
@@ -158,7 +158,7 @@ const Login = () => {
                             >
                                 <div className="flex items-center justify-center">
                                     <FaGithub className="text-2xl" />
-                                    <span className="ml-4">Log in with GitHub</span>
+                                    <span className="ml-4">GitHub</span>
                                 </div>
                             </button>
                         </div>

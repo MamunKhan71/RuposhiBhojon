@@ -21,20 +21,20 @@ const Testimonials = () => {
     }
     return (
         <div>
-            <div className="space-y-6 text-center">
-                <h1 className="text-3xl font-bold text-center">Hear what our partners have to say</h1>
+            <div className="space-y-6 text-center hidden lg:block">
+                <h1 className="text-2xl lg:text-4xl font-bold text-center">Hear what our partners have to say</h1>
                 <p className="text[#737373] text-base px-96">The majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
             </div>
 
-            <div className='flex gap-8 items-center mt-24'>
-                <div className='basis-1/4'>
-                    <h1 className='text-3xl font-bold'>See what our clients says</h1>
-                    <p className='text-gray-400 font-bold'>Explore our clients feedback for better understandability</p>
+            <div className='lg:flex space-y-4 w-full gap-8 items-center lg:mt-24'>
+                <div className='basis-1/4 space-y-4'>
+                    <h1 className='text-2xl lg:text-4xl font-bold text-center lg:text-left'>See what our clients says</h1>
+                    <p className='text-gray-400 font-bold text-center lg:text-left'>Explore our clients feedback for better understandability</p>
                 </div>
 
-                <div ref={sliderRef} className="keen-slider basis-3/4">
+                <div ref={sliderRef} className="keen-slider w-full lg:basis-3/4">
                     <div className="keen-slider__slide number-slide1">
-                        <div className="card bg-base-100 w-[500px] shadow-lg border border-[#F3F3F3] p-6 hover:transform hover:scale-105 transition ease-in-out hover:cursor-pointer">
+                        <div className="card bg-base-100 w-[500px] shadow-sm border border-[#F3F3F3] p-6 hover:transform hover:scale-105 transition ease-in-out hover:cursor-pointer">
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
@@ -57,7 +57,7 @@ const Testimonials = () => {
                         </div>
                     </div>
                     <div className="keen-slider__slide number-slide1">
-                        <div className="card bg-base-100 w-[500px] shadow-lg border border-[#F3F3F3] p-6 hover:transform hover:scale-105 transition ease-in-out hover:cursor-pointer">
+                        <div className="card bg-base-100 w-[500px] shadow-sm border border-[#F3F3F3] p-6 hover:transform hover:scale-105 transition ease-in-out hover:cursor-pointer">
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>
@@ -80,7 +80,7 @@ const Testimonials = () => {
                         </div>
                     </div>
                     <div className="keen-slider__slide number-slide1">
-                        <div className="card bg-base-100 w-[500px] shadow-lg border border-[#F3F3F3] p-6 hover:transform hover:scale-105 transition ease-in-out hover:cursor-pointer">
+                        <div className="card bg-base-100 w-[500px] shadow-sm border border-[#F3F3F3] p-6 hover:transform hover:scale-105 transition ease-in-out hover:cursor-pointer">
                             <div className='flex flex-col items-center justify-center w-full'>
                                 <div className='flex items-center justify-between w-full'>
                                     <div className='flex gap-4 items-center'>

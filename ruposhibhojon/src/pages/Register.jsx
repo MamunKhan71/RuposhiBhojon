@@ -74,21 +74,22 @@ const Register = () => {
         }
     }
     return (
-        <div className="flex justify-between items-center gap-10 my-12 w-full">
+        <div className="lg:flex justify-between items-center gap-10 lg:my-12 w-full">
             <Helmet>
                 <title>RuposhiBhojon | Register</title>
             </Helmet>
             <div className="flex-1 flex items-center justify-center rounded-xl">
-                <Lottie animationData={SignUpLottie} loop={true} />
+                <Lottie className="h-40 lg:h-auto" animationData={SignUpLottie} loop={true} />
             </div>
-            <div className="flex-1 w-1/2">
+            <div className="flex-1 lg:w-1/2">
                 <div
-                    className="w-full px-6 lg:px-16 xl:px-12
-  flex items-center justify-center py-12"
+                    className="w-full lg:px-16 xl:px-12
+  flex items-center justify-center lg:py-12"
                 >
                     <div className="w-full h-100 space-y-4">
-                        <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12 text-center">
-                            <span className="text-primary font-bold">Register </span> your account
+                        <h1 className="text-xl md:text-2xl font-bold leading-tight lg:mt-12 text-center">
+                            <span className="text-primary font-bold">Register </span>
+                            <p className="text-base text-center font-normal text-gray-400">Please register your account</p>
                             {
                                 info && <p className="text-gray-400 text-sm font-medium text-center">{info}</p>
                             }
@@ -186,7 +187,7 @@ const Register = () => {
                                             d="M48 48L17 24l-4-3 35-10z"
                                         />
                                     </svg>
-                                    <span className="ml-4">Sign up with Google</span>
+                                    <span className="ml-4">Google</span>
                                 </div>
                             </button>
                             <button onClick={handleGithubSignUp}
@@ -195,7 +196,7 @@ const Register = () => {
                             >
                                 <div className="flex items-center justify-center">
                                     <FaGithub className="text-2xl" />
-                                    <span className="ml-4">Sign up with GitHub</span>
+                                    <span className="ml-4">GitHub</span>
                                 </div>
                             </button>
                         </div>

@@ -5,7 +5,7 @@ const AccountSettings = () => {
     return (
         <div className="md:p-4 w-full">
             <div className="w-full mt-8 sm:rounded-lg space-y-4">
-                <h2 className="text-2xl text-center font-bold sm:text-xl">Profile Settings</h2>
+                <h2 className="text-2xl text-center font-bold sm:text-xl">Account Settings</h2>
                 <hr />
                 <div className="w-full space-y-4">
                     <h1 className="font-bold">Social Contacts</h1>

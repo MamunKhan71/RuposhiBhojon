@@ -17,10 +17,10 @@ const Home = () => {
             </Helmet>
             <div className="space-y-40">
                 <div className="h-[650px] relative w-full">
-                    <div className="p-24 font-bold absolute flex items-start justify-center flex-col z-10 text-white  w-full h-full rounded-lg bg-opacity-30">
-                        <div className="flex justify-between items-center w-full">
-                            <div className="space-y-4 basis-2/3">
-                                <h1 className="text-6xl font-bold">
+                    <div className="lg:p-24 font-bold absolute flex items-start justify-center flex-col z-10 text-white  w-full h-full rounded-lg bg-opacity-30">
+                        <div className="lg:flex justify-between items-center w-full">
+                            <div className="space-y-4 basis-2/3 my-20 p-4 lg:p-0 pt-12 lg:pt-0">
+                                <h1 className="text-2xl lg:text-6xl font-bold">
                                     Don’t{' '}
                                     <span style={{ color: '#F68712', fontWeight: 'bold' }}>
                                         <Typewriter

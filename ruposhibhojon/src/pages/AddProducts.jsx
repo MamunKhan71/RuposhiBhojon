@@ -5,6 +5,9 @@ import axios from 'axios'
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import FoodForm from "../components/FoodForm";
+import Swal from "sweetalert2";
+import success from '../assets/lottie/success.json'
+import Lottie from "lottie-react";
 
 const AddProducts = () => {
     const { user } = useContext(AuthContext)
@@ -31,9 +34,34 @@ const AddProducts = () => {
             availability: availability,
             additional_notes: additional_notes,
         }
+        Swal.fire({
+            title: "Are you sure?",
+            showClass: {
+                popup: `
+                  animate__animated
+                  animate__flipInX
+                  rounded-xl
+                  animate__faster
+                `
+              },
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#F68712",
+            cancelButtonColor: "#d33",
+            confirmButtonText: `Add`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(`http://localhost:5000/add-food`, newFoodItem)
+                    .then(() => Swal.fire({
+                        title: "Added!",
+                        text: "Your food has been added successfully!.",
+                        icon: ``
+                    }))
+            }
+        })
         console.log(newFoodItem);
-        axios.post(`http://localhost:5000/add-food`, newFoodItem)
-            .then(data => console.log(data.data))
+
 
     }
     return (
@@ -45,8 +73,9 @@ const AddProducts = () => {
 
             </div>
             <div>
-                <h1 className="font-bold text-4xl text-center">Add Food</h1>
+                <h1 className="font-bold text-2xl lg:text-4xl text-center">Add Food</h1>
                 <p className="text-center">Add food to the community</p>
+
             </div>
             <FoodForm formData={handleFormData} isUpdate={false} />
         </>

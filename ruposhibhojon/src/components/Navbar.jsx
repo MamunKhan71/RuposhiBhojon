@@ -11,7 +11,7 @@ const Navbar = () => {
         <li><NavLink to={`/available-food`}>Available Food</NavLink></li>
     </>
     return (
-        <div>
+        <div className="relative z-50">
             <div className="navbar bg-base-100 font-semibold mt-8">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -20,6 +20,13 @@ const Navbar = () => {
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             {navLink}
+                            {
+                                user && <>
+                                    <li><NavLink to={`/add-food`}>Add Food</NavLink></li>
+                                    <li><NavLink to={`/my-food`}>Manage My Food</NavLink></li>
+                                    <li><NavLink to={`/my-request`}>My Food Request</NavLink></li>
+                                </>
+                            }
                         </ul>
                     </div>
                     <img onClick={() => navigate('/')} className="h-16 hover:cursor-pointer" src="./src/assets/logoWhite.png" alt="" />

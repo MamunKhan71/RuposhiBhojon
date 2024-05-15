@@ -2,7 +2,7 @@ import Marquee from "react-fast-marquee";
 const CompanySlider = () => {
     return (
         <div>
-            <h1 className="text-4xl font-bold text-center mb-24">Our Proud Partners</h1>
+            <h1 className="text-2xl lg:text-4xl font-bold text-center mb-12 lg:mb-24">Our Proud Partners</h1>
             <Marquee>
                 <div className="flex gap-16 items-center grayscale">
                     <div className="h-16">

@@ -91,8 +91,8 @@ const FoodDetails = () => {
             <div className="bg-primary animated-background bg-gradient-to-r from-primary via-blue-500 to-indigo-500 opacity-10 w-1/2 h-[600px] mx-auto rounded-xl blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
 
             </div>
-            <section className="py-24 ">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <section className="lg:py-24">
+                <div className="mx-auto w-full lg:max-w-7xl px-0 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className="slider-box w-full h-full max-lg:mx-auto mx-0">
                             <div>
@@ -111,7 +111,7 @@ const FoodDetails = () => {
                             <div className="pro-detail w-full max-lg:max-w-[608px] lg:pl-8 xl:pl-16 max-lg:mx-auto max-lg:mt-8">
                                 <div className="flex items-center justify-between gap-6 mb-6">
                                     <div className="text">
-                                        <h2 className="font-manrope font-bold text-3xl leading-10  mb-2">
+                                        <h2 className="font-manrope font-bold text-3xl leading-10 mb-2">
                                             {food.food_name}
                                         </h2>
                                     </div>
@@ -142,9 +142,9 @@ const FoodDetails = () => {
                                         </svg>
                                     </button>
                                 </div>
-                                <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-8 gap-y-3">
+                                <div className="lg:flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-8 gap-y-3">
                                     <div className="flex items-center">
-                                        <h5 className="font-manrope font-semibold text-2xl leading-9  ">
+                                        <h5 className="font-manrope font-semibold text-xl lg:text-2xl leading-9  ">
                                             {food.food_quantity}{" "} Pieces Left
                                         </h5>
                                         <span className="ml-3 font-semibold text-lg text-indigo-600">
@@ -163,14 +163,14 @@ const FoodDetails = () => {
                                         <path d="M1 0V36" stroke="#E5E7EB" />
                                     </svg>
                                     <div className="flex items-center gap-2">
-                                        <img className="w-full h-10 rounded-xl ring-primary ring-offset-base-100" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                        <img className="w-10 h-10 rounded-xl ring-primary ring-offset-base-100" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                         <p className="text-base font-bold">{food.donator.userName}</p>
                                     </div>
                                 </div>
                                 <div className="pb-4">
                                     <p>{food.additional_notes}</p>
                                 </div>
-                                <div className="grid grid-cols-3 gap-3 mb-3 min-[400px]:mb-8">
+                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3 min-[400px]:mb-8">
                                     <button className="border inline-flex gap-2 items-center border-gray-200 whitespace-nowrap  text-sm leading-6 py-2.5 rounded-xl px-5 text-center w-full font-semibold shadow-sm shadow-transparent transition-all duration-300 hover:bg-gray-50 hover:shadow-gray-300">
                                         <IoIosTimer />{handleTimeRemaining(food.expired_datetime)} days left
                                     </button>
@@ -269,7 +269,7 @@ const FoodDetails = () => {
                                 </div>
                                 <button className="text-center w-full px-5 py-4 rounded-xl bg-primary flex gap-2 items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300" onClick={() => document.getElementById('my_modal_4').showModal()}>Make a request <BiPurchaseTag /></button>
                                 <dialog id="my_modal_4" className="modal">
-                                    <div className="modal-box w-11/12 max-w-5xl">
+                                    <div className="modal-box w-full lg:w-11/12 lg:max-w-5xl">
                                         <div>
                                             <div method="dialog">
                                                 <div>
@@ -287,9 +287,9 @@ const FoodDetails = () => {
                                                     <div className="flex items-center justify-center">
                                                         <div className="w-full">
                                                             <form onSubmit={handleSubmit(handleFormData)}
-                                                                className="py-6 px-9"
+                                                                className="py-6 lg:px-9"
                                                             >
-                                                                <div className="grid grid-cols-2 gap-6">
+                                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                                                     <div className="mb-5">
                                                                         <label
                                                                             htmlFor="email"

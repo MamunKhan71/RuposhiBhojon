@@ -9,10 +9,10 @@ const ProfileSettings = () => {
             <div className="w-full mt-8 sm:rounded-lg space-y-4">
                 <h2 className="text-2xl text-center font-bold sm:text-xl">Profile Settings</h2>
                 <hr />
-                <div className="flex flex-col items-start justify-start">
-                    <div className="flex gap-4 items-center">
+                <div className="lg:flex flex-col items-start space-y-4 justify-start">
+                    <div className="flex gap-4 items-center justify-center lg:justify-start">
                         <img
-                            className="object-cover w-28 h-28 p-1 rounded-xl ring-2 ring-indigo-300 dark:ring-indigo-500"
+                            className="object-cover w-12 lg:w-28 h-12 lg:h-28 p-1 rounded-xl ring-2 ring-indigo-300 dark:ring-indigo-500"
                             src={user?.photoURL}
                             alt="Bordered avatar"
                         />
@@ -21,7 +21,7 @@ const ProfileSettings = () => {
                             <h1>{user?.email}</h1>
                         </div>
                     </div>
-                    <div className="items-center border p-6 backdrop-blur-3xl sm:mt-14 rounded-xl">
+                    <div className="items-center border p-4 lg:p-6 backdrop-blur-3xl sm:mt-14 rounded-xl">
                         <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
                             <div className="w-full">
                                 <label
@@ -81,7 +81,7 @@ const ProfileSettings = () => {
                             <textarea
                                 id="message"
                                 rows={4}
-                                className="block p-2.5 w-full text-sm bg-base-200"
+                                className="block p-2.5 w-full text-sm bg-base-200 rounded-lg"
                                 placeholder="Write your bio here..."
                                 defaultValue={""}
                             />

@@ -1,9 +1,9 @@
 import { Bs1CircleFill, Bs2CircleFill , Bs3CircleFill,Bs4CircleFill   } from "react-icons/bs";
 const WorkSteps = () => {
     return (
-        <div className="flex justify-between items-center">
-            <div className="flex-1 flex items-center justify-center">
-                <img className="h-[700px] w-3/4 object-cover rounded-xl" src="/src/assets/pexels-ivan-samkov-7213605.jpg" alt="" />
+        <div className="lg:flex justify-between items-center">
+            <div className="flex-1 lg:flex items-center justify-center w-full">
+                <img className="h-full lg:h-[700px] w-full lg:w-3/4 object-cover rounded-xl" src="/src/assets/pexels-ivan-samkov-7213605.jpg" alt="" />
             </div>
 
             <div className="w-full flex-1">

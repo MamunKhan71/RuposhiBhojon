@@ -21,9 +21,9 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
     return (
         <>
             <div className="flex items-center justify-center">
-                <div className={`mx-auto ${isUpdate ? 'w-full' : 'max-w-[750px]'}`}>
+                <div className={`mx-auto ${isUpdate ? 'w-full' : 'w-full lg:max-w-[750px]'}`}>
                     <form onSubmit={handleSubmit(handleFormData)}
-                        className="py-6 px-9"
+                        className="py-6 lg:px-9 w-full"
                     >
                         <div>
                             <div className="mb-5">
@@ -56,7 +56,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                             <div className="mb-6 border border-dashed h-48 rounded-md p-4 bg-base-200">
                                 <img className="w-full h-full object-cover rounded-md" src={foodPhoto?foodPhoto : 'https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg'} alt="" />
                             </div>
-                            <div className="grid grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div className="mb-6 pt-4">
                                     <label className="mb-5 block text-base font-semibold ">
                                         Food Quantity
@@ -82,7 +82,7 @@ const FoodForm = ({ formData, isUpdate, foodData }) => {
                                     />
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div className="mb-6 pt-4">
                                     <label className="mb-5 block text-base font-semibold ">
                                         Pickup Location

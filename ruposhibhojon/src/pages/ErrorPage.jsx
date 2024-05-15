@@ -13,11 +13,10 @@ const ErrorPage = () => {
                 <title>RuposhiBhojon | 404 Not Found</title>
             </Helmet>
             <>
-                {/* component */}
                 <div className="min-w-screen min-h-screen bg-blue-100 flex items-center p-5 lg:p-20 overflow-hidden relative">
                     <div className="flex-1 flex justify-between min-h-full min-w-full rounded-3xl bg-white shadow-xl p-10 lg:p-20 text-gray-800 relative md:flex items-center text-center md:text-left">
                         <div className="w-full md:w-1/2">
-                            <div className="mb-10 lg:mb-20">
+                            <div className="mb-10 lg:mb-20 flex items-center justify-center lg:justify-start">
                                 <img src="/src/assets/logo2.png" alt="" />
                             </div>
                             <div className="mb-10 md:mb-20 font-light">
@@ -44,7 +43,7 @@ const ErrorPage = () => {
                                 </Link>
                             </div>
                         </div>
-                        <div className="w-full md:w-4/12 text-center">
+                        <div className="w-full md:w-4/12 text-center hidden lg:block">
                             <Lottie animationData={ErrorPageFiles}></Lottie>
                         </div>
                     </div>

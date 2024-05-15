@@ -11,9 +11,9 @@ const Profile = () => {
             <div className="bg-primary opacity-5 w-1/2 h-[600px] mx-auto rounded-xl blur-3xl absolute bottom-24 -z-10 left-1/2 -translate-x-1/2">
 
             </div>
-            <div className="flex items-center justify-center w-full">
-                <div className="backdrop-blur-3xl w-full flex justify-center gap-5 px-3 md:flex-row">
-                    <aside className="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
+            <div className="lg:flex items-center justify-center w-full">
+                <div className="backdrop-blur-3xl w-full lg:flex justify-center gap-5 px-3 md:flex-row">
+                    <aside className=" py-4 md:w-1/3 lg:w-1/4 md:block">
                         <div className="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
                             <h2 className="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
                             <Link to={`profile-settings`}
@@ -39,7 +39,7 @@ const Profile = () => {
                             </a>
                         </div>
                     </aside>
-                    <div className="w-full py-1 basis-2/5 flex items-center justify-center">
+                    <div className="w-full py-1 lg:basis-2/5 lg:flex items-center justify-center">
                         <Outlet />
                     </div>
                 </div>
