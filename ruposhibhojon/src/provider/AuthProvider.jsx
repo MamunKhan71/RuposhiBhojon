@@ -52,6 +52,7 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     }
     const sendResetEmail = (email) => {
+        console.log(email);
         return sendPasswordResetEmail(auth, email)
     }
     const authMethods = { userEmailSignUp, userEmailSignIn, userGoogleAuth, userGithubAuth, userUpdateProfile, userSignOut, user, loading, sendResetEmail }

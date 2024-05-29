@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet";
 import { Toaster, toast } from "sonner";
 import Swal from "sweetalert2";
 const Login = () => {
-    const { userGoogleAuth, userGithubAuth, userEmailSignIn, sendResetEmail } = useContext(AuthContext)
+    const { userGoogleAuth, userGithubAuth, userEmailSignIn } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
     if (location?.state) {
@@ -20,7 +20,6 @@ const Login = () => {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm()
 
@@ -56,35 +55,6 @@ const Login = () => {
             .catch(error => {
                 setInfo(error.code);
             })
-    }
-    const handlePasswordReset = () => {
-        Swal.fire({
-            title: "Enter Your Email",
-            input: "email",
-            inputAttributes: {
-                autocapitalize: "off"
-            },
-            showCancelButton: true,
-            confirmButtonText: "Look up",
-            showLoaderOnConfirm: true,
-            preConfirm: async (email) => {
-                try {
-                    sendResetEmail(email)
-                        .then(() => {
-                            Swal.fire({
-                                title: `Email sent, check your email`,
-                            });
-                        }).catch((error) => {
-                            const errorCode = error.code;
-                            Swal.fire({
-                                title: errorCode,
-                            });
-                        });
-                } catch (error) {
-                    console.log(error);
-                }
-            },
-        })
     }
     return (
         <div className="lg:flex justify-between items-center lg:gap-10 lg:my-12 w-full">
@@ -131,13 +101,12 @@ const Login = () => {
                                 />
                             </div>
                             <div className="text-right mt-2 mb-4">
-                                <button
-                                    onClick={() => handlePasswordReset()}
+                                <Link
+                                    to={'/reset'}
                                     className="text-sm font-semibold hover:text-primary focus:text-primary"
-                                    type="button"
                                 >
                                     Forgot Password?
-                                </button>
+                                </Link>
                             </div>
                             <button type="submit" className="relative inline-flex items-center justify-center px-5 py-3 bg-black overflow-hidden font-bold rounded-md group w-full">
                                 <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-black opacity-[3%]"></span>

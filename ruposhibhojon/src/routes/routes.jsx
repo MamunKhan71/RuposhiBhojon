@@ -16,6 +16,7 @@ import AccountSettings from "../components/AccountSettings";
 import Notifications from "../components/Notifications";
 import PrivateRoute from "./PrivateRoute";
 import LoginProtection from "./LoginProtection";
+import PasswordReset from "../pages/PasswordReset";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: '/my-request',
                 element: <PrivateRoute><MyRequestList /></PrivateRoute>
+            },
+            {
+                path: '/reset',
+                element: <PasswordReset />
             },
             {
                 path: '/profile',
