@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, updateProfile, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup, GithubAuthProvider, updateProfile, signOut } from "firebase/auth";
 import app from "../utils/firebase.config";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -51,8 +51,10 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem('isAuth')
         return signOut(auth)
     }
-
-    const authMethods = { userEmailSignUp, userEmailSignIn, userGoogleAuth, userGithubAuth, userUpdateProfile, userSignOut, user, loading }
+    const sendResetEmail = (email) => {
+        return sendPasswordResetEmail(auth, email)
+    }
+    const authMethods = { userEmailSignUp, userEmailSignIn, userGoogleAuth, userGithubAuth, userUpdateProfile, userSignOut, user, loading, sendResetEmail }
 
 
     return (
