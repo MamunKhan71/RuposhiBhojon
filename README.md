@@ -54,13 +54,10 @@ RuposhiBhojon is a community-driven platform aimed at reducing food waste and ad
 
 ## Getting Started
 To run the project locally, follow these steps:
-1. Clone the repository: `git clone <repository-url>`
-2. Install dependencies: `npm install`
-3. Start the development server: `npm run dev`
-
-## Contributors
-- [Your Name](https://github.com/yourusername)
-- [Contributor Name](https://github.com/contributorusername)
+1. Clone the repository: `git clone https://github.com/MamunKhan71/RuposhiBhojon.git`
+2. Navigate to the project directory: `cd RuposhiBhojon`
+4. Install dependencies: `npm install`
+5. Start the development server: `npm run dev`
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
